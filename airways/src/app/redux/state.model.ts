@@ -17,7 +17,18 @@ export interface User {
   document: string
 }
 
-export interface UserOrder {}
+export type PassengersType = {
+  adult: number | null,
+  children: number | null
+  infant: number | null
+}
+
+export interface UserOrder {
+  from: string
+  destination: string
+  date: string
+  passengers: PassengersType
+}
 
 export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
 export interface AirwaysState {
