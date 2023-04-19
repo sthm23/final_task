@@ -9,7 +9,10 @@ const routes: Routes = [
     path: 'main', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
   },
   {
-    path: '**', redirectTo: 'main/error', pathMatch: 'full',
+    path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule)
+  },
+  {
+    path: '**', redirectTo: 'main', pathMatch: 'full',
   },
 ];
 
