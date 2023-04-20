@@ -1,1 +1,65 @@
-<p>header works!</p>
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="#!" class="logo">
+        <img src="../../../../assets/img/header-logo.png" alt="png" />
+      </a>
+
+      <div class="menu">
+        <button class="btn-text">Book flights</button>
+        <button class="btn-dateformat">
+          <span (click)="dropDown()">
+            {{ isActive }}
+            <mat-icon aria-hidden="false" fontIcon="arrow_drop_down"></mat-icon>
+          </span>
+          <div class="format-list" *ngIf="isFormat">
+            <div
+              [ngClass]="{ active: isActive === 'MM/DD/YYYY' }"
+              class="format-item"
+              (click)="onCheckDate('MM/DD/YYYY')"
+            >
+              MM/DD/YYYY <span><mat-icon fontIcon="done"></mat-icon></span>
+            </div>
+            <div
+              [ngClass]="{ active: isActive === 'DD/MM/YYYY' }"
+              class="format-item"
+              (click)="onCheckDate('DD/MM/YYYY')"
+            >
+              DD/MM/YYYY <span><mat-icon fontIcon="done"></mat-icon></span>
+            </div>
+            <div
+              [ngClass]="{ active: isActive === 'YYYY/DD/MM' }"
+              class="format-item"
+              (click)="onCheckDate('YYYY/DD/MM')"
+            >
+              YYYY/DD/MM <span><mat-icon fontIcon="done"></mat-icon></span>
+            </div>
+            <div
+              [ngClass]="{ active: isActive === 'YYYY/MM/DD' }"
+              class="format-item"
+              (click)="onCheckDate('YYYY/MM/DD')"
+            >
+              YYYY/MM/DD <span><mat-icon fontIcon="done"></mat-icon></span>
+            </div>
+          </div>
+        </button>
+        <button mat-button class="btn-language" [matMenuTriggerFor]="menu">
+          {{ currency }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="chooseCurrency('EUR')" mat-menu-item>EUR</button>
+          <button (click)="chooseCurrency('USA')" mat-menu-item>USA</button>
+          <button (click)="chooseCurrency('RUB')" mat-menu-item>RUB</button>
+          <button (click)="chooseCurrency('PLN')" mat-menu-item>PLN</button>
+        </mat-menu>
+        <button class="btn-sign">
+          <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
+          Sign in
+        </button>
+        <span class="shopping-basket">
+          <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>

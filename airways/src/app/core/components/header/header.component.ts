@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DateFormatService } from '../../services/date-format.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  isFormat = false;
 
+  isActive = 'MM/DD/YYYY';
+
+  currency = 'EUR'
+
+  constructor(private dateFormatService: DateFormatService) { }
+
+  dropDown() {
+    this.isFormat = !this.isFormat
+  }
+
+  onCheckDate(format: string) {
+    this.isActive = this.dateFormatService.chechFormat(format);
+  }
+
+  chooseCurrency(currency: string) {
+    this.currency = currency;
+  }
 }

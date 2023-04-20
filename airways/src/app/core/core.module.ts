@@ -5,6 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -13,11 +15,13 @@ import { ErrorComponent } from './pages/error/error.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     CommonModule,
-    CoreRoutingModule
+    MatIconModule,
+    MatMenuModule,
+    CoreRoutingModule,
   ]
 })
 export class CoreModule { }
