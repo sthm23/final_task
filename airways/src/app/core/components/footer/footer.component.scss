@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 footer {
   border-top: 1px solid #d0d9df;
   padding: 35px 0;
@@ -8,6 +12,20 @@ footer {
     line-height: 20px;
     letter-spacing: 0.25px;
     color: #11397e;
+  }
+
+  .authors {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+
+    a {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: #11397e;
+      text-decoration: none;
+    }
   }
 
   .payments {
