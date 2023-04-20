@@ -21,6 +21,7 @@ export class HeaderComponent {
 
   onCheckDate(format: string) {
     this.isActive = this.dateFormatService.chechFormat(format);
+    this.isFormat = false;
   }
 
   chooseCurrency(currency: string) {
