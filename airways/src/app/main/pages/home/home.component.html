@@ -1,1 +1,51 @@
-<p>Main home works!</p>
+<form class="order-card">
+  <div class="flight-type">
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1">Round Trip</mat-radio-button>
+      <mat-radio-button value="2">One Way</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="choose-line">
+    <mat-form-field appearance="fill">
+      <mat-label>From</mat-label>
+      <mat-select [(value)]="from">
+        <mat-option value="option1">Dublin DUB</mat-option>
+        <mat-option value="option2">Dublin DUB 2</mat-option>
+        <mat-option value="option3">Dublin DUB 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Destination</mat-label>
+      <mat-select [(value)]="destination">
+        <mat-option value="option1">Dublin DUB</mat-option>
+        <mat-option value="option2">Dublin DUB 2</mat-option>
+        <mat-option value="option3">Dublin DUB 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="date-pass">
+    <mat-form-field appearance="fill">
+      <mat-label>Dates</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" />
+        <input matEndDate placeholder="End date" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Passengers</mat-label>
+      <mat-select [(value)]="passangers">
+        <mat-option value="option1">2 Adult, 1 Child, 1... </mat-option>
+        <mat-option value="option2">4 Adult, 2 Child, 1... </mat-option>
+        <mat-option value="option3">3 Adult, 4 Child, 1... </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <button mat-flat-button color="primary" class="primary">Primary</button>
+</form>
