@@ -6,6 +6,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderComponent } from './pages/order/order.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -33,7 +41,19 @@ import { ErrorComponent } from './pages/error/error.component';
           }
         ]
       }
-    ])
-  ]
+    ]),
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    }],
 })
 export class BookingModule { }
