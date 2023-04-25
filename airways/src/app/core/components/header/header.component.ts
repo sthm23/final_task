@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DateFormatService } from '../../services/date-format.service';
+import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,18 @@ export class HeaderComponent {
 
   currency = 'EUR'
 
-  constructor(private dateFormatService: DateFormatService) { }
+  constructor(private dateFormatService: DateFormatService, public dialog: MatDialog) {}
+
+  openAuthDialog() {
+    const dialogRef = this.dialog.open(AuthModalComponent, {
+      width: '500px',
+      minHeight: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   dropDown() {
     this.isFormat = !this.isFormat

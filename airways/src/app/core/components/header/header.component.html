@@ -52,7 +52,7 @@
           <button (click)="chooseCurrency('RUB')" mat-menu-item>RUB</button>
           <button (click)="chooseCurrency('PLN')" mat-menu-item>PLN</button>
         </mat-menu>
-        <button class="btn-sign">
+        <button class="btn-sign" (click)="openAuthDialog()">
           <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
           Sign in
         </button>
