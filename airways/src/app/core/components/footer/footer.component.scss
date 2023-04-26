@@ -59,3 +59,27 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 1399px) {
+  .container {
+    width: 960px;
+  }
+}
+@media screen and (max-width: 989px) {
+  .container {
+    width: 750px;
+  }
+  .row {
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 380px;
+  }
+  .row {
+    gap: 15px;
+  }
+}
