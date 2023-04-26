@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatInputModule } from '@angular/material/input';
-
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
   ],
   imports: [
     CommonModule,
+    MatSelectModule,
     RouterModule.forChild([
       {
         path: '', component: HomeComponent, children: [

@@ -1,7 +1,7 @@
 <header>
   <div class="container">
     <nav class="navbar">
-      <a href="#!" class="logo">
+      <a [routerLink]="['../main']" class="logo">
         <img src="../../../../assets/img/header-logo.png" alt="png" />
       </a>
 
@@ -42,42 +42,13 @@
         </mat-step>
       </mat-stepper>
       <div class="menu">
-        <button class="btn-dateformat">
-          <span (click)="dropDown()">
-            {{ isActive }}
-            <mat-icon aria-hidden="false" fontIcon="arrow_drop_down"></mat-icon>
-          </span>
-          <div class="format-list" *ngIf="isFormat">
-            <div
-              [ngClass]="{ active: isActive === 'MM/DD/YYYY' }"
-              class="format-item"
-              (click)="onCheckDate('MM/DD/YYYY')"
-            >
-              MM/DD/YYYY <span><mat-icon fontIcon="done"></mat-icon></span>
-            </div>
-            <div
-              [ngClass]="{ active: isActive === 'DD/MM/YYYY' }"
-              class="format-item"
-              (click)="onCheckDate('DD/MM/YYYY')"
-            >
-              DD/MM/YYYY <span><mat-icon fontIcon="done"></mat-icon></span>
-            </div>
-            <div
-              [ngClass]="{ active: isActive === 'YYYY/DD/MM' }"
-              class="format-item"
-              (click)="onCheckDate('YYYY/DD/MM')"
-            >
-              YYYY/DD/MM <span><mat-icon fontIcon="done"></mat-icon></span>
-            </div>
-            <div
-              [ngClass]="{ active: isActive === 'YYYY/MM/DD' }"
-              class="format-item"
-              (click)="onCheckDate('YYYY/MM/DD')"
-            >
-              YYYY/MM/DD <span><mat-icon fontIcon="done"></mat-icon></span>
-            </div>
-          </div>
-        </button>
+        <mat-form-field appearance="outline" class="choose-date-select">
+          <mat-select [formControl]="isActive" name="date">
+            <mat-option *ngFor="let date of dateFormatList" [value]="date">
+              <span>{{date}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <button mat-button class="btn-language" [matMenuTriggerFor]="menu">
           {{ currency }}
         </button>
