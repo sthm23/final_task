@@ -1,6 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
 import { DateFormatService } from 'src/app/core/services/date-format.service';
@@ -18,7 +18,9 @@ import { DateFormatService } from 'src/app/core/services/date-format.service';
 export class HeaderComponent {
   isFormat = false;
 
-  isActive = 'MM/DD/YYYY';
+  isActive = new FormControl('MM/DD/YYYY');
+
+  dateFormatList = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD']
 
   currency = 'EUR'
 
@@ -47,7 +49,7 @@ export class HeaderComponent {
   }
 
   onCheckDate(format: string) {
-    this.isActive = this.dateFormatService.chechFormat(format);
+    // this.isActive = this.dateFormatService.chechFormat(format);
     this.isFormat = false;
   }
 

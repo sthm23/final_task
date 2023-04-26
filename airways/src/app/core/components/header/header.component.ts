@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DateFormatService } from '../../services/date-format.service';
 import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 export class HeaderComponent {
   isFormat = false;
 
-  isActive = 'MM/DD/YYYY';
+  isActive = new FormControl('MM/DD/YYYY');
+
+  dateFormatList = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD']
 
   currency = 'EUR'
 
@@ -30,7 +33,7 @@ export class HeaderComponent {
   }
 
   onCheckDate(format: string) {
-    this.isActive = this.dateFormatService.chechFormat(format);
+    // this.isActive = this.dateFormatService.chechFormat(format);
     this.isFormat = false;
   }
 
