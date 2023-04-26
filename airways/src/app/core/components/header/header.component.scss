@@ -1,0 +1,154 @@
+@mixin menu-button {
+  padding: 10px 16px;
+  background: rgba(241, 243, 246, 0.15);
+  border: 0.5px solid #cecece;
+  border-radius: 4px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  background: rgba(116, 118, 122, 0.2);
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    button {
+      @include menu-button();
+      position: relative;
+    }
+
+    .btn-dateformat {
+      span {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .btn-text {
+      border: none;
+      background: transparent;
+    }
+
+    .shopping-basket {
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .choose-date-select{
+      margin-bottom: -1.75em !important;
+    }
+
+  }
+}
+
+.format-list {
+  position: absolute;
+  top: 100%;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+  .format-item {
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: #49454f;
+    padding: 20px 16px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    span {
+      width: 24px;
+      height: 24px;
+      mat-icon {
+        display: none;
+      }
+    }
+  }
+  .active {
+    background: #e9edf1;
+
+    span {
+      mat-icon {
+        display: block;
+        color: #11397e;
+      }
+    }
+  }
+}
+
+.container {
+  width: 1440px;
+  margin: auto;
+}
+
+@media screen and (max-width: 1399px) {
+  .container {
+    width: 960px;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .container {
+    width: 750px;
+  }
+  header {
+    .menu {
+      gap: 20px;
+
+      button {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 380px;
+  }
+  header {
+    .navbar {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .logo {
+        display: inline-block;
+        width: 100px;
+        img {
+          width: 100%;
+        }
+      }
+
+      .menu {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .btn-text {
+          order: 2;
+        }
+      }
+    }
+  }
+}

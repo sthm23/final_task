@@ -1,1 +1,36 @@
-<p>header works!</p>
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a [routerLink]="['/main']" class="logo">
+        <img src="../../../../assets/img/header-logo.png" alt="png" />
+      </a>
+
+      <div class="menu">
+        <button class="btn-text" [routerLink]="['../booking']">Book flights</button>
+        <mat-form-field appearance="outline" class="choose-date-select">
+          <mat-select [formControl]="isActive" name="date">
+            <mat-option *ngFor="let date of dateFormatList" [value]="date">
+              <span>{{date}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button class="btn-language" [matMenuTriggerFor]="currencyMenu">
+          {{ currency }}
+        </button>
+        <mat-menu #currencyMenu="matMenu">
+          <button (click)="chooseCurrency('EUR')" mat-menu-item>EUR</button>
+          <button (click)="chooseCurrency('USA')" mat-menu-item>USA</button>
+          <button (click)="chooseCurrency('RUB')" mat-menu-item>RUB</button>
+          <button (click)="chooseCurrency('PLN')" mat-menu-item>PLN</button>
+        </mat-menu>
+        <button class="btn-sign" (click)="openAuthDialog()">
+          <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
+          Sign in
+        </button>
+        <span class="shopping-basket">
+          <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>
