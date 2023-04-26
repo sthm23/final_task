@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderComponent } from '../components/header/header.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,13 +10,14 @@ interface DialogData {
 @Component({
   selector: 'app-auth-modal',
   templateUrl: './auth-modal.component.html',
-  styleUrls: ['./auth-modal.component.scss']
+  styleUrls: ['./auth-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AuthModalComponent {
 
-  hide:boolean = false
+  hide = false
 
-  toggleBlock: boolean = true
+  toggleBlock = true
 
   logInForm:FormGroup;
 

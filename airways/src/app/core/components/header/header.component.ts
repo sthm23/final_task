@@ -18,10 +18,7 @@ export class HeaderComponent {
   constructor(private dateFormatService: DateFormatService, public dialog: MatDialog) {}
 
   openAuthDialog() {
-    const dialogRef = this.dialog.open(AuthModalComponent, {
-      width: '500px',
-      minHeight: '500px'
-    });
+    const dialogRef = this.dialog.open(AuthModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
