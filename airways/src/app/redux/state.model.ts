@@ -11,7 +11,7 @@ export interface User {
   firstName: string
   lastName: string
   birthday: string
-  sex: 'male' | 'female'
+  gender: 'male' | 'female'
   country: string
   phoneNumber: string
   document: string
