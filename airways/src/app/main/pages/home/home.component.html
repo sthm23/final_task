@@ -46,29 +46,29 @@
 
     <div #option class="passengers" >
       <span class="passenger-label">Passengers</span>
-      <p class="input">1 Adult, 1 Child, 1... </p>
+      <p class="input">{{passengerText}}</p>
     </div>
     <div #options class="select" *ngIf="passenger" >
-      <div  class="option">
+      <div class="option">
         <div class="option-info">
           <p>Adults</p>
           <span>14+ years</span>
         </div>
-        <app-counter></app-counter>
+        <app-counter [counter]="adult" [age]="'adult'"></app-counter>
       </div>
       <div class="option">
         <div class="option-info">
           <p>Child</p>
           <span>2-14 years</span>
         </div>
-        <app-counter></app-counter>
+        <app-counter [counter]="child" [age]="'child'"></app-counter>
       </div>
       <div class="option">
         <div class="option-info">
           <p>Infant</p>
           <span>0-2 years</span>
         </div>
-        <app-counter></app-counter>
+        <app-counter [counter]="infant" [age]="'infant'"></app-counter>
       </div>
     </div>
   </div>
