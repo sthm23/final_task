@@ -46,16 +46,16 @@ header {
       cursor: pointer;
     }
 
+    .mdc-button__label,
+    .mat-mdc-select-min-line {
+      color: #ffffff;
+    }
     .choose-date-select {
       margin-bottom: -1.75em !important;
     }
   }
 }
 
-.mdc-button__label,
-.mat-mdc-select-min-line {
-  color: #ffffff;
-}
 .mdc-text-field--outlined .mdc-notched-outline {
   background: rgba(241, 243, 246, 0.15);
   /* Neutral/neutral60 */
