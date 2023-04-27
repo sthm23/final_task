@@ -56,7 +56,9 @@ header {
 
   }
 }
-
+.choose-date-select::ng-deep .mat-select-panel {
+  max-height: 40px !important;
+}
 .format-list {
   position: absolute;
   top: 100%;
