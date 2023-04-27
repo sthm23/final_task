@@ -1,0 +1,13 @@
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 14px;
+    line-height: 16px;
+    color: #11397e;
+    padding: 5px;
+    cursor: pointer;
+  }
+}

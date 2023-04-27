@@ -43,14 +43,34 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Passengers</mat-label>
-      <mat-select [(value)]="passangers">
-        <mat-option value="option1">2 Adult, 1 Child, 1... </mat-option>
-        <mat-option value="option2">4 Adult, 2 Child, 1... </mat-option>
-        <mat-option value="option3">3 Adult, 4 Child, 1... </mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <div #option class="passengers" >
+      <span class="passenger-label">Passengers</span>
+      <p class="input">1 Adult, 1 Child, 1... </p>
+    </div>
+    <div #options class="select" *ngIf="passenger" >
+      <div  class="option">
+        <div class="option-info">
+          <p>Adults</p>
+          <span>14+ years</span>
+        </div>
+        <app-counter></app-counter>
+      </div>
+      <div class="option">
+        <div class="option-info">
+          <p>Child</p>
+          <span>2-14 years</span>
+        </div>
+        <app-counter></app-counter>
+      </div>
+      <div class="option">
+        <div class="option-info">
+          <p>Infant</p>
+          <span>0-2 years</span>
+        </div>
+        <app-counter></app-counter>
+      </div>
+    </div>
   </div>
 
   <button mat-flat-button color="primary" class="primary">Primary</button>

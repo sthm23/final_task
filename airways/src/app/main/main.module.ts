@@ -9,10 +9,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    CounterComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
+    ReactiveFormsModule
   ],
 
   providers: [{
