@@ -1,0 +1,119 @@
+
+<div class="order-block">
+  <div class="order-card">
+    <div class="order-title">
+      <h2>Cart</h2>
+    </div>
+    <div class="order-body">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="No.">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            No.
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox color="primary"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(element) : null"
+              [checked]="selection.isSelected(element)">
+            </mat-checkbox>
+            <span class="flight-name" *ngFor="let item of element.number">{{item}}</span>
+          </td>
+        </ng-container>
+
+        <!-- Flight Column -->
+        <ng-container matColumnDef="Flight">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Flight
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let item of element.flight">{{item}}</div>
+          </td>
+        </ng-container>
+
+        <!-- Type trip Column -->
+        <ng-container matColumnDef="Type trip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Type trip
+          </th>
+          <td mat-cell *matCellDef="let element">{{element.flight.length > 1 ? 'Round Trip' : 'One way'}} </td>
+        </ng-container>
+
+        <!-- Data & Time Column -->
+        <ng-container matColumnDef="Data & Time">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Data & Time
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let item of element.date">{{item}}</div>
+          </td>
+        </ng-container>
+
+        <!-- Passengers Column -->
+        <ng-container matColumnDef="Passengers">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Passengers
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let item of element.passengers">{{item.count ? item.count+' x '+item.person : '' }}</div>
+          </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="Price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Price
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="price-name">$ {{element.price}}</div>
+          </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="btn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu btn">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
+              <button mat-menu-item>
+                <span>Delete</span>
+              </button>
+              <button mat-menu-item>
+                <span>Edit</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+      </table>
+
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-top-block">
+        <div class="add-trip-block">
+          <button mat-stroked-button>+ Add new trip</button>
+        </div>
+        <div class="total-price-block">
+          <h4>Total</h4>
+          <div>$ 572.34</div>
+        </div>
+      </div>
+      <div class="footer-bottom-block">
+        <div class="promo-code-block">
+          <input type="text" placeholder="Promo code">
+          <button >APPLY</button>
+        </div>
+        <div class="payment-btn-block">
+          <p>2 selected</p>
+          <button color="primary" mat-raised-button>Payment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

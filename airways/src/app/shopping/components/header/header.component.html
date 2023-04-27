@@ -6,7 +6,6 @@
       </a>
 
       <div class="menu">
-        <button class="btn-text" [routerLink]="['../booking']">Book flights</button>
         <mat-form-field appearance="outline" class="choose-date-select">
           <mat-select [formControl]="isActive" name="date">
             <mat-option *ngFor="let date of dateFormatList" [value]="date">
@@ -24,7 +23,7 @@
           <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
           Sign in
         </button>
-        <span class="shopping-basket" [routerLink]="['../shop']">
+        <span class="shopping-basket">
           <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
         </span>
       </div>

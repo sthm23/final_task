@@ -24,6 +24,8 @@ export class HeaderComponent {
 
   currency = 'EUR'
 
+  currencyList = ['EUR', 'USA', 'RUB', 'PLN']
+
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });

@@ -12,6 +12,9 @@ const routes: Routes = [
     path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule)
   },
   {
+    path: 'shop', loadChildren: () => import('./shopping/shopping.module').then(m=>m.ShoppingModule)
+  },
+  {
     path: '**', redirectTo: 'main', pathMatch: 'full',
   },
 ];

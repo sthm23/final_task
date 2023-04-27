@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { DateFormatService } from '../../services/date-format.service';
-import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
-import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +19,7 @@ export class HeaderComponent {
 
   currencyList = ['EUR', 'USA', 'RUB', 'PLN']
 
-  constructor(private dateFormatService: DateFormatService, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   openAuthDialog() {
     const dialogRef = this.dialog.open(AuthModalComponent);
