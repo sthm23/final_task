@@ -1,16 +1,19 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DateFormatService } from '../../services/date-format.service';
 import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Route, Router, RouterStateSnapshot, Scroll } from '@angular/router';
 
+
+type RouterUrl = '/main' | '/booking' | '/shop'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isFormat = false;
 
   isActive = new FormControl('MM/DD/YYYY');
@@ -21,7 +24,35 @@ export class HeaderComponent {
 
   currencyList = ['EUR', 'USA', 'RUB', 'PLN']
 
-  constructor(private dateFormatService: DateFormatService, public dialog: MatDialog) {}
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  toggleHeader = '/main'
+  headerBgToggler: boolean = true;
+
+  constructor(
+    private dateFormatService: DateFormatService,
+    public dialog: MatDialog,
+    private _formBuilder: FormBuilder,
+    private route: Router,
+    ) {}
+
+  ngOnInit(): void {
+    this.route.events.subscribe((e:any)=>{
+      const urlObj = e?.routerEvent as NavigationEnd | undefined
+      if(e?.routerEvent) {
+        const str = urlObj?.url! as RouterUrl;
+        this.toggleHeader = str
+        this.headerBgToggler = str === '/main'
+      }
+    })
+
+  }
 
   openAuthDialog() {
     const dialogRef = this.dialog.open(AuthModalComponent);

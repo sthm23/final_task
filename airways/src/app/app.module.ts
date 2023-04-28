@@ -9,6 +9,7 @@ import { reducers, metaReducers } from './redux/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AirwaysEffects } from './redux/effects/airways.effect';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AirwaysEffects } from './redux/effects/airways.effect';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, {
       metaReducers

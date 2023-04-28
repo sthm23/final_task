@@ -70,9 +70,9 @@
             <mat-error *ngIf="registerForm.get('birthday')?.invalid">Error birthday</mat-error>
           </mat-form-field>
 
-          <mat-button-toggle-group aria-label="choose gender">
-            <mat-button-toggle formControlName="gender" value="male" checked="true">Male</mat-button-toggle>
-            <mat-button-toggle formControlName="gender" value="female">Female</mat-button-toggle>
+          <mat-button-toggle-group aria-label="choose gender" formControlName="gender">
+            <mat-button-toggle value="male">Male</mat-button-toggle>
+            <mat-button-toggle value="female">Female</mat-button-toggle>
           </mat-button-toggle-group>
 
           <mat-form-field appearance="outline">
@@ -104,7 +104,7 @@
           </div>
 
           <div>
-            <button class="submit" mat-raised-button type="button" (click)="register">Sign up</button>
+            <button class="submit" mat-raised-button type="button" (click)="register()">Sign up</button>
           </div>
         </form>
       </div>

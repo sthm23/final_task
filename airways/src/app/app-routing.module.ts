@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './core/pages/home/home.component';
+import { ErrorComponent } from './core/pages/error/error.component';
 
 const routes: Routes = [
   {
     path: '', redirectTo: 'main', pathMatch: 'full',
   },
   {
-    path: 'main', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    path: '', component: HomeComponent, children: [
+      {
+        path: 'main', loadChildren: ()=> import('./main/main.module').then(m=>m.MainModule)
+      },
+      {
+        path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule)
+      },
+      {
+        path: 'shop', loadChildren: () => import('./shopping/shopping.module').then(m=>m.ShoppingModule)
+      },
+      {
+        path: 'error', component: ErrorComponent
+      },
+    ]
   },
   {
-    path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule)
-  },
-  {
-    path: 'shop', loadChildren: () => import('./shopping/shopping.module').then(m=>m.ShoppingModule)
-  },
-  {
-    path: '**', redirectTo: 'main', pathMatch: 'full',
+    path: '**', redirectTo: 'error', pathMatch: 'full',
   },
 ];
 
