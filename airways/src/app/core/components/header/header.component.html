@@ -1,30 +1,65 @@
-<header>
+<header [ngClass]="{'bgChange': !headerBgToggler}">
   <div class="container">
     <nav class="navbar">
       <a [routerLink]="['/main']" class="logo">
         <img src="../../../../assets/img/header-logo.png" alt="png" />
       </a>
-
+      <mat-stepper #stepper *ngIf="toggleHeader === '/booking'">
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Flights</ng-template>
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div> -->
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Passengers</ng-template>
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Passengers</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                     required>
+            </mat-form-field> -->
+            <!-- <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div> -->
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Review & Payment</ng-template>
+          <!-- <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div> -->
+        </mat-step>
+      </mat-stepper>
       <div class="menu">
-        <button class="btn-text" [routerLink]="['/booking']">Book flights</button>
+        <button class="btn-text" [routerLink]="['/booking']" *ngIf="toggleHeader === '/main'">Book flights</button>
         <mat-form-field appearance="outline" class="choose-date-select">
-          <mat-select [formControl]="isActive" name="date">
+          <mat-select [formControl]="isActive" name="date"  [panelClass]="{'textColor': !headerBgToggler }">
             <mat-option *ngFor="let date of dateFormatList" [value]="date">
-              <span>{{date}}</span>
+              <span [ngClass]="{'textColor': !headerBgToggler }">{{date}}</span>
             </mat-option>
           </mat-select>
         </mat-form-field>
         <button mat-button class="btn-language" [matMenuTriggerFor]="currencyMenu">
-          {{ currency }}
+          <span [ngClass]="{'textColor': !headerBgToggler }">{{ currency }}</span>
         </button>
         <mat-menu #currencyMenu="matMenu">
           <button *ngFor="let currencyName of currencyList" (click)="chooseCurrency(currencyName)" mat-menu-item>{{currencyName}}</button>
         </mat-menu>
-        <button class="btn-sign" (click)="openAuthDialog()">
+        <button class="btn-sign" (click)="openAuthDialog()" [ngClass]="{'textColor': !headerBgToggler }">
           <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
           Sign in
         </button>
-        <span class="shopping-basket" [routerLink]="['/shop']">
+        <span class="shopping-basket" [routerLink]="['/shop']" [ngClass]="{'textColor': !headerBgToggler }">
           <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
         </span>
       </div>
