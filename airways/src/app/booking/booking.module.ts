@@ -6,15 +6,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderComponent } from './pages/order/order.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -27,7 +20,6 @@ import {MatSelectModule} from '@angular/material/select';
   ],
   imports: [
     CommonModule,
-    MatSelectModule,
     RouterModule.forChild([
       {
         path: '', component: HomeComponent, children: [
@@ -43,13 +35,7 @@ import {MatSelectModule} from '@angular/material/select';
         ]
       }
     ]),
-    ReactiveFormsModule,
-    MatStepperModule,
-    MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
+    MaterialModule
   ],
   providers: [
     {
