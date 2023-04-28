@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DateFormatService } from '../../services/date-format.service';
 import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +7,8 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
   isFormat = false;

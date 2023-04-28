@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.order-card {
+  width: 580px;
+  background: rgba(255, 255, 255, 0.85);
+  background: #f4f6f9;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 62px 0 162px;
+  position: relative;
+
+  .flight-type {
+    margin-bottom: 12px;
+    mat-radio-group {
+      display: flex;
+      gap: 62px;
+    }
+  }
+
+  .choose-line {
+    display: flex;
+    flex-direction: column;
+  }
+  .date-pass {
+    display: flex;
+    justify-content: space-between;
+    mat-form-field {
+      width: 48%;
+    }
+  }
+  .primary {
+    margin-left: 86%;
+  }
+
+  .passengers {
+    width: 201px;
+    height: 56px;
+    padding: 8px 0 0 16px;
+    background: #f4f6f9;
+    border-radius: 4px;
+    border: 1px solid #a7a9ad;
+    cursor: pointer;
+
+    .passenger-label {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4px;
+      color: #49454f;
+    }
+  }
+  .select {
+    width: 201px;
+    background: #ffffff;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 286px;
+    right: 23px;
+    z-index: 2;
+    padding: 14px 16px;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .option-info {
+      p {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        color: #11397e;
+      }
+      span {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+        color: #74767a;
+      }
+    }
+
+  }
+}
+
+.mat-mdc-radio-button.mat-accent {
+  font-weight: 500;
+  font-size: 16px;
+}

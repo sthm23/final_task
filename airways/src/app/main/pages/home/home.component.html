@@ -1,1 +1,77 @@
-<p>Main home works!</p>
+<form class="order-card">
+  <div class="flight-type">
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1" checked (change)="selectFlightType($event)">Round Trip</mat-radio-button>
+      <mat-radio-button value="2" (change)="selectFlightType($event)">One Way</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="choose-line">
+    <mat-form-field appearance="fill">
+      <mat-label>From</mat-label>
+      <mat-select [(value)]="from">
+        <mat-option value="option1">Dublin DUB</mat-option>
+        <mat-option value="option2">Dublin DUB 2</mat-option>
+        <mat-option value="option3">Dublin DUB 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Destination</mat-label>
+      <mat-select [(value)]="destination">
+        <mat-option value="option1">Dublin DUB</mat-option>
+        <mat-option value="option2">Dublin DUB 2</mat-option>
+        <mat-option value="option3">Dublin DUB 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="date-pass">
+    <mat-form-field appearance="fill" *ngIf="flightType==='1'">
+      <mat-label>Dates</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" />
+        <input matEndDate placeholder="End date" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field appearance="fill" *ngIf="flightType === '2'">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div #option class="passengers" >
+      <span class="passenger-label">Passengers</span>
+      <p class="input">{{passengerText}}</p>
+    </div>
+    <div #options class="select" *ngIf="passenger" >
+      <div class="option">
+        <div class="option-info">
+          <p>Adults</p>
+          <span>14+ years</span>
+        </div>
+        <app-counter [counter]="adult" [age]="'adult'"></app-counter>
+      </div>
+      <div class="option">
+        <div class="option-info">
+          <p>Child</p>
+          <span>2-14 years</span>
+        </div>
+        <app-counter [counter]="child" [age]="'child'"></app-counter>
+      </div>
+      <div class="option">
+        <div class="option-info">
+          <p>Infant</p>
+          <span>0-2 years</span>
+        </div>
+        <app-counter [counter]="infant" [age]="'infant'"></app-counter>
+      </div>
+    </div>
+  </div>
+
+  <button mat-flat-button color="primary" class="primary">Primary</button>
+</form>

@@ -36,13 +36,6 @@ header {
       position: relative;
     }
 
-    .btn-dateformat {
-      span {
-        display: flex;
-        align-items: center;
-      }
-    }
-
     .btn-text {
       border: none;
       background: transparent;
@@ -53,47 +46,25 @@ header {
       cursor: pointer;
     }
 
-    .choose-date-select{
+    .mdc-button__label,
+    .mat-mdc-select-min-line {
+      color: #ffffff;
+    }
+    .choose-date-select {
       margin-bottom: -1.75em !important;
     }
-
   }
 }
 
-.format-list {
-  position: absolute;
-  top: 100%;
-  background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+.mdc-text-field--outlined .mdc-notched-outline {
+  background: rgba(241, 243, 246, 0.15);
+  /* Neutral/neutral60 */
 
-  .format-item {
-    font-size: 16px;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    color: #49454f;
-    padding: 20px 16px;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    span {
-      width: 24px;
-      height: 24px;
-      mat-icon {
-        display: none;
-      }
-    }
-  }
-  .active {
-    background: #e9edf1;
-
-    span {
-      mat-icon {
-        display: block;
-        color: #11397e;
-      }
-    }
-  }
+  border: 0.5px solid #cecece;
+  border-radius: 4px;
+}
+.mat-mdc-select-arrow svg {
+  fill: #fff !important;
 }
 
 .container {
