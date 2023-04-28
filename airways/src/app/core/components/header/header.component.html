@@ -4,7 +4,7 @@
       <a [routerLink]="['/main']" class="logo">
         <img src="../../../../assets/img/header-logo.png" alt="png" />
       </a>
-      <mat-stepper #stepper *ngIf="toggleHeader === '/booking'">
+      <mat-stepper #stepper *ngIf="toggleHeader.includes('/booking')">
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Flights</ng-template>

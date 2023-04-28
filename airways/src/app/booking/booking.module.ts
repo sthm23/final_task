@@ -6,13 +6,17 @@ import { OrderComponent } from './pages/order/order.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MaterialModule } from '../material/material.module';
+import { ConfigPassengersComponent } from './pages/config-passengers/config-passengers.component';
+import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     OrderComponent,
-    ErrorComponent
+    ErrorComponent,
+    ConfigPassengersComponent,
+    OrderSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,13 @@ import { MaterialModule } from '../material/material.module';
       {
         path: '', component: HomeComponent, children: [
           {
-            path: '', component: OrderComponent
+            path: '', component: OrderComponent,
+          },
+          {
+            path: 'order', component: ConfigPassengersComponent,
+          },
+          {
+            path: 'summary', component: OrderSummaryComponent,
           },
           {
             path: 'error', component: ErrorComponent
