@@ -1,0 +1,32 @@
+.order-block{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  height: 100%;
+  width: 100%;
+  row-gap: 20px;
+}
+
+.search-block{
+  grid-column: 1/5;
+  grid-row: 3/4;
+  margin-top: -25px;
+  background-color: aqua;
+}
+.order-body{
+  grid-column: 1/5;
+  grid-row: 4/12;
+  background-color: red;
+}
+.order-footer{
+  grid-column: 1/5;
+  grid-row: 12/13;
+}
+
+.btn-block{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 20px;
+  padding: 0px 20px;
+}
