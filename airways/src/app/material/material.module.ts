@@ -14,6 +14,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSortModule} from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -32,7 +35,11 @@ import {MatSortModule} from '@angular/material/sort';
     MatStepperModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -48,7 +55,11 @@ import {MatSortModule} from '@angular/material/sort';
     MatStepperModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }
