@@ -11,6 +11,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 interface Animal {
   name: string;
 }
+interface PassengersCard {
+  title: string;
+}
 @Component({
   selector: 'app-config-passengers',
   templateUrl: './config-passengers.component.html',
@@ -28,4 +31,10 @@ export class ConfigPassengersComponent {
     {name: '+71'},
     {name: '+62'},
   ];
+
+  passengersCard: PassengersCard[] = [{title: 'Adult'}, {title:'Child'}, {title:'Infant'}]
+
+  onInfo(type: string) {
+    console.log(type);
+  }
 }

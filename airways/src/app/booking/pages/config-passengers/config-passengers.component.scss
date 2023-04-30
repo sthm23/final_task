@@ -186,11 +186,27 @@ mat-label {
   .container {
     width: 750px;
   }
+  .order-block {
+    padding-top: 0;
+  }
+  .order-body {
+    mat-button-toggle-group {
+      order: 2;
+    }
+    .passengers-card {
+      .card-inputs {
+        flex-wrap: wrap;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
   .container {
     width: 380px;
+  }
+  .btn-block {
+    padding-bottom: 50px;
   }
 }
 
