@@ -33,8 +33,4 @@ export class ConfigPassengersComponent {
   ];
 
   passengersCard: PassengersCard[] = [{title: 'Adult'}, {title:'Child'}, {title:'Infant'}]
-
-  onInfo(type: string) {
-    console.log(type);
-  }
 }

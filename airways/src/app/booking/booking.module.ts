@@ -8,6 +8,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MaterialModule } from '../material/material.module';
 import { ConfigPassengersComponent } from './pages/config-passengers/config-passengers.component';
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
+import { PassengersCardComponent } from './components/passengers-card/passengers-card.component';
+import { SummaryCardComponent } from './components/summary-card/summary-card.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { OrderSummaryComponent } from './pages/order-summary/order-summary.compo
     OrderComponent,
     ErrorComponent,
     ConfigPassengersComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    PassengersCardComponent,
+    SummaryCardComponent
   ],
   imports: [
     CommonModule,

@@ -5,7 +5,7 @@
   font-style: normal;
 }
 .order-block {
-  padding-top: 87px;
+  padding-top: 120px;
 }
 
 .search-block {
@@ -112,6 +112,19 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      position: relative;
+
+      .input-info {
+        width: 200px;
+        padding: 16px 24px;
+        background: #ffffff;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        top: 50%;
+      }
     }
   }
   mat-slide-toggle {

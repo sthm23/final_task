@@ -51,41 +51,8 @@
         </p>
       </div>
 
-      <div class="passengers-card" *ngFor="let passenger of passengersCard">
-        <h3 class="card-title">{{passenger.title}}</h3>
-        <div class="card-inputs">
-          <mat-form-field appearance="fill">
-            <mat-label>First name*</mat-label>
-            <input matInput />
-            <mat-icon fontIcon="info" matSuffix></mat-icon>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Last name*</mat-label>
-            <input matInput />
-            <mat-icon fontIcon="info" matSuffix></mat-icon>
-          </mat-form-field>
-          <mat-button-toggle-group
-            name="favoriteColor"
-            aria-label="Favorite Color"
-          >
-            <mat-button-toggle value="male">Male</mat-button-toggle>
-            <mat-button-toggle value="female">Female</mat-button-toggle>
-          </mat-button-toggle-group>
-          <mat-form-field appearance="fill">
-            <mat-label>Date of birth*</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <mat-slide-toggle>
-          <mat-icon fontIcon="wheelchair_pickup"></mat-icon>
-          Need special assistance?
-        </mat-slide-toggle>
-      </div>
+      <app-passengers-card *ngFor="let passenger of passengersCard" [passenger]="passenger"></app-passengers-card>
+
       <h3 class="contact-title">
         <mat-icon fontIcon="contact_page"></mat-icon> Contact details
       </h3>

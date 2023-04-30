@@ -7,7 +7,7 @@
   padding: 22px 0;
   background: #fafafa;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 100px;
+  margin-top: 120px;
 
   .row {
     display: flex;
@@ -86,58 +86,10 @@
     display: flex;
     gap: 24px;
     margin-bottom: 30px;
-    .summary-card {
-      gap: 8px;
-      width: 551px;
-      background: #fff;
-      border-top: 3px solid #11397e;
-      border-radius: 8px 8px 0px 0px;
-    }
-    .summary-header {
-      width: 100%;
-      padding: 20px 24px;
-      background: #f1f3f6;
 
-      .header-way {
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
-        letter-spacing: 0.5px;
-        color: #000000;
-        margin-bottom: 8px;
-        span {
-          color: #11397e;
-          margin-right: 20px;
-        }
-      }
-    }
   }
 
-  .summary-main {
-    padding: 20px 24px;
-    width: 100%;
-    background: #ffffff;
-    border-radius: 0px 0px 8px 8px;
-    border-bottom: 1px solid #e1e5eb;
 
-    h4 {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: #1c1b1f;
-      margin-bottom: 12px;
-    }
-    p {
-      padding: 0px 0px 0px 28px;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0.5px;
-      color: #000000;
-      margin-bottom: 4px;
-    }
-  }
 
   .total {
     width: 552px;
@@ -294,7 +246,9 @@
   .btn-block {
     padding-bottom: 50px;
   }
-
+  .search-block {
+    margin-top: 0;
+  }
   .order-body {
     .order-summary {
       flex-wrap: wrap;
