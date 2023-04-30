@@ -252,6 +252,38 @@
         flex-wrap: wrap;
       }
     }
+    .summary-title {
+      font-size: 20px;
+    }
+
+    .summary-main {
+      padding: 15px 20px;
+      p {
+        padding: 0 0 0 20px;
+        font-size: 14px;
+      }
+    }
+
+    .order-summary {
+      .summary-card {
+        width: 49%;
+
+        .summary-header {
+          padding: 15px 20px;
+          .header-way {
+            font-size: 17px;
+          }
+        }
+      }
+    }
+    .total {
+      padding: 15px 60px 15px 30px;
+      .total-bottom {
+        p {
+          font-size: 18px;
+        }
+      }
+    }
   }
 }
 
@@ -261,5 +293,23 @@
   }
   .btn-block {
     padding-bottom: 50px;
+  }
+
+  .order-body {
+    .order-summary {
+      flex-wrap: wrap;
+      .summary-card {
+        width: 100%;
+      }
+    }
+    .total {
+      width: 100%;
+      padding: 15px 20px;
+      .total-bottom {
+        p {
+          font-size: 18px;
+        }
+      }
+    }
   }
 }
