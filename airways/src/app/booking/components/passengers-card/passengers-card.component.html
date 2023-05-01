@@ -1,22 +1,25 @@
 <div class="passengers-card">
-  <h3 class="card-title">{{passenger.title}}</h3>
+  <h3 class="card-title">{{ passenger.title }}</h3>
   <div class="card-inputs">
     <mat-form-field appearance="outline">
       <mat-label>First name*</mat-label>
       <input matInput />
-      <mat-icon matSuffix>info</mat-icon>
+      <mat-icon mat-raised-button matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname." matSuffix>info</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Last name*</mat-label>
       <input matInput />
-      <mat-icon matSuffix>info</mat-icon>
+
+      <mat-icon mat-raised-button matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname." matSuffix>info</mat-icon>
     </mat-form-field>
-    <mat-button-toggle-group
-      name="favoriteColor"
-      aria-label="Favorite Color"
-    >
-      <mat-button-toggle value="male"><mat-icon>check</mat-icon> Male</mat-button-toggle>
-      <mat-button-toggle value="female"><mat-icon>check</mat-icon> Female</mat-button-toggle>
+
+    <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+      <mat-button-toggle value="male"
+        ><mat-icon>check</mat-icon> Male</mat-button-toggle
+      >
+      <mat-button-toggle value="female"
+        ><mat-icon>check</mat-icon> Female</mat-button-toggle
+      >
     </mat-button-toggle-group>
     <mat-form-field appearance="outline">
       <mat-label>Date of birth*</mat-label>
