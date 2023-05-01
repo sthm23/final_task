@@ -5,7 +5,7 @@
   align-items: center;
   gap: 40px;
 
-  padding-top: 33px;
+  margin-top: 130px;
 }
 
 .search-left {
@@ -58,6 +58,9 @@
   letter-spacing: 0.1px;
   color: #11397e !important;
   border: none;
+}
+.active-btn{
+  background: #bebebe;
 }
 
 .search-form-block{
