@@ -1,92 +1,132 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+  font-style: normal;
 }
-
 .order-block {
-  padding-top: 87px;
+  padding-top: 120px;
 }
 
 .search-block {
+  position: relative;
   padding: 22px 0;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-  // margin-top: -25px;
-
-  .row {
-    gap: 40px;
-    align-items: center;
-  }
-
-  .search-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    p {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
-      text-align: right;
-      letter-spacing: 0.15px;
-      color: #000000;
-    }
-  }
-
-  .search-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    .right-text {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
-      letter-spacing: 0.1px;
-      color: #74767a;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .circle {
-      display: block;
-      width: 4px;
-      height: 4px;
-      background: #0090bd;
-      border-radius: 2px;
-    }
-  }
-
-  .button-flat {
-    padding: 4px 8px;
-    background: #f4f6f9;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    color: #11397e;
-    border: none;
-  }
+  margin-top: -33px;
 }
+
 .order-body {
   padding: 40px 0 20px;
+
+  .order-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    color: #11397e;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .order-text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #49454f;
+
+    margin-bottom: 20px;
+  }
+
+  .card-title,
+  .contact-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #10264c;
+    margin-bottom: 24px;
+  }
+  .passengers-card {
+    padding: 32px 44px;
+    background: #ffffff;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    .card-inputs {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+
+      .input-info {
+        width: 200px;
+        padding: 16px 24px;
+        background: #ffffff;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        top: 50%;
+      }
+    }
+  }
+  mat-slide-toggle {
+    margin-top: 24px;
+    gap: 17px;
+    .mdc-form-field > label {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .infant {
+    margin-bottom: 40px;
+  }
+
+  .contact-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #11397e;
+    margin-bottom: 8px;
+  }
+  .contact-text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #49454f;
+    margin-bottom: 20px;
+  }
 }
+
 .order-footer {
-  // grid-column: 1/5;
-  // grid-row: 12/13;
+
 }
 
 .btn-block {
-  // display: flex;
-  // align-items: center;
-  // justify-content: flex-end;
-  // column-gap: 20px;
-  // padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 20px;
+  padding: 0px 20px;
+  padding-bottom: 102px;
 }
+
+mat-label {
+  letter-spacing: 0.4px;
+  color: #49454f;
+}
+.mat-mdc-text-field-wrapper {
+  background: #f4f6f9;
+  border-radius: 4px;
+  border-bottom: none;
+  border: 1px solid #acadaf;
+}
+
 .container {
-  width: 1440px;
+  width: 1128px;
   margin: auto;
 }
 .row {
@@ -103,10 +143,32 @@
   .container {
     width: 750px;
   }
+  .order-block {
+    padding-top: 0;
+  }
+  .order-body {
+    mat-button-toggle-group {
+      order: 2;
+    }
+    .passengers-card {
+      .card-inputs {
+        flex-wrap: wrap;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
   .container {
     width: 380px;
+  }
+  .btn-block {
+    padding-bottom: 50px;
+  }
+}
+
+mat-form-field {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
   }
 }

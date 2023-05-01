@@ -8,6 +8,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MaterialModule } from '../material/material.module';
 import { ConfigPassengersComponent } from './pages/config-passengers/config-passengers.component';
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
+import { SearchFlightComponent } from './components/search-flight/search-flight.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { OrderSummaryComponent } from './pages/order-summary/order-summary.compo
     OrderComponent,
     ErrorComponent,
     ConfigPassengersComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    SearchFlightComponent
   ],
   imports: [
     CommonModule,
