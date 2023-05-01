@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, ValidationErrors } from '@angular/forms';
+import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-passengers-card',
@@ -15,7 +16,8 @@ export class PassengersCardComponent implements OnInit {
   ngOnInit(): void {
     this.createForm = this.rootFormGroup.control.get(this.passenger) as FormGroup;
   }
-  changesInput() {
-    console.log(this.createForm);
+
+  onToggle(event: MatSlideToggleChange) {
+    console.log(event.checked);
   }
 }

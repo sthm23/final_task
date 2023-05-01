@@ -67,6 +67,6 @@ export class ConfigPassengersComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.createForm.get('contact'));
+    console.log(this.createForm);
   }
 }

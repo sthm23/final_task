@@ -6,7 +6,6 @@
       <input
         matInput
         formControlName="firstName"
-        (ngModelChange)="changesInput()"
         required
       />
       <mat-icon
@@ -55,7 +54,7 @@
       >
     </mat-form-field>
 
-    <mat-button-toggle-group name="favoriteColor">
+    <mat-button-toggle-group formControlName="gender" name="favoriteColor">
       <mat-button-toggle value="male" checked>
         <mat-icon>check</mat-icon> Male
       </mat-button-toggle>
@@ -86,7 +85,7 @@
       >
     </mat-form-field>
   </div>
-  <mat-slide-toggle color="primary">
+  <mat-slide-toggle (change)="onToggle($event)" color="primary">
     <mat-icon fontIcon="wheelchair_pickup"></mat-icon>
     Need special assistance?
   </mat-slide-toggle>
