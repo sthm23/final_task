@@ -1,55 +1,67 @@
-import { Component, ElementRef, HostListener, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { PassengersService } from '../../services/passengers.service';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
+type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
+interface DropDownOptions {name: TypeOfPassengersName, count: number}
+interface SearchFormGroup {
+  from: FormControl
+  destination: FormControl
+  date: FormControl
+  passengers: FormArray<FormControl<DropDownOptions | null>>
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  from = 'option2';
-  destination = 'option1'
-  passangers = 'option1'
+
+  dropdownOptions: DropDownOptions[] = [
+    {
+      name: 'Adults',
+      count: 0
+    },
+    {
+      name: 'Child',
+      count: 0
+    },
+    {
+      name: 'Infant',
+      count: 0
+    },
+  ]
+
+  form!:FormGroup<SearchFormGroup>;
+
   flightType = '1'
-  passengerText = ''
 
-  constructor(private passengerService: PassengersService) { }
-
-  adult = 0;
-  child = 0;
-  infant = 0;
-
-  passenger = false;
-  @ViewChild('option', { static: false }) element!: ElementRef;
-  @ViewChild('options', { static: false }) options!: ElementRef;
-
-  @HostListener('click', ['$event']) onClick(e: MouseEvent) {
-    this.passengerText = `${this.adult} Adults, ${this.child} Child, ${this.infant} Infant`
-    if (this.element.nativeElement.contains(e.target)) {
-      this.passenger = !this.passenger;
-    }
-    else if (this.options?.nativeElement.contains(e.target)) {
-      this.passenger = true;
-    }
-    else {
-      this.passenger = false;
-    }
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.passengerService.adult.subscribe(val => {
-      this.adult = val
-    })
-    this.passengerService.child.subscribe(val => {
-      this.child = val
-    })
-    this.passengerService.infant.subscribe(val => {
-      this.infant = val
-    });
+   const formArr = this.dropdownOptions.map(item=>new FormControl(item, [Validators.required]));
+   this.form = new FormGroup({
+    from: new FormControl('', ),
+    destination: new FormControl('', ),
+    date: new FormControl('', ),
+    passengers: new FormArray(formArr),
+  });
   }
 
   selectFlightType(event: MatRadioChange) {
     this.flightType = event.value;
+  }
+
+  dropdownValueChanged(e:DropDownOptions[]) {
+    this.dropdownOptions = e;
+    const passengersArr = e.map(item=>new FormControl(item, [Validators.required]));
+    const passengers = new FormArray(passengersArr);
+    this.form.setControl('passengers', passengers);
+  }
+
+  submitSearch(){
+    console.log(this.form.value);
+
   }
 }

@@ -4,13 +4,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CounterComponent } from './components/counter/counter.component';
+// import { CounterComponent } from './components/counter/counter.component';
 import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    CounterComponent,
+    // CounterComponent,
   ],
   imports: [
     CommonModule,

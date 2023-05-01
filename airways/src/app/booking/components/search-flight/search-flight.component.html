@@ -63,7 +63,7 @@
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-
+        <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
       </div>
     </form>
   </div>

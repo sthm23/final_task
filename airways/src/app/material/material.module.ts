@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,9 +17,14 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
+import { HtmlSelectComponent } from './components/html-select/html-select.component';
+import { ClickOutsideDirective } from './directives/clickOut.directive';
+import { CounterComponent } from './components/counter/counter.component';
 @NgModule({
   declarations: [
-
+    HtmlSelectComponent,
+    ClickOutsideDirective,
+    CounterComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
+    FormsModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -61,6 +67,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
+    HtmlSelectComponent
   ]
 })
 export class MaterialModule { }

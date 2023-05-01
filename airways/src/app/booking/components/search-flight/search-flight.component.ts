@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-
+type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
+interface DropDownOptions {name: TypeOfPassengersName, count: number}
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
@@ -17,6 +18,20 @@ export class SearchFlightComponent implements OnInit {
   destinationDate = ''
 
   searchFormBlockToggler = false
+  dropdownOptions: DropDownOptions[] = [
+    {
+      name: 'Adults',
+      count: 0
+    },
+    {
+      name: 'Child',
+      count: 0
+    },
+    {
+      name: 'Infant',
+      count: 0
+    },
+  ]
 
 
   constructor(private router: Router) {}
@@ -34,6 +49,11 @@ export class SearchFlightComponent implements OnInit {
 
   showSearchForm() {
     this.searchFormBlockToggler = !this.searchFormBlockToggler
+  }
+
+  dropdownValueChanged(e:DropDownOptions[]) {
+    this.dropdownOptions = e;
+
   }
 
 }
