@@ -171,3 +171,14 @@ mat-form-field {
     display: none !important;
   }
 }
+
+
+
+.airplane-icon{
+  transform: rotateY(180deg);
+}
+.flight-info-block{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
