@@ -1,24 +1,24 @@
 <div class="passengers-card">
   <h3 class="card-title">{{passenger.title}}</h3>
   <div class="card-inputs">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>First name*</mat-label>
       <input matInput />
-      <mat-icon fontIcon="info" matSuffix></mat-icon>
+      <mat-icon matSuffix>info</mat-icon>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Last name*</mat-label>
       <input matInput />
-      <mat-icon fontIcon="info" matSuffix></mat-icon>
+      <mat-icon matSuffix>info</mat-icon>
     </mat-form-field>
     <mat-button-toggle-group
       name="favoriteColor"
       aria-label="Favorite Color"
     >
-      <mat-button-toggle value="male">Male</mat-button-toggle>
-      <mat-button-toggle value="female">Female</mat-button-toggle>
+      <mat-button-toggle value="male"><mat-icon>check</mat-icon> Male</mat-button-toggle>
+      <mat-button-toggle value="female"><mat-icon>check</mat-icon> Female</mat-button-toggle>
     </mat-button-toggle-group>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Date of birth*</mat-label>
       <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" />
       <mat-datepicker-toggle
@@ -28,7 +28,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-  <mat-slide-toggle>
+  <mat-slide-toggle color="primary">
     <mat-icon fontIcon="wheelchair_pickup"></mat-icon>
     Need special assistance?
   </mat-slide-toggle>
