@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
@@ -8,8 +8,12 @@ interface DropDownOptions {name: TypeOfPassengersName, count: number}
 interface SearchFormGroup {
   from: FormControl
   destination: FormControl
-  date: FormControl
+  date: FormControl<string | null>
   passengers: FormArray<FormControl<DropDownOptions | null>>
+  rangeDate: FormGroup<{
+    start: FormControl<Date | null>;
+    end: FormControl<Date | null>;
+  }>
 }
 @Component({
   selector: 'app-home',
@@ -33,19 +37,26 @@ export class HomeComponent implements OnInit {
     },
   ]
 
+  cities = [{name:'Dublin DUB 1'}, {name:'Dublin DUB 2'}, {name:'Dublin DUB 3'}]
+
   form!:FormGroup<SearchFormGroup>;
 
   flightType = '1'
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
    const formArr = this.dropdownOptions.map(item=>new FormControl(item, [Validators.required]));
-   this.form = new FormGroup({
+   this.form = this.formBuilder.group({
     from: new FormControl('', ),
     destination: new FormControl('', ),
     date: new FormControl('', ),
     passengers: new FormArray(formArr),
+
+    rangeDate: this.formBuilder.group({
+      start: new FormControl<Date | null>(null),
+      end: new FormControl<Date | null>(null),
+    })
   });
   }
 
@@ -58,6 +69,11 @@ export class HomeComponent implements OnInit {
     const passengersArr = e.map(item=>new FormControl(item, [Validators.required]));
     const passengers = new FormArray(passengersArr);
     this.form.setControl('passengers', passengers);
+  }
+
+  setRouteDate(e:any) {
+    console.log(e);
+
   }
 
   submitSearch(){
