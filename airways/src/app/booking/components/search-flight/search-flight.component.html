@@ -54,9 +54,6 @@
             <mat-option value="option3">Dublin DUB 3</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
-
-      <div class="date-pass">
         <mat-form-field appearance="outline">
           <mat-label>Date</mat-label>
           <input matInput [matDatepicker]="picker">
@@ -65,6 +62,7 @@
         </mat-form-field>
         <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
       </div>
+
     </form>
   </div>
 </div>
