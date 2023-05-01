@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   });
 
   toggleHeader = '/main'
-  headerBgToggler: boolean = true;
+  headerBgToggler = true;
 
   constructor(
     private dateFormatService: DateFormatService,

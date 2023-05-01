@@ -10,6 +10,7 @@ import { ConfigPassengersComponent } from './pages/config-passengers/config-pass
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
 import { PassengersCardComponent } from './components/passengers-card/passengers-card.component';
 import { SummaryCardComponent } from './components/summary-card/summary-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,10 +21,11 @@ import { SummaryCardComponent } from './components/summary-card/summary-card.com
     ConfigPassengersComponent,
     OrderSummaryComponent,
     PassengersCardComponent,
-    SummaryCardComponent
+    SummaryCardComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '', component: HomeComponent, children: [
