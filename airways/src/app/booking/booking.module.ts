@@ -11,6 +11,7 @@ import { OrderSummaryComponent } from './pages/order-summary/order-summary.compo
 import { SearchFlightComponent } from './components/search-flight/search-flight.component';
 import { CaruselComponent } from './components/carusel/carusel.component';
 import { SelectFlightComponent } from './components/select-flight/select-flight.component';
+import { OrderTitleComponent } from './components/order-title/order-title.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SelectFlightComponent } from './components/select-flight/select-flight.
     OrderSummaryComponent,
     SearchFlightComponent,
     CaruselComponent,
-    SelectFlightComponent
+    SelectFlightComponent,
+    OrderTitleComponent
   ],
   imports: [
     CommonModule,

@@ -4,9 +4,6 @@
   font-family: "Roboto";
   font-style: normal;
 }
-.order-block {
-
-}
 
 .search-block {
   position: relative;
@@ -17,17 +14,6 @@
 
 .order-body {
   padding: 40px 0 20px;
-
-  .order-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    display: flex;
-    align-items: center;
-    color: #11397e;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
 
   .order-text {
     font-size: 16px;
@@ -99,9 +85,8 @@
     margin-bottom: 20px;
   }
 }
-
-.order-footer {
-
+.destination-block{
+  margin-top: 25px;
 }
 
 .btn-block {
@@ -111,6 +96,32 @@
   column-gap: 20px;
   padding: 0px 20px;
   padding-bottom: 102px;
+
+  & .next-btn {
+    width: 126px;
+    height: 60px;
+    background: #11397E;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: #FFFFFF;
+  }
+
+  & .back-btn {
+    width: 126px;
+    height: 60px;
+    letter-spacing: 0.1px;
+    color: #11397E;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
 
 mat-label {

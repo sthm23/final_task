@@ -1,0 +1,14 @@
+.order-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #11397e;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.airplane-icon{
+  transform: rotateY(180deg);
+}
