@@ -1,13 +1,132 @@
 <div class="order-block">
-  <div class="search-block">search items</div>
   <div class="order-body">
-    body summary
+    <div class="container">
+      <h2 class="summary-title">
+        <mat-icon fontIcon="preview"></mat-icon>
+        Summary
+      </h2>
+
+      <div class="order-summary">
+        <app-summary-card></app-summary-card>
+        <app-summary-card></app-summary-card>
+        <!-- <div class="summary-card">
+          <div class="summary-header">
+            <p class="header-way"><span>FR 1925</span>Dublin — Warsaw Modlin</p>
+            <p class="header-date">
+              Wednesday, 1 March, 2023 <span>8:40 — 12:00</span>
+            </p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-header">
+            <p class="header-way"><span>FR 1925</span>Warsaw Modlin — Dublin</p>
+            <p class="header-date">
+              Saturday, 18 March, 2023 <span>7:40 — 11:00</span>
+            </p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+          <div class="summary-main">
+            <h4>Harry Potter</h4>
+            <p>1checked bag (total 23 kg) included</p>
+            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
+            <p>Seat 19E</p>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="total">
+        <div class="total-top">
+          <table>
+            <tr>
+              <th><span>1</span>x Adult Fare</th>
+              <th>€257.31</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>€166.00</td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€90.08</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th><span>1</span>x Adult Fare</th>
+              <th>€257.31</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>€166.00</td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€90.08</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th><span>1</span>x Adult Fare</th>
+              <th>€257.31</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>€166.00</td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€90.08</td>
+            </tr>
+          </table>
+        </div>
+        <div class="total-bottom">
+          <p>TOTAL:</p>
+          <p>€551.38</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="order-footer">
-    <div class="btn-block">
-      <button mat-button [routerLink]="['/booking/order']">Back</button>
-      <button mat-stroked-button >Add to order card</button>
-      <button color="primary" mat-raised-button [routerLink]="['/shop']">Continue</button>
+    <div class="container">
+      <div class="btn-block">
+        <button mat-button [routerLink]="['/booking/order']">Back</button>
+        <button mat-stroked-button>Add to order card</button>
+        <button color="primary" mat-raised-button [routerLink]="['/shop']">
+          Continue
+        </button>
+      </div>
     </div>
   </div>
 </div>
