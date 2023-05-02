@@ -10,6 +10,7 @@ import { ConfigPassengersComponent } from './pages/config-passengers/config-pass
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
 import { SearchFlightComponent } from './components/search-flight/search-flight.component';
 import { CaruselComponent } from './components/carusel/carusel.component';
+import { SelectFlightComponent } from './components/select-flight/select-flight.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CaruselComponent } from './components/carusel/carusel.component';
     ConfigPassengersComponent,
     OrderSummaryComponent,
     SearchFlightComponent,
-    CaruselComponent
+    CaruselComponent,
+    SelectFlightComponent
   ],
   imports: [
     CommonModule,

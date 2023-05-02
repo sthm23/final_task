@@ -1,0 +1,69 @@
+<div class="select-flight-block">
+
+  <div class="left-side">
+    <div class="start-time-block">
+      <div class="date-block">
+        <span>Wed, 1 Mar 2023</span>
+      </div>
+      <div class="time-block">
+        <span class="main-time">8:40</span>
+        <span>UTC+0</span>
+      </div>
+      <div class="country-name-block">
+        Dublin
+      </div>
+    </div>
+
+    <div class="flight-info-icon-block">
+      <div class="icon-time-block">2h 50m</div>
+      <div class="icon-block">
+        <span class="line"></span>
+        <mat-icon
+          [ngClass]="{'airplane-icon': direction === 'return'}"
+          svgIcon="airport_Icon"
+          aria-hidden="false"
+          aria-label="airplane_icon SVG icon"
+        ></mat-icon>
+        <span class="line"></span>
+      </div>
+      <div class="icon-subtitle-block">Direct</div>
+    </div>
+
+    <div class="destination-time-block">
+      <div class="date-block">
+        <span>Wed, 1 Mar 2023</span>
+      </div>
+      <div class="time-block">
+        <span>UTC+1</span>
+        <span class="main-time">12:00</span>
+      </div>
+      <div class="coutry-name-block">
+        Warsaw Modlin
+      </div>
+    </div>
+
+    <div class="flight-number-block">
+      <span class="flight-number-title">Flight no.</span>
+      <span class="flight-number">FR 1925</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="right-side">
+    <div class="seats-block">
+      <div class="price-info">
+        <div>100 seats</div>
+        <div>available</div>
+      </div>
+      <div class="price-title">
+        <p>Price</p>
+        <div class="price">$ 146.7</div>
+      </div>
+    </div>
+    <div class="select-btn-block">
+      <button mat-raised-button class="select-btn" *ngIf="true">Select</button>
+      <button mat-stroked-button class="edit-btn" *ngIf="false">Edit</button>
+    </div>
+  </div>
+</div>

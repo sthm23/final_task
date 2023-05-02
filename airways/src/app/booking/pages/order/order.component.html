@@ -16,18 +16,7 @@
           <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[1]"></app-carousel>
         </div>
         <div class="flight-info-block">
-          <div>start time</div>
-          <div>
-            <mat-icon
-            svgIcon="airport_Icon"
-            aria-hidden="false"
-            aria-label="airplane_icon SVG icon"
-          ></mat-icon>
-          </div>
-          <div>during time</div>
-          <div>
-            price block
-          </div>
+          <app-select-flight [direction]="'goTo'"></app-select-flight>
         </div>
       </div>
       <div class="destination-block">
@@ -46,19 +35,7 @@
           <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[0]"></app-carousel>
         </div>
         <div class="flight-info-block">
-          <div>start time</div>
-          <div>
-            <mat-icon
-            class="airplane-icon"
-            svgIcon="airport_Icon"
-            aria-hidden="false"
-            aria-label="airplane_icon SVG icon"
-          ></mat-icon>
-          </div>
-          <div>during time</div>
-          <div>
-            price block
-          </div>
+          <app-select-flight [direction]="'return'"></app-select-flight>
         </div>
       </div>
     </div>
