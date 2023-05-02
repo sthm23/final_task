@@ -83,9 +83,9 @@
     & .date-week{
       display: block;
       @include textFont();
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: 100;
+      font-size: 12px;
+      line-height: 12px;
       color: #74767A;
     }
 
@@ -96,6 +96,7 @@
       font-size: 20px;
       line-height: 20px;
       color: #11397E;
+      margin-top: 4px;
     }
 
     &:disabled {
@@ -113,9 +114,12 @@
       & .date-month {
         @include textFont();
         color: #D0D9DF;
-        font-weight: 500;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 20px;
+      }
+
+      & .icon-airplane{
+        margin-top: 4px;
       }
     }
   }
