@@ -1,3 +1,10 @@
+@mixin textFont {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
 .carousel-block {
   max-width: 1128px;
   min-height: 83px;
@@ -63,10 +70,87 @@
     border-left: 1px solid #CECECE;
     background-color: #FFFFFF;
     transition: all 0.3s;
+    color: #0090BD;
+
+    & .date-month{
+      display: block;
+      @include textFont();
+      font-size: 14px;
+      line-height: 20px;
+      color: #0090BD;
+    }
+
+    & .date-week{
+      display: block;
+      @include textFont();
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #74767A;
+    }
+
+    & .price{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      color: #11397E;
+    }
+
+    &:disabled {
+      @include textFont();
+      font-weight: 100;
+      font-size: 12px;
+      line-height: 12px;
+      & .date-week {
+        @include textFont();
+        color: #74767A;
+        font-weight: 100;
+        font-size: 12px;
+        line-height: 12px;
+      }
+      & .date-month {
+        @include textFont();
+        color: #D0D9DF;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
   }
   & .active-card{
     height: 83px;
     border-bottom: 4px solid #F1C933;
     transition: all 0.3s;
+    & .date-month{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 20px;
+      color: #11397E;
+    }
+
+    & .date-week{
+      display: block;
+      @include textFont();
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #74767A;
+    }
+
+    & .price{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 36px;
+      color: #11397E;
+    }
+
   }
+
+
 }

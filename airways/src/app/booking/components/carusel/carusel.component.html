@@ -9,13 +9,17 @@
         [ngClass]="{'active-card': day.id === currentIndex}"
         #el
         (click)="selectCard(el, day)"
+        [disabled]="day.check"
         >
-          <div>{{day.day | date:'dd MMM' | uppercase}}</div>
-          <div>{{day.day | date:'EEEE' | uppercase}}</div>
+          <span class="date-month">{{day.day | date:'dd MMM' | uppercase}}</span>
+          <span class="date-week">{{day.day | date:'EEEE' | uppercase}}</span>
+          <span class="price" *ngIf="!day.check">$110</span>
           <mat-icon
-          svgIcon="no_reys"
-          aria-hidden="false"
-          aria-label="no reys SVG icon"></mat-icon>
+            *ngIf="day.check"
+            svgIcon="no_reys"
+            aria-hidden="false"
+            aria-label="no reys SVG icon">
+          </mat-icon>
       </button>
     </div>
   </div>

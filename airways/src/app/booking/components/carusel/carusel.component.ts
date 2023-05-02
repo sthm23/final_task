@@ -10,35 +10,9 @@ import { no_reys } from './icon';
 })
 export class CaruselComponent implements OnInit {
 
-  // flightList = [
-  //   {
-  //     id: 1,
-  //     from: '2022-10-10T09:26:32Z',
-  //     price: '257',
-  //     currency: '$'
-  //   },
-  //   {
-  //     id: 1,
-  //     from: '2022-10-13T09:26:32Z',
-  //     price: '257',
-  //     currency: '$'
-  //   },
-  //   {
-  //     id: 1,
-  //     from: '2022-10-16T09:26:32Z',
-  //     price: '257',
-  //     currency: '$'
-  //   },
-  //   {
-  //     id: 1,
-  //     from: '2022-10-15T09:26:32Z',
-  //     price: '257',
-  //     currency: '$'
-  //   }
-  // ];
   currentIndex = 3
 
-  days!: {day:Date, id:number}[];
+  days!: {day:Date, id:number, check: boolean}[];
   @Input() flightList!: any[];
   @Input() chosenFlightDay!: any;
 
@@ -48,11 +22,12 @@ export class CaruselComponent implements OnInit {
 
   ngOnInit(): void {
     this.days = this.createCarouselDates();
+    this.currentIndex = this.chosenFlightDay.id
   }
 
   selectCard(e:HTMLButtonElement, day:{day:Date, id:number}){
     this.currentIndex = day.id
-    e.classList.toggle('active-card');
+    e.classList.add('active-card');
   }
 
   createDay(currentDay: Date, day:number) {
@@ -68,6 +43,6 @@ export class CaruselComponent implements OnInit {
     const yesterday1 = this.createDay(currentDay, -2);
     const tomorrow = this.createDay(currentDay, 1);
     const tomorrow1 = this.createDay(currentDay, 2);
-    return [{id:1, day: yesterday1}, {id:2, day: yesterday}, {id:3, day: currentDay}, {id:4, day: tomorrow}, {id:5, day: tomorrow1},]
+    return [{id:1, day: yesterday1, check: true}, {id:2, day: yesterday, check: false}, {id:3, day: currentDay, check: true}, {id:4, day: tomorrow, check: false}, {id:5, day: tomorrow1, check: true},]
   }
 }
