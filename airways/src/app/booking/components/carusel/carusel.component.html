@@ -1,0 +1,22 @@
+<div class="carousel-block">
+  <div class="carousel-wrapper">
+    <button class="btn left-btn"><mat-icon>arrow_back_ios</mat-icon></button>
+    <button class="btn right-btn"><mat-icon>arrow_forward_ios</mat-icon></button>
+    <div class="carousel-card-block">
+      <button
+        *ngFor="let day of days; index as ind;"
+        class="card"
+        [ngClass]="{'active-card': day.id === currentIndex}"
+        #el
+        (click)="selectCard(el, day)"
+        >
+          <div>{{day.day | date:'dd MMM' | uppercase}}</div>
+          <div>{{day.day | date:'EEEE' | uppercase}}</div>
+          <mat-icon
+          svgIcon="no_reys"
+          aria-hidden="false"
+          aria-label="no reys SVG icon"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

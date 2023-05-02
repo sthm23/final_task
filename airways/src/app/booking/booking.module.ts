@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { ConfigPassengersComponent } from './pages/config-passengers/config-passengers.component';
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
 import { SearchFlightComponent } from './components/search-flight/search-flight.component';
+import { CaruselComponent } from './components/carusel/carusel.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SearchFlightComponent } from './components/search-flight/search-flight.
     ErrorComponent,
     ConfigPassengersComponent,
     OrderSummaryComponent,
-    SearchFlightComponent
+    SearchFlightComponent,
+    CaruselComponent
   ],
   imports: [
     CommonModule,
