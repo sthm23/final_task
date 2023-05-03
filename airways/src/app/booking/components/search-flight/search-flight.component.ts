@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
+import { fromToReturnIcon } from './icon';
 
 type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
 interface DropDownOptions {name: TypeOfPassengersName, count: number}
@@ -33,8 +36,9 @@ export class SearchFlightComponent implements OnInit {
     },
   ]
 
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIconLiteral('fromToReturnIcon', sanitizer.bypassSecurityTrustHtml(fromToReturnIcon));
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe((e:any)=>{
