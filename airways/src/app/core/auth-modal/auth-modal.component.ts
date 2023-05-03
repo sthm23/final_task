@@ -48,7 +48,6 @@ export class AuthModalComponent {
   }
 
   login() {
-
     console.log(this.logInForm.value);
     this.logInForm.valid ? this.dialogRef.close('success login') : ''
   }
@@ -56,7 +55,6 @@ export class AuthModalComponent {
   register(): void {
     console.log(this.registerForm.value);
     this.registerForm.valid ? this.dialogRef.close('success register') : ''
-
   }
 
 }

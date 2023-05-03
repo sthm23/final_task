@@ -3,8 +3,14 @@
     <mat-tab label="Log in">
       <div class="log-in-block">
         <div class="social-media-block">
-          <button mat-button>Continue with Google</button>
-          <button mat-button>Continue with Facebook</button>
+          <button class="with-social" mat-button>
+            <img src="../../../assets/img/google_24px.png" alt="" />
+            Continue with Google
+          </button>
+          <button class="with-social" mat-button>
+            <img src="../../../assets/img/Vector.png" alt="" />
+            Continue with Facebook
+          </button>
         </div>
         <div class="body-split-line">
           <span class="line"></span>
@@ -14,20 +20,36 @@
         <form class="form-block" [formGroup]="logInForm">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="text" formControlName="email">
-            <mat-error *ngIf="logInForm.get('email')?.invalid">Error email</mat-error>
+            <input matInput type="text" formControlName="email" />
+            <mat-error *ngIf="logInForm.get('email')?.invalid"
+              >Error email</mat-error
+            >
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
-            <mat-error *ngIf="logInForm.get('password')?.invalid">Error password</mat-error>
+            <mat-error *ngIf="logInForm.get('password')?.invalid"
+              >Error password</mat-error
+            >
           </mat-form-field>
           <div>
-            <button mat-raised-button (click)="login()" class="submit">Log in</button>
+            <button mat-raised-button (click)="login()" class="submit">
+              Log in
+            </button>
           </div>
         </form>
       </div>
@@ -35,8 +57,14 @@
     <mat-tab label="Sing up">
       <div class="register-block">
         <div class="social-media-block">
-          <button mat-button>Continue with Google</button>
-          <button mat-button>Continue with Facebook</button>
+          <button mat-button class="with-social">
+            <img src="../../../assets/img/google_24px.png" alt="" />
+            Continue with Google
+          </button>
+          <button mat-button class="with-social">
+            <img src="../../../assets/img/Vector.png" alt="" /> Continue with
+            Facebook
+          </button>
         </div>
         <div class="body-split-line">
           <span class="line"></span>
@@ -46,69 +74,94 @@
         <form [formGroup]="registerForm">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="text" formControlName="email">
-            <mat-error *ngIf="registerForm.get('email')?.invalid">Error email</mat-error>
+            <input matInput type="text" formControlName="email" />
+            <mat-error *ngIf="registerForm.get('email')?.invalid"
+              >Error email</mat-error
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>password</mat-label>
-            <input matInput type="text" formControlName="password">
-            <mat-error *ngIf="registerForm.get('password')?.invalid">Error password</mat-error>
+            <input matInput type="text" formControlName="password" />
+            <mat-error *ngIf="registerForm.get('password')?.invalid"
+              >Error password</mat-error
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>firstName</mat-label>
-            <input matInput type="text" formControlName="firstName">
-            <mat-error *ngIf="registerForm.get('firstName')?.invalid">Error firstName</mat-error>
+            <input matInput type="text" formControlName="firstName" />
+            <mat-error *ngIf="registerForm.get('firstName')?.invalid"
+              >Error firstName</mat-error
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>lastName</mat-label>
-            <input matInput type="text" formControlName="lastName">
-            <mat-error *ngIf="registerForm.get('lastName')?.invalid">Error lastName</mat-error>
+            <input matInput type="text" formControlName="lastName" />
+            <mat-error *ngIf="registerForm.get('lastName')?.invalid"
+              >Error lastName</mat-error
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>birthday</mat-label>
-            <input matInput type="text" formControlName="birthday">
-            <mat-error *ngIf="registerForm.get('birthday')?.invalid">Error birthday</mat-error>
+            <input matInput type="text" formControlName="birthday" />
+            <mat-error *ngIf="registerForm.get('birthday')?.invalid"
+              >Error birthday</mat-error
+            >
           </mat-form-field>
 
-          <mat-button-toggle-group aria-label="choose gender" formControlName="gender">
+          <mat-button-toggle-group
+            aria-label="choose gender"
+            formControlName="gender"
+          >
             <mat-button-toggle value="male">Male</mat-button-toggle>
             <mat-button-toggle value="female">Female</mat-button-toggle>
           </mat-button-toggle-group>
 
           <mat-form-field appearance="outline">
             <mat-label>countryCode</mat-label>
-            <input matInput type="text" formControlName="countryCode">
-            <mat-error *ngIf="registerForm.get('countryCode')?.invalid">Error countryCode</mat-error>
+            <input matInput type="text" formControlName="countryCode" />
+            <mat-error *ngIf="registerForm.get('countryCode')?.invalid"
+              >Error countryCode</mat-error
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>phoneNumber</mat-label>
-            <input matInput type="text" formControlName="phoneNumber">
-            <mat-error *ngIf="registerForm.get('phoneNumber')?.invalid">Error phoneNumber</mat-error>
+            <input matInput type="text" formControlName="phoneNumber" />
+            <mat-error *ngIf="registerForm.get('phoneNumber')?.invalid"
+              >Error phoneNumber</mat-error
+            >
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>document</mat-label>
             <mat-select formControlName="document" required>
               <mat-option *ngFor="let document of documents" [value]="document">
-                {{document}}
+                {{ document }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="registerForm.get('document')?.invalid">Please choose document</mat-error>
+            <mat-error *ngIf="registerForm.get('document')?.invalid"
+              >Please choose document</mat-error
+            >
           </mat-form-field>
 
           <div class="agree">
             <label>
-              <input type="checkbox" checked>
+              <input type="checkbox" checked />
               <span>I agree to Airway's Privacy Policy and Terms of Use</span>
             </label>
           </div>
 
           <div>
-            <button class="submit" mat-raised-button type="button" (click)="register()">Sign up</button>
+            <button
+              class="submit"
+              mat-raised-button
+              type="button"
+              (click)="register()"
+            >
+              Sign up
+            </button>
           </div>
         </form>
       </div>
     </mat-tab>
   </mat-tab-group>
 </div>
-

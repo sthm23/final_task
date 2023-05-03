@@ -73,7 +73,6 @@ export class HomeComponent implements OnInit {
 
   setRouteDate(e:any) {
     console.log(e);
-
   }
 
   submitSearch(){

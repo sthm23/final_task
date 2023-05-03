@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.main-block{
+.main-block {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -14,7 +14,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 .order-block {
@@ -23,7 +22,7 @@
   grid-row-start: 4;
   grid-row-end: 9;
 }
-.body-bottom{
+.body-bottom {
   grid-column-start: 1;
   grid-column-end: 8;
   grid-row-start: 10;
@@ -37,8 +36,10 @@
   position: relative;
 
   .flight-type {
+    margin-bottom: 12px;
     mat-radio-group {
       display: flex;
+      gap: 32px;
     }
   }
 
@@ -99,11 +100,73 @@
         color: #74767a;
       }
     }
-
   }
 }
 
 .mat-mdc-radio-button.mat-accent {
   font-weight: 500;
   font-size: 16px;
+}
+
+::ng-deep {
+  .label-block .dropdown-label {
+    font-size: 12px !important;
+    line-height: 16px !important;
+    letter-spacing: 0.4px !important;
+    color: #49454f !important;
+  }
+  .mat-mdc-text-field-wrapper {
+    border: none;
+  }
+  .mat-mdc-form-field
+    .mat-mdc-text-field-wrapper.mdc-text-field
+    .mdc-notched-outline__notch {
+    padding-top: 20px;
+    padding-right: 0;
+  }
+
+  .mat-mdc-form-field.mat-focused
+    .mat-mdc-text-field-wrapper
+    .mat-mdc-form-field-flex
+    .mat-mdc-floating-label,
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    top: 20px !important;
+  }
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 8px;
+  }
+  .mat-label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #49454f;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border: none;
+  }
+
+  .mat-mdc-form-field-infix {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px !important;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #1c1b1f;
+  }
+
+  .search-btn.mdc-button {
+    padding: 12px 24px;
+    background: #11397e;
+    border-radius: 4px;
+    box-sizing: content-box;
+    margin-left: auto;
+  }
 }
