@@ -14,8 +14,6 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<any>(true, []);
 
-  constructor() {}
-
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {

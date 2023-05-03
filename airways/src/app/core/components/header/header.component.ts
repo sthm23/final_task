@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { DateFormatService } from '../../services/date-format.service';
 import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Route, Router, RouterStateSnapshot, Scroll } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 type RouterUrl = '/main' | '/booking' | '/shop'
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit {
   headerBgToggler = true;
 
   constructor(
-    private dateFormatService: DateFormatService,
     public dialog: MatDialog,
     private _formBuilder: FormBuilder,
     private route: Router,
@@ -46,7 +44,7 @@ export class HeaderComponent implements OnInit {
     this.route.events.subscribe((e:any)=>{
       const urlObj = e?.routerEvent as NavigationEnd | undefined
       if(e?.routerEvent) {
-        const str = urlObj?.url! as RouterUrl;
+        const str = urlObj?.url as RouterUrl;
         this.toggleHeader = str
         this.headerBgToggler = str === '/main'
       }
@@ -64,11 +62,6 @@ export class HeaderComponent implements OnInit {
 
   dropDown() {
     this.isFormat = !this.isFormat
-  }
-
-  onCheckDate(format: string) {
-    // this.isActive = this.dateFormatService.chechFormat(format);
-    this.isFormat = false;
   }
 
   chooseCurrency(currency: string) {

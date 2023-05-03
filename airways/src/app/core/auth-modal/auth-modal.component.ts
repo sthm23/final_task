@@ -2,6 +2,9 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderComponent } from '../components/header/header.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { facebook, google } from './icon';
 
 interface DialogData {
   data: any
@@ -27,8 +30,12 @@ export class AuthModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<HeaderComponent>,
+    iconRegistr: MatIconRegistry,
+    sanitaizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
+    iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
+    iconRegistr.addSvgIconLiteral('facebook', sanitaizer.bypassSecurityTrustHtml(facebook));
     this.logInForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(3)])
@@ -48,7 +55,6 @@ export class AuthModalComponent {
   }
 
   login() {
-
     console.log(this.logInForm.value);
     this.logInForm.valid ? this.dialogRef.close('success login') : ''
   }
@@ -56,7 +62,6 @@ export class AuthModalComponent {
   register(): void {
     console.log(this.registerForm.value);
     this.registerForm.valid ? this.dialogRef.close('success register') : ''
-
   }
 
 }
