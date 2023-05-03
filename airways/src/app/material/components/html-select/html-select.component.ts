@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 
-type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';;
+type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
 interface DropDownOptions {name: TypeOfPassengersName, count: number}
 @Component({
   selector: 'app-html-select',
@@ -20,10 +20,10 @@ export class HtmlSelectComponent {
   textPassengers = 'test text'
 
   @Input() options!: DropDownOptions[];
-  @Input() title: string = '';
+  @Input() title = '';
   @Output() currentValueChange = new EventEmitter();
 
-  public dropdownOpen: boolean = false;
+  public dropdownOpen = false;
   public get dropdownElement(): Element {
     return this.elem.nativeElement.querySelector('.dropdown-list')
   }
