@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControlName, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -18,6 +18,6 @@ export class PassengersCardComponent implements OnInit {
   }
 
   onToggle(event: MatSlideToggleChange) {
-    console.log(event.checked);
+    console.log(this.createForm);
   }
 }

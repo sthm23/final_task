@@ -1,5 +1,5 @@
 <div [formGroup]="createForm" class="passengers-card">
-  <h3 class="card-title">{{ passenger }}</h3>
+  <h3 class="card-title">{{ passenger.toUpperCase() }}</h3>
   <div class="card-inputs">
     <mat-form-field appearance="outline">
       <mat-label>First name</mat-label>
@@ -85,7 +85,7 @@
       >
     </mat-form-field>
   </div>
-  <mat-slide-toggle (change)="onToggle($event)" color="primary">
+  <mat-slide-toggle formControlName="assist" (change)="onToggle($event)" color="primary">
     <mat-icon fontIcon="wheelchair_pickup"></mat-icon>
     Need special assistance?
   </mat-slide-toggle>
