@@ -5,86 +5,12 @@
   font-style: normal;
 }
 
-.search-block {
-  position: relative;
-  padding: 22px 0;
-  background: #fafafa;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-}
 
 .order-body {
-  padding: 40px 0 20px;
-
-  .order-text {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    color: #49454f;
-
-    margin-bottom: 20px;
-  }
-
-  .card-title,
-  .contact-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    color: #10264c;
-    margin-bottom: 24px;
-  }
-  .passengers-card {
-    padding: 32px 44px;
-    background: #ffffff;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    .card-inputs {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      position: relative;
-
-      .input-info {
-        width: 200px;
-        padding: 16px 24px;
-        background: #ffffff;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        position: absolute;
-        z-index: 5;
-        left: 0;
-        top: 50%;
-      }
-    }
-  }
-  mat-slide-toggle {
-    margin-top: 24px;
-    gap: 17px;
-    .mdc-form-field > label {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  .infant {
-    margin-bottom: 40px;
-  }
-
-  .contact-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #11397e;
-    margin-bottom: 8px;
-  }
-  .contact-text {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    color: #49454f;
-    margin-bottom: 20px;
-  }
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
+
 .destination-block{
   margin-top: 25px;
 }
@@ -124,10 +50,6 @@
   }
 }
 
-mat-label {
-  letter-spacing: 0.4px;
-  color: #49454f;
-}
 .mat-mdc-text-field-wrapper {
   background: #f4f6f9;
   border-radius: 4px;
@@ -139,10 +61,7 @@ mat-label {
   width: 1128px;
   margin: auto;
 }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 @media screen and (max-width: 1399px) {
   .container {
     width: 960px;
@@ -177,9 +96,4 @@ mat-label {
   }
 }
 
-mat-form-field {
-  .mat-mdc-form-field-subscript-wrapper {
-    display: none !important;
-  }
-}
 

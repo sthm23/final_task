@@ -33,36 +33,38 @@
     </div>
   </div>
 </div>
-<div class="search-form-block" *ngIf="searchFormBlockToggler">
-  <div class="container">
-    <form class="order-card">
+<div class="search-block-parent">
+  <div class="search-form-block" *ngIf="searchFormBlockToggler">
+    <div class="search-container">
+      <form class="order-card">
 
-      <div class="choose-line">
-        <mat-form-field appearance="outline">
-          <mat-label>From</mat-label>
-          <mat-select >
-            <mat-option value="option1">Dublin DUB</mat-option>
-            <mat-option value="option2">Dublin DUB 2</mat-option>
-            <mat-option value="option3">Dublin DUB 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Destination</mat-label>
-          <mat-select >
-            <mat-option value="option1">Dublin DUB</mat-option>
-            <mat-option value="option2">Dublin DUB 2</mat-option>
-            <mat-option value="option3">Dublin DUB 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
-      </div>
+        <div class="choose-line">
+          <mat-form-field appearance="outline">
+            <mat-label>From</mat-label>
+            <mat-select >
+              <mat-option value="option1">Dublin DUB</mat-option>
+              <mat-option value="option2">Dublin DUB 2</mat-option>
+              <mat-option value="option3">Dublin DUB 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Destination</mat-label>
+            <mat-select >
+              <mat-option value="option1">Dublin DUB</mat-option>
+              <mat-option value="option2">Dublin DUB 2</mat-option>
+              <mat-option value="option3">Dublin DUB 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 </div>
