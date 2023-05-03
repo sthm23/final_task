@@ -1,8 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { DropDownOptions } from '../../interfaces/interfaces';
 
 
-type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
-interface DropDownOptions {name: TypeOfPassengersName, count: number}
 @Component({
   selector: 'app-html-select',
   templateUrl: './html-select.component.html',

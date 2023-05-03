@@ -22,6 +22,7 @@ import { ClickOutsideDirective } from './directives/clickOut.directive';
 import { CounterComponent } from './components/counter/counter.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
@@ -55,6 +57,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   exports: [
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
     MatIconModule,
     MatMenuModule,

@@ -44,14 +44,26 @@
   }
 
   .choose-line {
+    position: relative;
     display: flex;
     flex-direction: column;
+    & .swap-btn{
+      position: absolute;
+      z-index: 1;
+      right: 20px;
+      top: 45px;
+      background-color: #FFF;
+      color: #74767a;
+    }
   }
   .date-pass {
     display: flex;
     justify-content: space-between;
-    mat-form-field {
-      width: 48%;
+    & .date-pick-block{
+      width: 100%;
+      mat-form-field {
+        width: 98%;
+      }
     }
   }
 
