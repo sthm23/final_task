@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+  font-style: normal;
+}
 .order-title {
   font-weight: 700;
   font-size: 24px;
@@ -5,7 +11,7 @@
   display: flex;
   align-items: center;
   color: #11397e;
-  gap: 12px;
+  column-gap: 12px;
   margin-bottom: 8px;
 }
 
