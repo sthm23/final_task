@@ -20,6 +20,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { HtmlSelectComponent } from './components/html-select/html-select.component';
 import { ClickOutsideDirective } from './directives/clickOut.directive';
 import { CounterComponent } from './components/counter/counter.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 @NgModule({
   declarations: [
     HtmlSelectComponent,
@@ -46,7 +52,12 @@ import { CounterComponent } from './components/counter/counter.component';
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatTooltipModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -67,7 +78,12 @@ import { CounterComponent } from './components/counter/counter.component';
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    HtmlSelectComponent
+    HtmlSelectComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

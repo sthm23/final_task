@@ -12,6 +12,9 @@ import { SearchFlightComponent } from './components/search-flight/search-flight.
 import { CaruselComponent } from './components/carusel/carusel.component';
 import { SelectFlightComponent } from './components/select-flight/select-flight.component';
 import { OrderTitleComponent } from './components/order-title/order-title.component';
+import { PassengersCardComponent } from './components/passengers-card/passengers-card.component';
+import { SummaryCardComponent } from './components/summary-card/summary-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,10 +27,13 @@ import { OrderTitleComponent } from './components/order-title/order-title.compon
     SearchFlightComponent,
     CaruselComponent,
     SelectFlightComponent,
-    OrderTitleComponent
+    OrderTitleComponent,
+    PassengersCardComponent,
+    SummaryCardComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '', component: HomeComponent, children: [
