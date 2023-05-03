@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,13 +14,24 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSortModule} from '@angular/material/sort';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import { HtmlSelectComponent } from './components/html-select/html-select.component';
+import { ClickOutsideDirective } from './directives/clickOut.directive';
+import { CounterComponent } from './components/counter/counter.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    HtmlSelectComponent,
+    ClickOutsideDirective,
+    CounterComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -37,6 +48,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatCheckboxModule,
     MatSortModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSlideToggleModule,
@@ -58,6 +74,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatCheckboxModule,
     MatSortModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    HtmlSelectComponent,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSlideToggleModule,
