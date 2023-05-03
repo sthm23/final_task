@@ -12,6 +12,8 @@ export class CaruselComponent implements OnInit {
 
   currentIndex = 3
 
+  widthCounter = 0
+
   days!: {day:Date, id:number, check: boolean}[];
   @Input() flightList!: any[];
   @Input() chosenFlightDay!: any;
@@ -52,12 +54,13 @@ export class CaruselComponent implements OnInit {
     ]
   }
 
-  nextBtn(el:any) {
-    console.log('next', el);
-
+  nextBtn(el:HTMLElement) {
+    this.widthCounter += 225
+    el.style.left = this.widthCounter + 'px';
   }
 
   prevBtn(el:any) {
-    console.log('prev');
+    this.widthCounter -= 225;
+    el.style.left = this.widthCounter + 'px';
   }
 }

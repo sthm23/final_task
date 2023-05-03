@@ -1,27 +1,29 @@
 <div class="carousel-block">
-  <div class="carousel-wrapper" #wrapper>
+  <div class="carousel-wrapper">
     <button class="btn left-btn" (click)="prevBtn(wrapper)"><mat-icon>arrow_back_ios</mat-icon></button>
     <button class="btn right-btn" (click)="nextBtn(wrapper)"><mat-icon>arrow_forward_ios</mat-icon></button>
     <div class="carousel-card-block">
-      <button
-        *ngFor="let day of days; index as ind;"
-        class="card"
-        [ngClass]="{'active-card': day.id === currentIndex}"
-        #el
-        (click)="selectCard(el, day)"
-        [disabled]="day.check"
-        >
-          <span class="date-month">{{day.day | date:'dd MMM' | uppercase}}</span>
-          <span class="date-week">{{day.day | date:'EEEE' | uppercase}}</span>
-          <span class="price" *ngIf="!day.check">$110</span>
-          <mat-icon
-            class="icon-airplane"
-            *ngIf="day.check"
-            svgIcon="no_reys"
-            aria-hidden="false"
-            aria-label="no reys SVG icon">
-          </mat-icon>
-      </button>
+      <div class="slider-wrapper" #wrapper>
+        <button
+          *ngFor="let day of days; index as ind;"
+          class="card"
+          [ngClass]="{'active-card': day.id === currentIndex}"
+          #el
+          (click)="selectCard(el, day)"
+          [disabled]="day.check"
+          >
+            <span class="date-month">{{day.day | date:'dd MMM' | uppercase}}</span>
+            <span class="date-week">{{day.day | date:'EEEE' | uppercase}}</span>
+            <span class="price" *ngIf="!day.check">$110</span>
+            <mat-icon
+              class="icon-airplane"
+              *ngIf="day.check"
+              svgIcon="no_reys"
+              aria-hidden="false"
+              aria-label="no reys SVG icon">
+            </mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
