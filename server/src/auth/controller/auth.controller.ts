@@ -26,7 +26,7 @@ export class AuthController {
   @Get('google')
   @UseGuards(GoogleOAuthGuard)
   async googleAuth(@Request() req: any) {
-    return this.authService.registerWithGoogle(req?.user);
+    return this.authService.registerWithGoogleFacebook(req?.user);
   }
 
   @Get('google-redirect')
@@ -38,7 +38,7 @@ export class AuthController {
   @Get('facebook')
   @UseGuards(FacebookAuthGuard)
   async facebookAuth(@Request() req: any) {
-    return this.authService.registerWithGoogle(req?.user);
+    return this.authService.registerWithGoogleFacebook(req?.user);
   }
 
   @Get('facebook-redirect')
