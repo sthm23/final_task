@@ -61,6 +61,9 @@ export class AuthModalComponent {
 
   register(): void {
     console.log(this.registerForm.value);
+    if(this.registerForm.valid) {
+
+    }
     this.registerForm.valid ? this.dialogRef.close('success register') : ''
   }
 

@@ -25,13 +25,13 @@ export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
     const user = {
       email: String(emails[0].value),
       login: String(emails[0].value),
-      password: 'test',
+      password: '',
       firstName: String(name.givenName),
       lastName: String(name.familyName),
-      phoneNumber: '123456789',
-      country: 'uzbekistan',
+      phoneNumber: '',
+      country: '',
       birthday: '',
-      citizenship: 'uzb',
+      citizenship: '',
       gender: 'male'
     } as CreateUserDto;
 
