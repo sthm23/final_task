@@ -119,24 +119,24 @@
             formControlName="gender"
           >
             <mat-button-toggle value="male">
-              <mat-icon>check</mat-icon>
+              <mat-icon *ngIf="registerForm.controls['gender'].value === 'male'">check</mat-icon>
               Male
             </mat-button-toggle>
             <mat-button-toggle value="female">
-              <mat-icon>check</mat-icon>
+              <mat-icon *ngIf="registerForm.controls['gender'].value === 'female'">check</mat-icon>
               Female
             </mat-button-toggle>
           </mat-button-toggle-group>
 
           <div class="autocomplete">
             <mat-form-field appearance="outline">
-              <mat-label>countryCode</mat-label>
+              <mat-label>Country code</mat-label>
               <mat-select formControlName="countryCode" required>
                 <mat-option *ngFor="let document of documents" [value]="document">
                   <span>{{ document.name }} ({{document.code}})</span>
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="registerForm.get('countryCode')?.invalid">Error countryCode</mat-error>
+              <mat-error *ngIf="registerForm.get('countryCode')?.invalid">Error country code</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Mobile phone number</mat-label>

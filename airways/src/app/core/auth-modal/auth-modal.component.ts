@@ -26,7 +26,7 @@ export class AuthModalComponent implements OnInit {
 
   logInForm:FormGroup;
 
-  registerForm!:FormGroup;
+  registerForm!:FormGroup<any>;
 
   documents:RegisterCountryType[] = []
 
@@ -52,11 +52,11 @@ export class AuthModalComponent implements OnInit {
       firstName: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       birthday: new FormControl(null, [Validators.required]),
-      gender: new FormControl<GenderType>('male', [Validators.required, Validators.minLength(3)]),
+      gender: new FormControl<GenderType>('male', [Validators.required]),
       countryCode: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       document: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-    })
+    }) as any
     this.authService.getCountry().subscribe(country=>{
       this.documents = country;
     })
