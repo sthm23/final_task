@@ -72,8 +72,38 @@ export class HomeComponent implements OnInit {
   }
 
   submitSearch(){
-    console.log(this.form.value);
+    let dateType = ''
+    this.flightType === '1' ? dateType = 'multi' : dateType = 'single';
 
+    if(dateType === 'multi') {
+      const obj = this.filterSearchObj(this.form, dateType);
+      console.log(obj);
+
+    } else {
+      const obj = this.filterSearchObj(this.form);
+      console.log(obj);
+
+    }
+
+  }
+
+  filterSearchObj(obj:FormGroup<SearchFormGroup>, typeDate?: string) {
+    if(typeDate) {
+      const {rangeDate, destination, from, passengers } = obj.value;
+      return {
+        date: [rangeDate?.start, rangeDate?.end],
+        from,
+        destination,
+        passengers
+      }
+    }
+    const {date, destination, from, passengers } = obj.value;
+    return {
+      date: [date],
+      from,
+      destination,
+      passengers
+    }
   }
 
   flipFlight() {

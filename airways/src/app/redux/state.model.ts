@@ -2,43 +2,62 @@
 
 export enum AirwaysActionsEnum {
   enterMain = '[Enter main Page] Enter',
+  enterAuth = '[Enter auth modal] Enter',
   enterBooking = '[Enter booking Page] Enter',
+  enterShop = '[Enter shop Page] Enter',
   currency = '[Select currency] Currency',
+  dateType = '[Select type of date] TypeOfDate',
+  login = '[User login] user',
+  register = '[User register] user',
+  loginWithSocial = '[Login with social] user',
+  search = '[Search flight] search',
 }
+
+
+export type GenderType = 'male' | 'female';
+export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
+export type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
+export type DateType = 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY/DD/MM' | 'YYYY/MM/DD';
+
 
 export interface User {
-  email: string
-  firstName: string
-  lastName: string
-  birthday: string
-  gender: 'male' | 'female'
-  country: string
-  phoneNumber: string
-  document: string
+  id: string,
+  lastName: string,
+  firstName: string,
+  birthday: string,
+  gender: GenderType,
+  login: string,
+  password: string,
+  createDate: string,
+  email: string,
+  phoneNumber: string,
+  country: string,
+  citizenship: string
 }
 
-export type PassengersType = {
-  adult: number | null,
-  children: number | null
-  infant: number | null
+export type OrderType = {
+  name: TypeOfPassengersName
+  count: number
 }
 
 export interface UserOrder {
   from: string
   destination: string
-  date: string
-  passengers: PassengersType
+  date: string[]
+  passengers: OrderType[]
 }
 
-export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
+
 export interface AirwaysState {
   user: User | null;
-  order: UserOrder | null;
+  searchOrder: UserOrder | null;
   currency: CurrencyType
+  typeOfDate: DateType
 }
 
 export const initialState: AirwaysState = {
-  user: null,
-  order: null,
   currency: 'EUR',
+  typeOfDate: 'MM/DD/YYYY',
+  user: null,
+  searchOrder: null,
 };
