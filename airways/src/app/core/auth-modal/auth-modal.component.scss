@@ -96,3 +96,12 @@ form {
 .mat-mdc-form-field {
   margin-bottom: 20px;
 }
+.data-picker{
+  width: 436px;
+  height: 56px;
+
+  mat-form-field{
+    width: 100%;
+    margin-bottom: -1.25rem;
+  }
+}

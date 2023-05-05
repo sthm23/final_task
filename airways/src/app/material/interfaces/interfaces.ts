@@ -39,6 +39,16 @@ export interface Country {
   isoCode: string
 }
 
+export type RegisterCountryType = Pick<Country, 'name' | 'isoCode'> & {code:string}
+
+export interface Airport {
+  id: number
+  country: string
+  code: string
+  name: string
+  city: string
+  state: string
+}
 
 /*auth interfaces*/
 
@@ -61,7 +71,10 @@ export type GenderType = 'male' | 'female';
 
 export type CreateUser = Omit<User, 'id' | 'createDate'>;
 
-export type LoginObj = Pick<User, 'login' | 'email'>;
+export type LoginObj = {
+  username: string
+  password: string
+};
 
 export interface LoginResult {
   user: User
@@ -74,5 +87,3 @@ export interface LoginWithSocial {
   accessToken: string
   refreshToken: string
 }
-
-

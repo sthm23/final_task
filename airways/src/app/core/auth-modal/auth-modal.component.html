@@ -3,11 +3,11 @@
     <mat-tab label="Log in">
       <div class="log-in-block">
         <div class="social-media-block">
-          <button class="with-social" mat-button>
+          <button class="with-social" mat-button (click)="loginWithGoogle()">
             <mat-icon svgIcon="google" aria-hidden="false"></mat-icon>
             Continue with Google
           </button>
-          <button class="with-social" mat-button>
+          <button class="with-social" mat-button (click)="loginWithFacebook()">
             <mat-icon svgIcon="facebook" aria-hidden="false"></mat-icon>
             Continue with Facebook
           </button>
@@ -20,7 +20,7 @@
         <form class="form-block" [formGroup]="logInForm">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="text" formControlName="email" />
+            <input matInput type="text" formControlName="username" />
             <mat-error *ngIf="logInForm.get('email')?.invalid"
               >Error email</mat-error
             >
@@ -57,11 +57,11 @@
     <mat-tab label="Sing up">
       <div class="register-block">
         <div class="social-media-block">
-          <button mat-button class="with-social">
+          <button mat-button class="with-social" (click)="loginWithGoogle()">
             <mat-icon svgIcon="google" aria-hidden="false"></mat-icon>
             Continue with Google
           </button>
-          <button mat-button class="with-social">
+          <button mat-button class="with-social" (click)="loginWithFacebook()">
             <mat-icon svgIcon="facebook" aria-hidden="false"></mat-icon>
             Continue with Facebook
           </button>
@@ -101,11 +101,16 @@
             >
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>birthday</mat-label>
-            <input matInput type="text" formControlName="birthday" />
-            <mat-error *ngIf="registerForm.get('birthday')?.invalid"
-              >Error birthday</mat-error
-            >
+            <mat-label>Date of birth</mat-label>
+            <input
+            (click)="pickDate(picker)"
+              matInput
+              [readonly]="true"
+              [matDatepicker]="picker"
+              formControlName="birthday"
+              >
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
           </mat-form-field>
 
           <mat-button-toggle-group
@@ -118,7 +123,11 @@
 
           <mat-form-field appearance="outline">
             <mat-label>countryCode</mat-label>
-            <input matInput type="text" formControlName="countryCode" />
+            <mat-select formControlName="countryCode" required>
+              <mat-option *ngFor="let document of documents" [value]="document">
+                <span>{{ document.name }} ({{document.code}})</span>
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="registerForm.get('countryCode')?.invalid"
               >Error countryCode</mat-error
             >
@@ -135,7 +144,7 @@
             <mat-label>document</mat-label>
             <mat-select formControlName="document" required>
               <mat-option *ngFor="let document of documents" [value]="document">
-                {{ document }}
+                <span>{{ document.name }}</span>
               </mat-option>
             </mat-select>
             <mat-error *ngIf="registerForm.get('document')?.invalid"

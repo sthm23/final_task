@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Country } from "src/app/material/interfaces/interfaces";
+import { Airport, Country } from "src/app/material/interfaces/interfaces";
 
 @Injectable({
   providedIn: 'platform'
@@ -12,5 +12,9 @@ export class HttpRequestService {
 
   getAllCountry() {
     return this.http.get<Country[]>(this.url+'/country')
+  }
+
+  getAllAirport() {
+    return this.http.get<Airport[]>(this.url+'/airport')
   }
 }
