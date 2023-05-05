@@ -6,7 +6,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { facebook, google } from './icon';
 import { AuthLoginRegisterService } from '../services/auth.service';
-import { CreateUser, GenderType, RegisterCountryType } from 'src/app/material/interfaces/interfaces';
+import { CreateUser, GenderType, LoginResult, LoginWithSocial, RegisterCountryType } from 'src/app/material/interfaces/interfaces';
 
 interface DialogData {
   data: any
@@ -35,7 +35,7 @@ export class AuthModalComponent implements OnInit {
     public dialogRef: MatDialogRef<HeaderComponent>,
     iconRegistr: MatIconRegistry,
     sanitaizer: DomSanitizer,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: LoginResult | LoginWithSocial | undefined,
   ) {
     iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
     iconRegistr.addSvgIconLiteral('facebook', sanitaizer.bypassSecurityTrustHtml(facebook));
@@ -93,13 +93,12 @@ export class AuthModalComponent implements OnInit {
         login:email,
         country: countryCode.name
       }
-
-      console.log(user);
-
-
-      // this.authService.register(user).subscribe(result=>{
-      //   this.dialogRef.close({type:'register', result})
-      // })
+      this.authService.register(user).subscribe(result=>{
+        this.authService.login({username: result.login, password: result.password})
+        .subscribe(result=>{
+          this.dialogRef.close({type:'login', result})
+        })
+      })
     }
   }
 

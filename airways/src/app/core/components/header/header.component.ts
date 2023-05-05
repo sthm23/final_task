@@ -3,6 +3,7 @@ import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthModalResult, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
 
 
 type RouterUrl = '/main' | '/booking' | '/shop'
@@ -22,6 +23,8 @@ export class HeaderComponent implements OnInit {
   currency = 'EUR'
 
   currencyList = ['EUR', 'USA', 'RUB', 'PLN']
+
+  userName:string | null = null;
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -50,14 +53,45 @@ export class HeaderComponent implements OnInit {
       }
     })
 
+    this.userName = localStorage.getItem('user_name');
+
   }
 
   openAuthDialog() {
-    const dialogRef = this.dialog.open(AuthModalComponent);
+    if(!this.userName) {
+      const dialogRef = this.dialog.open(AuthModalComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+      dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
+        if(answer) {
+          const {type, result} = answer;
+          switch (type) {
+            case 'facebook':
+              this.setUserDataToLocalStorage(result)
+              break;
+            case 'google':
+              this.setUserDataToLocalStorage(result)
+              break;
+            case 'login':
+              this.setUserDataToLocalStorage(result)
+              break;
+            default:
+                break;
+          }
+        }
+      });
+    } else {
+      localStorage.clear();
+      this.userName = null
+    }
+
+  }
+
+  setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
+    const name =  `${data.user.firstName} ${data.user.lastName}`;
+    this.userName = name
+    localStorage.setItem('user_name', name);
+    localStorage.setItem('ac_token', data.accessToken);
+    localStorage.setItem('ref_token', data.refreshToken);
   }
 
   dropDown() {

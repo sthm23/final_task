@@ -87,3 +87,9 @@ export interface LoginWithSocial {
   accessToken: string
   refreshToken: string
 }
+
+type ModalType = 'login' | 'facebook' | 'google'
+export interface AuthModalResult {
+  result: LoginWithSocial | LoginResult
+  type: ModalType
+}
