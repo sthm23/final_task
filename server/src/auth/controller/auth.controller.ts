@@ -31,8 +31,8 @@ export class AuthController {
 
   @Get('google-redirect')
   @UseGuards(GoogleOAuthGuard)
-  googleAuthRedirect(@Request() req:any) {
-    return this.authService.login(req.user);
+  googleAuthRedirect(@Request() req:Request) {
+    return this.authService.login(req['user']);
   }
 
   @Get('facebook')
