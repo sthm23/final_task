@@ -77,8 +77,8 @@ export class HomeComponent implements OnInit {
   }
 
   flipFlight() {
-    const from = this.form.controls.destination.value || '';
-    const dest = this.form.controls.from.value || '';
+    const from = this.form.controls.destination.value;
+    const dest = this.form.controls.from.value;
     this.form.controls.from.setValue(from);
     this.form.controls.destination.setValue(dest);
   }
