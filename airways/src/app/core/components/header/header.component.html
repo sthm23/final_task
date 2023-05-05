@@ -36,7 +36,8 @@
         </mat-menu>
         <button class="btn-sign" (click)="openAuthDialog()" [ngClass]="{'textColor': !headerBgToggler }">
           <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
-          Sign in
+         <span *ngIf="!userName; else name">Sign in</span>
+         <ng-template #name>{{userName}}</ng-template>
         </button>
         <span class="shopping-basket" [routerLink]="['/shop']" [ngClass]="{'textColor': !headerBgToggler }">
           <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
