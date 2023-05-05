@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
   currencyList = ['EUR', 'USA', 'RUB', 'PLN']
 
-  userName:string | undefined;
+  userName:string | null = null;
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -53,29 +53,37 @@ export class HeaderComponent implements OnInit {
       }
     })
 
+    this.userName = localStorage.getItem('user_name');
+
   }
 
   openAuthDialog() {
-    const dialogRef = this.dialog.open(AuthModalComponent);
+    if(!this.userName) {
+      const dialogRef = this.dialog.open(AuthModalComponent);
 
-    dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
-      if(answer) {
-        const {type, result} = answer;
-        switch (type) {
-          case 'facebook':
-            this.setUserDataToLocalStorage(result)
-            break;
-          case 'google':
-            this.setUserDataToLocalStorage(result)
-            break;
-          case 'login':
-            this.setUserDataToLocalStorage(result)
-            break;
-          default:
+      dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
+        if(answer) {
+          const {type, result} = answer;
+          switch (type) {
+            case 'facebook':
+              this.setUserDataToLocalStorage(result)
               break;
+            case 'google':
+              this.setUserDataToLocalStorage(result)
+              break;
+            case 'login':
+              this.setUserDataToLocalStorage(result)
+              break;
+            default:
+                break;
+          }
         }
-      }
-    });
+      });
+    } else {
+      localStorage.clear();
+      this.userName = null
+    }
+
   }
 
   setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
