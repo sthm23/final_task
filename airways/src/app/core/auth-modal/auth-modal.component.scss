@@ -35,6 +35,11 @@ form {
   }
 }
 
+.autocomplete {
+  display: flex;
+  gap: 8px;
+}
+
 .social-media-block {
   display: flex;
   flex-direction: column;
@@ -95,4 +100,13 @@ form {
 }
 .mat-mdc-form-field {
   margin-bottom: 20px;
+}
+
+.mat-button-toggle .mat-button-toggle-label-content > * {
+  opacity: 0;
+}
+.mat-button-toggle-checked .mat-icon,
+.mat-button-toggle-checked .mat-button-toggle-label-content {
+  opacity: 1 !important;
+  color: #11397e;
 }
