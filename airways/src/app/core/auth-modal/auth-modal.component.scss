@@ -101,12 +101,12 @@ form {
 .mat-mdc-form-field {
   margin-bottom: 20px;
 }
+.data-picker{
+  width: 436px;
+  height: 56px;
 
-.mat-button-toggle .mat-button-toggle-label-content > * {
-  opacity: 0;
-}
-.mat-button-toggle-checked .mat-icon,
-.mat-button-toggle-checked .mat-button-toggle-label-content {
-  opacity: 1 !important;
-  color: #11397e;
+  mat-form-field{
+    width: 100%;
+    margin-bottom: -1.25rem;
+  }
 }

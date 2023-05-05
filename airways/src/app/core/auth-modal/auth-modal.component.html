@@ -3,11 +3,11 @@
     <mat-tab label="Log in">
       <div class="log-in-block">
         <div class="social-media-block">
-          <button class="with-social" mat-button>
+          <button class="with-social" mat-button (click)="loginWithGoogle()">
             <mat-icon svgIcon="google" aria-hidden="false"></mat-icon>
             Continue with Google
           </button>
-          <button class="with-social" mat-button>
+          <button class="with-social" mat-button (click)="loginWithFacebook()">
             <mat-icon svgIcon="facebook" aria-hidden="false"></mat-icon>
             Continue with Facebook
           </button>
@@ -20,7 +20,7 @@
         <form class="form-block" [formGroup]="logInForm">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="text" formControlName="email" />
+            <input matInput type="text" formControlName="username" />
             <mat-error *ngIf="logInForm.get('email')?.invalid"
               >Invalid character</mat-error
             >
@@ -57,11 +57,11 @@
     <mat-tab label="Sing up">
       <div class="register-block">
         <div class="social-media-block">
-          <button mat-button class="with-social">
+          <button mat-button class="with-social" (click)="loginWithGoogle()">
             <mat-icon svgIcon="google" aria-hidden="false"></mat-icon>
             Continue with Google
           </button>
-          <button mat-button class="with-social">
+          <button mat-button class="with-social" (click)="loginWithFacebook()">
             <mat-icon svgIcon="facebook" aria-hidden="false"></mat-icon>
             Continue with Facebook
           </button>
@@ -101,11 +101,17 @@
             >
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Date of birth </mat-label>
-            <input matInput type="text" formControlName="birthday" />
-            <mat-error *ngIf="registerForm.get('birthday')?.invalid"
-              >Invalid character</mat-error
-            >
+            <mat-label>Date of birth</mat-label>
+            <input
+            (click)="pickDate(picker)"
+              matInput
+              [readonly]="true"
+              [matDatepicker]="picker"
+              formControlName="birthday"
+              >
+            <mat-error *ngIf="registerForm.get('birthday')?.invalid">Invalid character</mat-error>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
           </mat-form-field>
 
           <mat-button-toggle-group
@@ -113,11 +119,11 @@
             formControlName="gender"
           >
             <mat-button-toggle value="male">
-              <mat-icon>check</mat-icon>
+              <mat-icon *ngIf="registerForm.controls['gender'].value === 'male'">check</mat-icon>
               Male
             </mat-button-toggle>
             <mat-button-toggle value="female">
-              <mat-icon>check</mat-icon>
+              <mat-icon *ngIf="registerForm.controls['gender'].value === 'female'">check</mat-icon>
               Female
             </mat-button-toggle>
           </mat-button-toggle-group>
@@ -125,17 +131,17 @@
           <div class="autocomplete">
             <mat-form-field appearance="outline">
               <mat-label>Country code</mat-label>
-              <input matInput type="text" formControlName="countryCode" />
-              <mat-error *ngIf="registerForm.get('countryCode')?.invalid"
-                >Invalid character</mat-error
-              >
+              <mat-select formControlName="countryCode" required>
+                <mat-option *ngFor="let document of documents" [value]="document">
+                  <span>{{ document.name }} ({{document.code}})</span>
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="registerForm.get('countryCode')?.invalid">Error country code</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Mobile phone number</mat-label>
               <input matInput type="text" formControlName="phoneNumber" />
-              <mat-error *ngIf="registerForm.get('phoneNumber')?.invalid"
-                >Invalid character</mat-error
-              >
+              <mat-error *ngIf="registerForm.get('phoneNumber')?.invalid">Invalid character</mat-error>
             </mat-form-field>
           </div>
 
@@ -143,7 +149,7 @@
             <mat-label>Citizenship</mat-label>
             <mat-select formControlName="document" required>
               <mat-option *ngFor="let document of documents" [value]="document">
-                {{ document }}
+                <span>{{ document.name }}</span>
               </mat-option>
             </mat-select>
             <mat-error *ngIf="registerForm.get('document')?.invalid"

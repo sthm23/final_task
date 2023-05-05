@@ -23,51 +23,16 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     const user = {
       email: String(emails[0].value),
       login: String(emails[0].value),
-      password: 'test',
+      password: '',
       firstName: String(name.givenName),
       lastName: String(name.familyName),
-      phoneNumber: '123456789',
-      country: 'uzbekistan',
+      phoneNumber: '',
+      country: '',
       birthday: '',
-      citizenship: 'uzb',
+      citizenship: '',
       gender: 'male'
     } as CreateUserDto;
 
     done(null, {...user, accessToken, refreshToken});
   }
 }
-
-/**
- * {
-  id: '114299679822685574084',
-  displayName: 'Sanjar Tukhtamishev',
-  name: { familyName: 'Tukhtamishev', givenName: 'Sanjar' },
-  emails: [ { value: 'stuxtamixhev@gmail.com', verified: true } ],
-  photos: [
-    {
-      value: 'https://lh3.googleusercontent.com/a/AGNmyxbBeYuBaKjph_CkJzeJzZgew1QVd9rCh39vVXbVmQ=s96-c'
-    }
-  ],
-  provider: 'google',
-  _raw: '{\n' +
-    '  "sub": "114299679822685574084",\n' +
-    '  "name": "Sanjar Tukhtamishev",\n' +
-    '  "given_name": "Sanjar",\n' +
-    '  "family_name": "Tukhtamishev",\n' +
-    '  "picture": "https://lh3.googleusercontent.com/a/AGNmyxbBeYuBaKjph_CkJzeJzZgew1QVd9rCh39vVXbVmQ\\u003ds96-c",\n' +
-    '  "email": "stuxtamixhev@gmail.com",\n' +
-    '  "email_verified": true,\n' +
-    '  "locale": "ru"\n' +
-    '}',
-  _json: {
-    sub: '114299679822685574084',
-    name: 'Sanjar Tukhtamishev',
-    given_name: 'Sanjar',
-    family_name: 'Tukhtamishev',
-    picture: 'https://lh3.googleusercontent.com/a/AGNmyxbBeYuBaKjph_CkJzeJzZgew1QVd9rCh39vVXbVmQ=s96-c',
-    email: 'stuxtamixhev@gmail.com',
-    email_verified: true,
-    locale: 'ru'
-  }
-}
- */

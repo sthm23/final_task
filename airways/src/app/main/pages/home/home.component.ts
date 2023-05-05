@@ -3,8 +3,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
-import { Country, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
-import { MatDateRangePicker, MatDatepickerControl } from '@angular/material/datepicker';
+import { Airport, Country, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  cities: Country[] = []
+  cities: Airport[] = []
 
   form!:FormGroup<SearchFormGroup>;
 
@@ -38,22 +37,22 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private httpService: HttpRequestService) { }
 
   ngOnInit(): void {
-    this.httpService.getAllCountry().subscribe(city=>{
-      this.cities = city;
+    this.httpService.getAllAirport().subscribe(airports=>{
+      this.cities = airports
     })
 
     const formArr = this.dropdownOptions.map(item=>new FormControl(item, [Validators.required]));
     this.form = this.formBuilder.group({
-      from: new FormControl('', ),
-      destination: new FormControl('', ),
-      date: new FormControl({disabled: true, value: ''}, ),
+      from: new FormControl(null),
+      destination: new FormControl(null),
+      date: new FormControl<Date | null>(null),
       passengers: new FormArray(formArr),
 
       rangeDate: this.formBuilder.group({
         start: new FormControl<Date | null>(null),
         end: new FormControl<Date | null>(null),
       })
-    });
+    }) as any;
 
   }
 
@@ -78,8 +77,8 @@ export class HomeComponent implements OnInit {
   }
 
   flipFlight() {
-    const from = this.form.controls.destination.value || '';
-    const dest = this.form.controls.from.value || '';
+    const from = this.form.controls.destination.value;
+    const dest = this.form.controls.from.value;
     this.form.controls.from.setValue(from);
     this.form.controls.destination.setValue(dest);
   }

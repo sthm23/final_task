@@ -13,9 +13,9 @@
           <mat-label>From</mat-label>
           <mat-select formControlName="from">
             <mat-select-trigger>{{this.form.controls.from.value}}</mat-select-trigger>
-            <mat-option *ngFor="let city of cities" [value]="city.name">
-              {{city.capital}} ({{city.region}})
-              <h5 class="subtitle">president, {{city.name}}</h5>
+            <mat-option *ngFor="let airport of cities" [value]="airport.city">
+              {{airport.city}} ({{airport.code}})
+              <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -23,9 +23,9 @@
           <mat-label>Destination</mat-label>
           <mat-select formControlName="destination">
             <mat-select-trigger>{{this.form.controls.destination.value}}</mat-select-trigger>
-            <mat-option *ngFor="let city of cities" [value]="city.name">
-              {{city.capital}} ({{city.region}})
-              <h5 class="subtitle">president, {{city.name}}</h5>
+            <mat-option *ngFor="let airport of cities" [value]="airport.city">
+              {{airport.city}} ({{airport.code}})
+              <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -36,26 +36,24 @@
           <mat-form-field appearance="outline">
             <mat-label>Dates</mat-label>
             <mat-date-range-input formGroupName="rangeDate" [rangePicker]="multiPicker" [disabled]="true">
-              <input matStartDate formControlName="start" placeholder="Start date" [disabled]="true">
-              <input matEndDate formControlName="end" placeholder="End date" [disabled]="true">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
             </mat-date-range-input>
 
             <mat-datepicker-toggle matIconSuffix [for]="multiPicker"></mat-datepicker-toggle>
             <mat-date-range-picker #multiPicker disabled="false"></mat-date-range-picker>
 
-            <!-- <mat-error *ngIf="form.controls.get('rangeDate').end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+            <!-- <mat-error *ngIf="form.controls.rangeDate.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
             <!-- <mat-error *ngIf="form.controls.get('rangeDate').start.hasError('matStartDateInvalid')">Invalid start date</mat-error> -->
           </mat-form-field>
         </div>
 
-        <div class="date-pick-block" *ngIf="flightType === '2'" (click)="openDateBlock(picker)">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" *ngIf="flightType === '2'" >
             <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date" [disabled]="true">
+            <input matInput [readonly]="true" [matDatepicker]="picker" formControlName="date" (click)="openDateBlock(picker)">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker disabled="false"></mat-datepicker>
           </mat-form-field>
-        </div>
 
         <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
       </div>

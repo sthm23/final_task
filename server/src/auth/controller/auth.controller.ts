@@ -26,19 +26,19 @@ export class AuthController {
   @Get('google')
   @UseGuards(GoogleOAuthGuard)
   async googleAuth(@Request() req: any) {
-    return this.authService.registerWithGoogle(req?.user);
+    return this.authService.registerWithGoogleFacebook(req?.user);
   }
 
   @Get('google-redirect')
   @UseGuards(GoogleOAuthGuard)
-  googleAuthRedirect(@Request() req:any) {
-    return this.authService.login(req.user);
+  googleAuthRedirect(@Request() req:Request) {
+    return this.authService.login(req['user']);
   }
 
   @Get('facebook')
   @UseGuards(FacebookAuthGuard)
   async facebookAuth(@Request() req: any) {
-    return this.authService.registerWithGoogle(req?.user);
+    return this.authService.registerWithGoogleFacebook(req?.user);
   }
 
   @Get('facebook-redirect')

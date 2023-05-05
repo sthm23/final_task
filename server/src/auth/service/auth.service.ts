@@ -27,6 +27,7 @@ export class AuthService {
   async login(user: GetTokenOptions) {
     const tokens = await this.getToken({id: user.id, login: user.login});
     return {
+      user: user,
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken
     };
@@ -36,7 +37,7 @@ export class AuthService {
     return await this.userServ.createUser(dto);
   }
 
-  async registerWithGoogle(dto: CreateUserDto) {
+  async registerWithGoogleFacebook(dto: CreateUserDto) {
     return await this.userServ.createUser(dto);
   }
 
