@@ -47,19 +47,19 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    & .swap-btn{
+    & .swap-btn {
       position: absolute;
       z-index: 1;
       right: 20px;
       top: 45px;
-      background-color: #FFF;
+      background-color: #fff;
       color: #74767a;
     }
   }
   .date-pass {
     display: flex;
     justify-content: space-between;
-    & .date-pick-block{
+    & .date-pick-block {
       width: 100%;
       mat-form-field {
         width: 98%;
@@ -154,6 +154,10 @@
     line-height: 16px;
     letter-spacing: 0.4px;
     color: #49454f;
+  }
+  .dropdown-value {
+    font-weight: 400 !important;
+    color: #1c1b1f !important;
   }
 
   .mdc-notched-outline__leading,

@@ -35,6 +35,11 @@ form {
   }
 }
 
+.autocomplete {
+  display: flex;
+  gap: 8px;
+}
+
 .social-media-block {
   display: flex;
   flex-direction: column;
