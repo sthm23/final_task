@@ -6,32 +6,32 @@ export const enterBooking = createAction(AirwaysActionsEnum.enterBooking);
 export const enterShop = createAction(AirwaysActionsEnum.enterShop);
 export const enterAuth = createAction(AirwaysActionsEnum.enterAuth);
 
-export const selectCurrency = createAction(
+export const selectCurrencyAction = createAction(
   AirwaysActionsEnum.currency,
   props<{ currency: CurrencyType }>(),
 );
 
-export const selectTypeOfDate = createAction(
+export const selectTypeOfDateAction = createAction(
   AirwaysActionsEnum.dateType,
   props<{ typeOfDate: DateType }>(),
 );
 
-export const login = createAction(
+export const loginAction = createAction(
   AirwaysActionsEnum.login,
   props<{ user: User }>(),
 );
 
-export const register = createAction(
+export const registerAction = createAction(
   AirwaysActionsEnum.register,
   props<{ user: User }>(),
 );
 
-export const loginWithSocial = createAction(
+export const loginWithSocialAction = createAction(
   AirwaysActionsEnum.loginWithSocial,
   props<{ user: Omit<User, 'id'> }>(),
 );
 
-export const search = createAction(
+export const searchAction = createAction(
   AirwaysActionsEnum.search,
   props<{ searchResult: UserOrder }>(),
 );

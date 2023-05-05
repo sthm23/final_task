@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { enterMain, enterBooking, selectCurrency, selectTypeOfDate, search, enterAuth, login, register, loginWithSocial } from '../actions/airways.action';
+import { enterMain, enterBooking, selectCurrencyAction, selectTypeOfDateAction, searchAction, enterAuth, loginAction, registerAction, loginWithSocialAction } from '../actions/airways.action';
 import { initialState } from '../state.model';
 
 
@@ -10,17 +10,17 @@ export const airwaysReducer = createReducer(
     searchOrder: null,
   })),
 
-  on(selectCurrency, (state, action) => ({
+  on(selectCurrencyAction, (state, action) => ({
     ...state,
     currency: action.currency
   })),
 
-  on(selectTypeOfDate, (state, action) => ({
+  on(selectTypeOfDateAction, (state, action) => ({
     ...state,
     typeOfDate: action.typeOfDate
   })),
 
-  on(search, (state, action) => ({
+  on(searchAction, (state, action) => ({
     ...state,
     searchOrder: action.searchResult
   })),
@@ -30,17 +30,17 @@ export const airwaysReducer = createReducer(
     user: null
   })),
 
-  on(login, (state, action) => ({
+  on(loginAction, (state, action) => ({
     ...state,
     user: action.user
   })),
 
-  on(register, (state, action) => ({
+  on(registerAction, (state, action) => ({
     ...state,
     user: action.user
   })),
 
-  on(loginWithSocial, (state, action) => ({
+  on(loginWithSocialAction, (state, action) => ({
     ...state,
     user: {...action.user, id: 'loginWithSocial'}
   })),

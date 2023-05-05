@@ -3,7 +3,11 @@ import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthModalResult, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
+import { AuthModalResult, CurrencyType, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
+import { Store } from '@ngrx/store';
+import { selectDate, selectCurrency } from 'src/app/redux/selectors/airways.selector';
+import { selectCurrencyAction } from 'src/app/redux/actions/airways.action';
+import { Observable } from 'rxjs';
 
 
 type RouterUrl = '/main' | '/booking' | '/shop'
@@ -20,9 +24,9 @@ export class HeaderComponent implements OnInit {
 
   dateFormatList = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD']
 
-  currency = 'EUR'
+  currency$!:Observable<CurrencyType>
 
-  currencyList = ['EUR', 'USA', 'RUB', 'PLN']
+  currencyList:CurrencyType[] = ['EUR', 'USA', 'RUB', 'PLN']
 
   userName:string | null = null;
 
@@ -41,6 +45,7 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     private _formBuilder: FormBuilder,
     private route: Router,
+    private store: Store
     ) {}
 
   ngOnInit(): void {
@@ -55,6 +60,12 @@ export class HeaderComponent implements OnInit {
 
     this.userName = localStorage.getItem('user_name');
 
+    const date = this.store.select(selectDate);
+    date.subscribe(el=>{
+      console.log(el);
+
+    })
+    this.currency$ = this.store.select(selectCurrency);
   }
 
   openAuthDialog() {
@@ -98,7 +109,9 @@ export class HeaderComponent implements OnInit {
     this.isFormat = !this.isFormat
   }
 
-  chooseCurrency(currency: string) {
-    this.currency = currency;
+  chooseCurrency(currency: CurrencyType) {
+    // this.currency = currency;
+    this.store.dispatch(selectCurrencyAction({currency}));
+
   }
 }

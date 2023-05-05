@@ -29,7 +29,7 @@
           </mat-select>
         </mat-form-field>
         <button mat-button class="btn-language" [matMenuTriggerFor]="currencyMenu">
-          <span [ngClass]="{'textColor': !headerBgToggler }">{{ currency }}</span>
+          <span [ngClass]="{'textColor': !headerBgToggler }">{{ currency$ | async }}</span>
         </button>
         <mat-menu #currencyMenu="matMenu">
           <button *ngFor="let currencyName of currencyList" (click)="chooseCurrency(currencyName)" mat-menu-item>{{currencyName}}</button>
