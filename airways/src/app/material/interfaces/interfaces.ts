@@ -10,8 +10,8 @@ export interface DropDownOptions {
 }
 
 export interface SearchFormGroup {
-  from: FormControl
-  destination: FormControl
+  from: FormControl<string | null>
+  destination: FormControl<string | null>
   date: FormControl<Date | null>
   passengers: FormGroup<FormPassengers>
   rangeDate: FormGroup<{

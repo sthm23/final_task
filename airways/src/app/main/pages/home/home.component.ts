@@ -3,12 +3,14 @@ import { MatRadioChange } from '@angular/material/radio';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
-import { Airport, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
+import { Airport, AuthModalResult, DropDownOptions, LoginResult, LoginWithSocial, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { selectUser } from 'src/app/redux/selectors/airways.selector';
 import { Store } from '@ngrx/store';
-import { enterMain } from 'src/app/redux/actions/airways.action';
+import { enterMain, loginAction, searchAction } from 'src/app/redux/actions/airways.action';
 import { User } from 'src/app/redux/state.model';
+import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -33,11 +35,7 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-  // passengers = new FormGroup({
-  //   adults: new FormControl(0, [Validators.required, Validators.pattern(/[1-9]/)]),
-  //   child: new FormControl(0, [Validators.required, Validators.pattern(/[1-9]/)]),
-  //   infant: new FormControl(0, [Validators.required, Validators.pattern(/[1-9]/)])
-  // })
+  user:User | null = null;
 
   cities: Airport[] = [
     {
@@ -131,13 +129,13 @@ export class HomeComponent implements OnInit {
   ]
 
   form:FormGroup<SearchFormGroup> = new FormGroup({
-    from: new FormControl(null, Validators.required),
-    destination: new FormControl(null, Validators.required),
+    from: new FormControl<string | null>(null, Validators.required),
+    destination: new FormControl<string | null>(null, Validators.required),
     date: new FormControl<Date | null>(null, Validators.required),
     passengers: new FormGroup({
-      adults: new FormControl(0, [Validators.required, Validators.pattern(/[1-9]/)]),
-      child: new FormControl(0, [Validators.required, Validators.pattern(/[0-9]/)]),
-      infant: new FormControl(0, [Validators.required, Validators.pattern(/[0-9]/)])
+      adults: new FormControl<number>(0, [Validators.required, Validators.pattern(/[1-9]/)]),
+      child: new FormControl<number>(0, [Validators.required, Validators.pattern(/[0-9]/)]),
+      infant: new FormControl<number>(0, [Validators.required, Validators.pattern(/[0-9]/)])
     }),
 
     rangeDate: new FormGroup({
@@ -151,7 +149,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: Router,
     private store: Store,
-    private httpService: HttpRequestService
+    private httpService: HttpRequestService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -167,6 +166,9 @@ export class HomeComponent implements OnInit {
       user = JSON.parse(user_json) as User;
     }
     this.store.dispatch(enterMain({user}));
+    this.store.select(selectUser).subscribe(user=>{
+      this.user = user
+    })
   }
 
   selectFlightType(event: MatRadioChange) {
@@ -189,19 +191,48 @@ export class HomeComponent implements OnInit {
   }
 
   submitSearch(){
-    const form = this.form.value;
-    console.log(form);
-    console.log(this.form.valid);
-    const el = this.store.select(selectUser);
-    el.subscribe(user=>{
-      console.log(user);
-
-    })
-    // if(this.form.valid && ) {
-
-    // }
+    if(this.form.valid && this.user !== null) {
+      this.store.dispatch(searchAction({searchResult: this.form.value}));
+      this.route.navigate(['/booking'])
+    } else if(this.form.valid && this.user === null) {
+      this.openAuthDialog()
+    }
 
   }
+
+  openAuthDialog() {
+    const dialogRef = this.dialog.open(AuthModalComponent);
+
+    dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
+      if(answer) {
+        const {type, result} = answer;
+        switch (type) {
+          case 'facebook':
+            this.setUserDataToLocalStorage(result)
+            break;
+          case 'google':
+            this.setUserDataToLocalStorage(result)
+            break;
+          case 'login':
+            this.setUserDataToLocalStorage(result)
+            break;
+          default:
+              break;
+        }
+      }
+    });
+  }
+
+  setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
+    this.store.dispatch(loginAction({user: data.user}))
+    localStorage.setItem('user_name', JSON.stringify(data.user));
+    localStorage.setItem('ac_token', data.accessToken);
+    localStorage.setItem('ref_token', data.refreshToken);
+    this.route.navigate(['/booking'])
+  }
+
+
+
 
   flipFlight() {
     const from = this.form.controls.destination.value;

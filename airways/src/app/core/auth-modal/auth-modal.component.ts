@@ -1,16 +1,12 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderComponent } from '../components/header/header.component';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { facebook, google } from './icon';
 import { AuthLoginRegisterService } from '../services/auth.service';
 import { CreateUser, GenderType, LoginResult, LoginWithSocial, RegisterCountryType } from 'src/app/material/interfaces/interfaces';
-
-interface DialogData {
-  data: any
-}
 
 @Component({
   selector: 'app-auth-modal',
@@ -76,8 +72,6 @@ export class AuthModalComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.registerForm.value);
-
     if(this.registerForm.valid) {
       const {
         email, password, firstName,
@@ -94,10 +88,12 @@ export class AuthModalComponent implements OnInit {
         country: countryCode.name
       }
       this.authService.register(user).subscribe(result=>{
-        this.authService.login({username: result.login, password: result.password})
-        .subscribe(result=>{
-          this.dialogRef.close({type:'login', result})
-        })
+        if(result) {
+          this.authService.login({username: result.login, password: password})
+            .subscribe(result=>{
+              this.dialogRef.close({type:'login', result})
+            })
+        }
       })
     }
   }
@@ -115,10 +111,5 @@ export class AuthModalComponent implements OnInit {
         this.dialogRef.close({type:'facebook', result})
       })
   }
-
-  // test(e:any) {
-  //   console.log(e);
-
-  // }
 
 }
