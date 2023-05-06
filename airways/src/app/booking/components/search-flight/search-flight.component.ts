@@ -20,20 +20,26 @@ export class SearchFlightComponent implements OnInit {
   destinationDate = ''
 
   searchFormBlockToggler = false
-  dropdownOptions: DropDownOptions[] = [
-    {
-      name: 'Adults',
-      count: 0
-    },
-    {
-      name: 'Child',
-      count: 0
-    },
-    {
-      name: 'Infant',
-      count: 0
-    },
-  ]
+
+  dropdownOptions: DropDownOptions = {
+    adults: 0,
+    child: 0,
+    infant: 0,
+  }
+  // dropdownOptions: DropDownOptions[] = [
+  //   {
+  //     name: 'Adults',
+  //     count: 0
+  //   },
+  //   {
+  //     name: 'Child',
+  //     count: 0
+  //   },
+  //   {
+  //     name: 'Infant',
+  //     count: 0
+  //   },
+  // ]
 
   constructor(private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('fromToReturnIcon', sanitizer.bypassSecurityTrustHtml(fromToReturnIcon));
@@ -54,9 +60,8 @@ export class SearchFlightComponent implements OnInit {
     this.searchFormBlockToggler = !this.searchFormBlockToggler
   }
 
-  dropdownValueChanged(e:DropDownOptions[]) {
+  dropdownValueChanged(e:DropDownOptions) {
     this.dropdownOptions = e;
-
   }
 
 }

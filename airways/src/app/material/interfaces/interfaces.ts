@@ -1,12 +1,16 @@
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
-export type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
+export type TypeOfPassengersName = 'adults' | 'child' | 'infant';
 
 export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
 
-export interface DropDownOptions {
-  name: TypeOfPassengersName,
-  count: number
+// export interface DropDownOptions {
+//   name: TypeOfPassengersName,
+//   count: number
+// }
+
+export type DropDownOptions = {
+  [keyof in TypeOfPassengersName]: number
 }
 
 export interface SearchFormGroup {
