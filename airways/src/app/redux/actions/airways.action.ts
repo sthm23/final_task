@@ -1,10 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 import { AirwaysActionsEnum, CurrencyType, DateType, User, UserOrder } from '../state.model';
 
-export const enterMain = createAction(AirwaysActionsEnum.enterMain);
+
 export const enterBooking = createAction(AirwaysActionsEnum.enterBooking);
 export const enterShop = createAction(AirwaysActionsEnum.enterShop);
 export const enterAuth = createAction(AirwaysActionsEnum.enterAuth);
+
+export const enterMain = createAction(
+  AirwaysActionsEnum.enterMain,
+  props<{ user: User | null }>(),
+);
 
 export const selectCurrencyAction = createAction(
   AirwaysActionsEnum.currency,
@@ -18,7 +23,7 @@ export const selectTypeOfDateAction = createAction(
 
 export const loginAction = createAction(
   AirwaysActionsEnum.login,
-  props<{ user: User }>(),
+  props<{ user: User | null }>(),
 );
 
 export const registerAction = createAction(
@@ -28,7 +33,7 @@ export const registerAction = createAction(
 
 export const loginWithSocialAction = createAction(
   AirwaysActionsEnum.loginWithSocial,
-  props<{ user: Omit<User, 'id'> }>(),
+  props<{ user: User }>(),
 );
 
 export const searchAction = createAction(

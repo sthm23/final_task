@@ -12,14 +12,19 @@ export interface DropDownOptions {
 export interface SearchFormGroup {
   from: FormControl
   destination: FormControl
-  date: FormControl<string | null>
-  passengers: FormArray<FormControl<DropDownOptions | null>>
+  date: FormControl<Date | null>
+  passengers: FormGroup<FormPassengers>
   rangeDate: FormGroup<{
     start: FormControl<Date | null>;
     end: FormControl<Date | null>;
   }>
 }
 
+interface FormPassengers {
+  adults: FormControl<number | null>
+  child: FormControl<number | null>
+  infant: FormControl<number | null>
+}
 export interface Country {
   name: string
   code: string,

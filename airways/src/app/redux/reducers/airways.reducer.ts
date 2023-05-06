@@ -5,9 +5,9 @@ import { initialState } from '../state.model';
 
 export const airwaysReducer = createReducer(
   initialState,
-  on(enterMain, (state) => ({
+  on(enterMain, (state, action) => ({
     ...state,
-    searchOrder: null,
+    user: action.user
   })),
 
   on(selectCurrencyAction, (state, action) => ({

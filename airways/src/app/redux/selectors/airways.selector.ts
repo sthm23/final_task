@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AirwaysState } from '../state.model';
+import { AirwaysState, User } from '../state.model';
 
 
 export const selectSharedCardsState = createFeatureSelector<AirwaysState>('airwaysState');
@@ -13,12 +13,12 @@ export const selectCurrencyState = createSelector(
 
 export const selectDateState = createSelector(
   selectSharedCardsState,
-  (state: AirwaysState) => state.typeOfDate,
+  (state: AirwaysState):string => state.typeOfDate,
 )
 
-export const selectUser = createSelector(
+export const selectUserState = createSelector(
   selectSharedCardsState,
-  (state: AirwaysState) => state.user
+  (state: AirwaysState):User | null => state.user
 )
 
 export const selectSearchOrder = createSelector(
@@ -36,5 +36,10 @@ export const selectDate = createSelector(
 
 export const selectCurrency = createSelector(
   selectCurrencyState,
+  selectDates,
+);
+
+export const selectUser = createSelector(
+  selectUserState,
   selectDates,
 );
