@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { DropDownOptions } from '../../interfaces/interfaces';
+import { DropDownOptions, TypeOfPassengersName } from '../../interfaces/interfaces';
 
 
 @Component({
@@ -15,10 +15,10 @@ export class HtmlSelectComponent {
   child = 0;
   infant = 0;
 
-  result: DropDownOptions[] = []
+  result!: DropDownOptions;
   textPassengers = 'test text'
 
-  @Input() options!: DropDownOptions[];
+  @Input() options!: DropDownOptions;
   @Input() title = '';
   @Output() currentValueChange = new EventEmitter();
 
@@ -32,7 +32,10 @@ export class HtmlSelectComponent {
   ) { }
 
   ngOnInit(): void {
-    this.textPassengers = this.writeLabelText(this.options)
+    this.textPassengers = this.writeLabelText(this.options);
+    this.adults = this.options.adults
+    this.child = this.options.child
+    this.infant = this.options.infant
   }
 
   handleKeyboardEvents($event: KeyboardEvent) {
@@ -67,29 +70,24 @@ export class HtmlSelectComponent {
     }
   }
 
-  writeLabelText(arr: DropDownOptions[]) {
-    let str = ''
-    arr.forEach(item=> {
-      str += `${item.count} ${item.name}, `
-    })
+  writeLabelText(object: DropDownOptions) {
+    let str = '';
+    let key: TypeOfPassengersName = 'adults'
+    for (key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        str += `${element} ${key}, `
+      }
+    }
     return str
   }
 
   writeResult() {
-    this.result = [
-      {
-        name: 'Adults',
-        count: this.adults
-      },
-      {
-        name: 'Child',
-        count: this.child
-      },
-      {
-        name: 'Infant',
-        count: this.infant
-      }
-    ]
+    this.result =  {
+      adults: this.adults,
+      child: this.child,
+      infant: this.infant,
+    }
     this.textPassengers = this.writeLabelText(this.result)
     this.currentValueChange.emit(this.result)
   }

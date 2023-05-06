@@ -5,10 +5,10 @@ import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
 import { Airport, AuthModalResult, DropDownOptions, LoginResult, LoginWithSocial, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
 import { Router } from '@angular/router';
-import { selectUser } from 'src/app/redux/selectors/airways.selector';
+import { selectSearchOrder, selectUser } from 'src/app/redux/selectors/airways.selector';
 import { Store } from '@ngrx/store';
 import { enterMain, loginAction, searchAction } from 'src/app/redux/actions/airways.action';
-import { User } from 'src/app/redux/state.model';
+import { TypeOfPassengersName, User } from 'src/app/redux/state.model';
 import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -20,20 +20,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HomeComponent implements OnInit {
 
-  dropdownOptions: DropDownOptions[] = [
-    {
-      name: 'Adults',
-      count: 0
-    },
-    {
-      name: 'Child',
-      count: 0
-    },
-    {
-      name: 'Infant',
-      count: 0
-    },
-  ]
+  dropdownOptions: DropDownOptions = {
+    adults: 0,
+    child: 0,
+    infant: 0,
+  }
 
   user:User | null = null;
 
@@ -169,6 +160,25 @@ export class HomeComponent implements OnInit {
     this.store.select(selectUser).subscribe(user=>{
       this.user = user
     })
+    this.store.select(selectSearchOrder).subscribe(item=>{
+      if(item) {
+        const {from, date, destination, passengers, rangeDate} = item;
+        this.form.get('from')?.setValue(from!)
+        this.form.get('date')?.setValue(date!)
+        this.form.get('destination')?.setValue(destination!)
+        this.form.get('passengers')?.get('adults')?.setValue(passengers?.adults!)
+        this.form.get('passengers')?.get('child')?.setValue(passengers?.child!)
+        this.form.get('passengers')?.get('infant')?.setValue(passengers?.infant!)
+        this.form.get('rangeDate')?.get('start')?.setValue(rangeDate?.start!)
+        this.form.get('rangeDate')?.get('end')?.setValue(rangeDate?.end!)
+
+        this.dropdownOptions = {
+          adults: passengers?.adults!,
+          child: passengers?.child!,
+          infant: passengers?.infant!
+        };
+      }
+    })
   }
 
   selectFlightType(event: MatRadioChange) {
@@ -182,19 +192,24 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  dropdownValueChanged(e:DropDownOptions[]) {
+  dropdownValueChanged(e:DropDownOptions) {
     this.dropdownOptions = e;
-    e.forEach(item=>{
-      const name = item.name.toLowerCase() as 'adults' | 'infant' | 'child';
-      this.form.controls.passengers.controls[name].setValue(item.count);
-    });
+    let key:TypeOfPassengersName = 'adults'
+    for (key in e) {
+      if (Object.prototype.hasOwnProperty.call(e, key)) {
+        const element = e[key];
+        this.form.controls.passengers.controls[key].setValue(element);
+      }
+    }
   }
 
   submitSearch(){
     if(this.form.valid && this.user !== null) {
+      localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
       this.route.navigate(['/booking'])
     } else if(this.form.valid && this.user === null) {
+      localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.openAuthDialog()
     }
 
@@ -230,9 +245,6 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('ref_token', data.refreshToken);
     this.route.navigate(['/booking'])
   }
-
-
-
 
   flipFlight() {
     const from = this.form.controls.destination.value;
