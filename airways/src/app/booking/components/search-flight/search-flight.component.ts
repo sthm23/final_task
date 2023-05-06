@@ -30,9 +30,9 @@ export class SearchFlightComponent implements OnInit {
 
   cityFrom = 'Dublin'
   cityDestination = 'Warsaw Modlin'
+
   flightDate:Date = new Date()
   flightBackDate:Date | undefined;
-  peopleCount = 0
 
   searchFormBlockToggler = false
 
@@ -168,7 +168,7 @@ export class SearchFlightComponent implements OnInit {
     this.form.controls.rangeDate.controls.end.setValue(this.searchData?.rangeDate?.end)
 
 
-    console.log(this.searchData);
+    // console.log(this.searchData);
 
   }
 

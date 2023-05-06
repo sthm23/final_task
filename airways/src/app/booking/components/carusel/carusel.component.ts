@@ -46,11 +46,13 @@ export class CaruselComponent implements OnInit {
     const tomorrow = this.createDay(currentDay, 1);
     const tomorrow1 = this.createDay(currentDay, 2);
     return [
-      {id:1, day: yesterday1, check: true},
+      {id:1, day: yesterday1, check: false},
       {id:2, day: yesterday, check: false},
-      {id:3, day: currentDay, check: true},
+      {id:3, day: currentDay, check: false},
       {id:4, day: tomorrow, check: false},
-      {id:5, day: tomorrow1, check: true},
+      {id:5, day: tomorrow1, check: false},
+      {id:6, day: currentDay, check: false},
+      {id:7, day: currentDay, check: false},
     ]
   }
 
