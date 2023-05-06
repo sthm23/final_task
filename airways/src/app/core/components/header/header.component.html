@@ -22,7 +22,7 @@
       <div class="menu">
         <button class="btn-text" [routerLink]="['/booking']" *ngIf="toggleHeader === '/main'">Book flights</button>
         <mat-form-field appearance="outline" class="choose-date-select">
-          <mat-select [formControl]="isActive" name="date"  [panelClass]="{'textColor': !headerBgToggler }">
+          <mat-select [value]="isActive$ | async" (selectionChange)="selectDate($event)" name="date"  [panelClass]="{'textColor': !headerBgToggler }">
             <mat-option *ngFor="let date of dateFormatList" [value]="date">
               <span [ngClass]="{'textColor': !headerBgToggler }">{{date}}</span>
             </mat-option>

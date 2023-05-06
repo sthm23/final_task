@@ -16,12 +16,12 @@ export enum AirwaysActionsEnum {
 
 export type GenderType = 'male' | 'female';
 export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
-export type TypeOfPassengersName = 'Adults' | 'Child' | 'Infant';
+export type TypeOfPassengersName = 'adults' | 'child' | 'infant';
 export type DateType = 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY/DD/MM' | 'YYYY/MM/DD';
 
 
 export interface User {
-  id: string,
+  id?: string,
   lastName: string,
   firstName: string,
   birthday: string,
@@ -36,16 +36,35 @@ export interface User {
 }
 
 export type OrderType = {
-  name: TypeOfPassengersName
-  count: number
-}
+  [key in TypeOfPassengersName]: number;
+};
 
-export interface UserOrder {
+
+export interface UserOrder2 {
   from: string
   destination: string
-  date: string[]
-  passengers: OrderType[]
+  date?: Date
+  rangeDate?: {
+    start:Date,
+    end:Date
+  }
+  passengers: OrderType;
 }
+
+export type UserOrder = Partial<{
+  from: string | null;
+  destination: string | null;
+  date: Date | null;
+  passengers: Partial<{
+      adults: number | null;
+      child: number | null;
+      infant: number | null;
+  }>;
+  rangeDate: Partial<{
+      start: Date | null;
+      end: Date | null;
+  }>;
+}>
 
 
 export interface AirwaysState {

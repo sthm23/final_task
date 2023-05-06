@@ -3,11 +3,12 @@ import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthModalResult, CurrencyType, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
+import { AuthModalResult, CurrencyType, LoginResult, LoginWithSocial, User } from 'src/app/material/interfaces/interfaces';
 import { Store } from '@ngrx/store';
-import { selectDate, selectCurrency } from 'src/app/redux/selectors/airways.selector';
-import { selectCurrencyAction } from 'src/app/redux/actions/airways.action';
+import { selectDate, selectCurrency, selectUser } from 'src/app/redux/selectors/airways.selector';
+import { loginAction, selectCurrencyAction, selectTypeOfDateAction } from 'src/app/redux/actions/airways.action';
 import { Observable } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
 
 
 type RouterUrl = '/main' | '/booking' | '/shop'
@@ -18,17 +19,15 @@ type RouterUrl = '/main' | '/booking' | '/shop'
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
-  isFormat = false;
-
-  isActive = new FormControl('MM/DD/YYYY');
-
-  dateFormatList = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD']
-
-  currency$!:Observable<CurrencyType>
 
   currencyList:CurrencyType[] = ['EUR', 'USA', 'RUB', 'PLN']
+  dateFormatList = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD']
 
-  userName:string | null = null;
+  isActive$ = this.store.select(selectDate)
+  currency$:Observable<CurrencyType> = this.store.select(selectCurrency);
+
+
+  userName: string | null = null;
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -58,14 +57,13 @@ export class HeaderComponent implements OnInit {
       }
     })
 
-    this.userName = localStorage.getItem('user_name');
-
-    const date = this.store.select(selectDate);
-    date.subscribe(el=>{
-      console.log(el);
-
+    this.store.select(selectUser).subscribe(user => {
+      if(user) {
+        this.userName = `${user.firstName} ${user.lastName}`
+      } else {
+        this.userName = user
+      }
     })
-    this.currency$ = this.store.select(selectCurrency);
   }
 
   openAuthDialog() {
@@ -92,26 +90,23 @@ export class HeaderComponent implements OnInit {
       });
     } else {
       localStorage.clear();
-      this.userName = null
+      this.store.dispatch(loginAction({user: null}))
     }
 
   }
 
   setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
-    const name =  `${data.user.firstName} ${data.user.lastName}`;
-    this.userName = name
-    localStorage.setItem('user_name', name);
+    this.store.dispatch(loginAction({user: data.user}))
+    localStorage.setItem('user_name', JSON.stringify(data.user));
     localStorage.setItem('ac_token', data.accessToken);
     localStorage.setItem('ref_token', data.refreshToken);
   }
 
-  dropDown() {
-    this.isFormat = !this.isFormat
+  chooseCurrency(currency: CurrencyType) {
+    this.store.dispatch(selectCurrencyAction({currency}));
   }
 
-  chooseCurrency(currency: CurrencyType) {
-    // this.currency = currency;
-    this.store.dispatch(selectCurrencyAction({currency}));
-
+  selectDate(e: MatSelectChange ) {
+    this.store.dispatch(selectTypeOfDateAction({typeOfDate: e.value}))
   }
 }
