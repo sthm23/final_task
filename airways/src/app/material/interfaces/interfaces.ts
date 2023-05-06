@@ -4,10 +4,20 @@ export type TypeOfPassengersName = 'adults' | 'child' | 'infant';
 
 export type CurrencyType = 'EUR' | 'USA' | 'RUB' | 'PLN';
 
-// export interface DropDownOptions {
-//   name: TypeOfPassengersName,
-//   count: number
-// }
+export interface SearchResult {
+  destination:string
+  from:string
+  passengers: {
+    adults: number,
+    child: number,
+    infant: number
+  }
+  rangeDate?: {
+    start: Date
+    end: Date
+  }
+  date?: Date
+}
 
 export type DropDownOptions = {
   [keyof in TypeOfPassengersName]: number

@@ -205,9 +205,11 @@ export class HomeComponent implements OnInit {
 
   submitSearch(){
     if(this.form.valid && this.user !== null) {
+      localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
       this.route.navigate(['/booking'])
     } else if(this.form.valid && this.user === null) {
+      localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.openAuthDialog()
     }
 
