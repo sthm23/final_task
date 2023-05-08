@@ -10,7 +10,10 @@ type DirectionType = 'goTo' | 'return'
 export class SelectFlightComponent implements OnInit{
 
   @Input() direction: DirectionType = 'goTo'
+  utc = (new Date()).getTime() + (new Date().getTimezoneOffset() * 60000)
+  myDate = new Date(77760000);
 
+  hour = Math.floor(77760000/60/60/1000)
 
   ngOnInit(): void {
 
