@@ -18,6 +18,7 @@ import { CarouselData } from 'src/app/material/interfaces/interfaces';
 export class OrderComponent implements OnInit {
 
   flightArr:CarouselData[] = []
+  flightReturnArr:CarouselData[] = []
   returnFlight:CarouselData[] = []
   selectedFlight!:CarouselData;
   selectedReturnFlight!:CarouselData;
@@ -40,14 +41,15 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
     const search = JSON.parse(localStorage.getItem('search_result')!);
+    const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
+    const range = search.rangeDate;
 
-    const range = search.rangeDate
     const obj = {
       from: search.from.id,
       destination: search.destination.id,
       date: undefined,
       rangeDate: undefined,
-      count:2
+      count
     }
     if(range) {
       obj.rangeDate = range
@@ -57,6 +59,7 @@ export class OrderComponent implements OnInit {
 
     this.searchService.getTicket(obj).subscribe((res)=>{
       this.flightArr = res.start
+      this.flightReturnArr = res.end
       this.returnFlight = res.end
       this.selectedFlight = res.start[2]
       this.selectedReturnFlight = res.end[2]

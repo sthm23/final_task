@@ -36,7 +36,7 @@ export class AirportService {
         
         if(body.rangeDate) {
             const resStartArr = this.createFlights(from, destination, body.rangeDate.start);
-            const resEndArr = this.createFlights(from, destination, body.rangeDate.end);
+            const resEndArr = this.createFlights(destination, from, body.rangeDate.end);
             return res.status(HttpStatus.OK).json({
                 start: resStartArr,
                 end: resEndArr
@@ -66,7 +66,7 @@ export class AirportService {
                 flightNumber: flightNumber,
                 seats: seats,
                 price: price,
-                flight: flight
+                flight: ind===2 ? false : flight
             }
         })
 
@@ -76,12 +76,15 @@ export class AirportService {
         const time = new Date(date);
         const destination = new Date(date);
         if(num !== undefined) {
-            const dest = destination.setUTCDate(time.getUTCHours() + num - 2);
-            return new Date(dest);
+            const dest = destination.setDate(time.getDate() + num - 2);
+            const randomHour = Math.floor(Math.random() * 23);
+            const randomMinute = Math.floor(Math.random() * 59);
+            const dest2 = new Date(dest).setHours(time.getHours() + randomHour, time.getMinutes() - randomMinute);
+            return new Date(dest2);
         }
-        const randomHour = Math.floor(Math.random() * 24);
-        const randomMinute = Math.floor(Math.random() * 60);
-        const dest = destination.setUTCHours(time.getUTCHours() + randomHour, time.getUTCMinutes() + randomMinute);
+        const randomHour = Math.floor(Math.random() * 23);
+        const randomMinute = Math.floor(Math.random() * 59);
+        const dest = destination.setHours(time.getHours() + randomHour, time.getMinutes() + randomMinute);
 
         return new Date(dest);
     }

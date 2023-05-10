@@ -25,7 +25,7 @@ export class CaruselComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.flightList);
-    // this.currentIndex = this.chosenFlightDay.id
+
   }
 
   selectCard(e:HTMLButtonElement, day:CarouselData){
