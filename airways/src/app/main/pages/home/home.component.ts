@@ -29,94 +29,94 @@ export class HomeComponent implements OnInit {
   user:User | null = null;
 
   cities: Airport[] = [
-    {
-      "id": 1,
-      "code": "AAA",
-      "name": "Anaa Airport",
-      "city": "Anaa",
-      "state": "Tuamotu-Gambier",
-      "country": "French Polynesia"
-  },
-  {
-      "id": 2,
-      "code": "AAE",
-      "name": "El Mellah Airport",
-      "city": "El Tarf",
-      "state": "Annaba",
-      "country": "Algeria"
-  },
-  {
-      "id": 3,
-      "code": "AAL",
-      "name": "Aalborg Airport",
-      "city": "Norresundby",
-      "state": "Nordjylland",
-      "country": "Denmark"
-  },
-  {
-      "id": 4,
-      "code": "AAM",
-      "name": "Mala Mala",
-      "city": "Mala Mala",
-      "state": "",
-      "country": "South Africa"
-  },
-  {
-      "id": 5,
-      "code": "AAN",
-      "name": "Al Ain Airport",
-      "city": "Ayn al Faydah",
-      "state": "Abu Dhabi",
-      "country": "United Arab Emirates"
-  },
-  {
-      "id": 6,
-      "code": "AAQ",
-      "name": "Olkhovka Airport",
-      "city": "Novorossiysk",
-      "state": "Krasnodarskiy Kray",
-      "country": "Russia"
-  },
-  {
-      "id": 7,
-      "code": "AAR",
-      "name": "Tirstrup Airport",
-      "city": "Kolind",
-      "state": "Midtjylland",
-      "country": "Denmark"
-  },
-  {
-      "id": 8,
-      "code": "AAT",
-      "name": "Altay Airport",
-      "city": "Altay",
-      "state": "Xinjiang",
-      "country": "China"
-  },
-  {
-      "id": 9,
-      "code": "AAX",
-      "name": "Romeu Zuma Airport",
-      "city": "Araxá",
-      "state": "Minas Gerais",
-      "country": "Brazil"
-  },
-  {
-      "id": 10,
-      "code": "AAY",
-      "name": "Al Gaidah Airport",
-      "city": "Al Ghaydah",
-      "state": "Hadramawt",
-      "country": "Yemen"
-  },
-  {
-      "id": 11,
-      "code": "ABA",
-      "name": "Abakan",
-      "city": "Abakan",
-      "state": "Khakasiya",
-      "country": "Russian Federation"
-  },
+  //   {
+  //     "id": 1,
+  //     "code": "AAA",
+  //     "name": "Anaa Airport",
+  //     "city": "Anaa",
+  //     "state": "Tuamotu-Gambier",
+  //     "country": "French Polynesia"
+  // },
+  // {
+  //     "id": 2,
+  //     "code": "AAE",
+  //     "name": "El Mellah Airport",
+  //     "city": "El Tarf",
+  //     "state": "Annaba",
+  //     "country": "Algeria"
+  // },
+  // {
+  //     "id": 3,
+  //     "code": "AAL",
+  //     "name": "Aalborg Airport",
+  //     "city": "Norresundby",
+  //     "state": "Nordjylland",
+  //     "country": "Denmark"
+  // },
+  // {
+  //     "id": 4,
+  //     "code": "AAM",
+  //     "name": "Mala Mala",
+  //     "city": "Mala Mala",
+  //     "state": "",
+  //     "country": "South Africa"
+  // },
+  // {
+  //     "id": 5,
+  //     "code": "AAN",
+  //     "name": "Al Ain Airport",
+  //     "city": "Ayn al Faydah",
+  //     "state": "Abu Dhabi",
+  //     "country": "United Arab Emirates"
+  // },
+  // {
+  //     "id": 6,
+  //     "code": "AAQ",
+  //     "name": "Olkhovka Airport",
+  //     "city": "Novorossiysk",
+  //     "state": "Krasnodarskiy Kray",
+  //     "country": "Russia"
+  // },
+  // {
+  //     "id": 7,
+  //     "code": "AAR",
+  //     "name": "Tirstrup Airport",
+  //     "city": "Kolind",
+  //     "state": "Midtjylland",
+  //     "country": "Denmark"
+  // },
+  // {
+  //     "id": 8,
+  //     "code": "AAT",
+  //     "name": "Altay Airport",
+  //     "city": "Altay",
+  //     "state": "Xinjiang",
+  //     "country": "China"
+  // },
+  // {
+  //     "id": 9,
+  //     "code": "AAX",
+  //     "name": "Romeu Zuma Airport",
+  //     "city": "Araxá",
+  //     "state": "Minas Gerais",
+  //     "country": "Brazil"
+  // },
+  // {
+  //     "id": 10,
+  //     "code": "AAY",
+  //     "name": "Al Gaidah Airport",
+  //     "city": "Al Ghaydah",
+  //     "state": "Hadramawt",
+  //     "country": "Yemen"
+  // },
+  // {
+  //     "id": 11,
+  //     "code": "ABA",
+  //     "name": "Abakan",
+  //     "city": "Abakan",
+  //     "state": "Khakasiya",
+  //     "country": "Russian Federation"
+  // },
   ]
 
   form:FormGroup<SearchFormGroup> = new FormGroup({
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpService.getAllAirport().subscribe(airports=>{
-      // this.cities = airports
+      this.cities = airports
     })
 
     this.form.controls.date.disable();

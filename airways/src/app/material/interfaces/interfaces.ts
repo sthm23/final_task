@@ -165,6 +165,7 @@ export interface CarouselData {
   duration: number
   flight: boolean
   from: Airport
+  flightNumber: string
   fromDate: string
   price: number
   seats: number

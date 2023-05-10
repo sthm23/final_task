@@ -35,6 +35,9 @@
     line-height: 20px;
     letter-spacing: 0.1px;
     color: #FFFFFF;
+    &:disabled {
+      background-color: #cacaca;
+    }
   }
 
   & .back-btn {

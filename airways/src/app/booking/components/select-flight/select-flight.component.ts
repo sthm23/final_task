@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CarouselData } from 'src/app/material/interfaces/interfaces';
 
 
 type DirectionType = 'goTo' | 'return'
@@ -7,16 +8,23 @@ type DirectionType = 'goTo' | 'return'
   templateUrl: './select-flight.component.html',
   styleUrls: ['./select-flight.component.scss']
 })
-export class SelectFlightComponent implements OnInit{
+export class SelectFlightComponent {
 
   @Input() direction: DirectionType = 'goTo'
-  utc = (new Date()).getTime() + (new Date().getTimezoneOffset() * 60000)
-  myDate = new Date(77760000);
+  @Input() flight!: CarouselData;
+  @Output() selectedFlight: EventEmitter<boolean> = new EventEmitter();
 
-  hour = Math.floor(77760000/60/60/1000)
+  checkSelect = true
 
-  ngOnInit(): void {
+  setDuration(time:number) {
+    const minute = new Date(time)
+    const hour =  Math.floor(time/60/60/1000)
+    return { minute, hour}
+  }
 
+  selectFlight() {
+    this.checkSelect = !this.checkSelect
+    this.selectedFlight.emit(this.checkSelect)
   }
 
 }

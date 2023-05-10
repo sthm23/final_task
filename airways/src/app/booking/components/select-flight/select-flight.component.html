@@ -3,19 +3,19 @@
   <div class="left-side">
     <div class="start-time-block">
       <div class="date-block">
-        <span>Wed, 1 Mar 2023</span>
+        <span>{{flight.fromDate | date:'EEE, d MMMM y'}}</span>
       </div>
       <div class="time-block">
-        <span class="main-time">8:40</span>
-        <span>UTC+0</span>
+        <span class="main-time">{{flight.fromDate | date:'h:mm'}}</span>
+        <span>{{flight.fromDate | date:'zzz'}}</span>
       </div>
       <div class="country-name-block">
-        Dublin
+        {{flight.from.city}}
       </div>
     </div>
 
     <div class="flight-info-icon-block">
-      <div class="icon-time-block">{{hour}}h {{myDate | date:'mm'}}m</div>
+      <div class="icon-time-block">{{setDuration(flight.duration).hour}}h {{setDuration(flight.duration).minute | date:'mm'}}m</div>
       <div class="icon-block">
         <span class="line"></span>
         <mat-icon
@@ -31,20 +31,20 @@
 
     <div class="destination-time-block">
       <div class="date-block">
-        <span>Wed, 1 Mar 2023</span>
+        <span>{{flight.destinationDate | date:'EEE, d MMMM y'}}</span>
       </div>
       <div class="time-block">
-        <span>UTC+1</span>
-        <span class="main-time">12:00</span>
+        <span>{{flight.destinationDate | date:'zzz'}}</span>
+        <span class="main-time">{{flight.destinationDate | date:'h:mm'}}</span>
       </div>
       <div class="coutry-name-block">
-        Warsaw Modlin
+        {{flight.destination.city}}
       </div>
     </div>
 
     <div class="flight-number-block">
-      <span class="flight-number-title">Flight no.</span>
-      <span class="flight-number">FR 1925</span>
+      <div class="flight-number-title">Flight no.</div>
+      <div class="flight-number">{{flight.flightNumber}}</div>
     </div>
   </div>
 
@@ -53,17 +53,17 @@
   <div class="right-side">
     <div class="seats-block">
       <div class="price-info">
-        <div>100 seats</div>
+        <div>{{flight.seats}} seats</div>
         <div>available</div>
       </div>
       <div class="price-title">
         <p>Price</p>
-        <div class="price">$ 146.7</div>
+        <div class="price">$ {{flight.price}}</div>
       </div>
     </div>
     <div class="select-btn-block">
-      <button mat-raised-button class="select-btn" *ngIf="true">Select</button>
-      <button mat-stroked-button class="edit-btn" *ngIf="false">Edit</button>
+      <button mat-raised-button class="select-btn" *ngIf="checkSelect" (click)="selectFlight()">Select</button>
+      <button mat-stroked-button class="edit-btn" *ngIf="!checkSelect" (click)="selectFlight()">Edit</button>
     </div>
   </div>
 </div>

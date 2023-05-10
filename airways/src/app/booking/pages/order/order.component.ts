@@ -23,6 +23,8 @@ export class OrderComponent implements OnInit {
   selectedReturnFlight!:CarouselData;
 
   searchOrder$!:Observable<UserOrder>;
+  checkCarousel = true
+  checkReturnCarousel = true
 
   constructor(
     iconRegistry: MatIconRegistry,
@@ -38,26 +40,51 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
     const search = JSON.parse(localStorage.getItem('search_result')!);
-    this.searchService.getTicket({
+
+    const range = search.rangeDate
+    const obj = {
       from: search.from.id,
       destination: search.destination.id,
-      date: search.date,
+      date: undefined,
+      rangeDate: undefined,
       count:2
-    }).subscribe((res)=>{
+    }
+    if(range) {
+      obj.rangeDate = range
+    } else {
+      obj.date = search.date
+    }
+
+    this.searchService.getTicket(obj).subscribe((res)=>{
       this.flightArr = res.start
       this.returnFlight = res.end
-      this.selectedFlight = res.start[3]
-      this.selectedReturnFlight = res.end[3]
+      this.selectedFlight = res.start[2]
+      this.selectedReturnFlight = res.end[2]
     })
 
   }
 
-  chooseFlight(flight:CarouselData) {
-    console.log(flight);
+  chooseFlightCarousel(flight:CarouselData, type?:string) {
+    if(type) {
+      this.selectedFlight = flight
+    } else {
+      this.selectedReturnFlight = flight
+    }
+  }
 
+  chooseFlightSelect(check:boolean, type?: string) {
+    if(type) {
+      this.checkCarousel = check
+    } else {
+      this.checkReturnCarousel = check
+    }
   }
 
   nextSection() {
-    this.route.navigate(['/booking/order'])
+    if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel) {
+      this.route.navigate(['/booking/order'])
+    } else if(!this.checkCarousel) {
+      this.route.navigate(['/booking/order'])
+    }
   }
 }

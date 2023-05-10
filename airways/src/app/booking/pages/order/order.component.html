@@ -3,20 +3,20 @@
     <div class="order-body" *ngIf="flightArr.length">
       <div class="from-county">
         <app-order-title [direction]="'goTo'"></app-order-title>
-        <div class="carousel-block">
-          <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[2]" (selectedFlight)="chooseFlight($event)"></app-carousel>
+        <div class="carousel-block" *ngIf="checkCarousel">
+          <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[2]" (selectedFlight)="chooseFlightCarousel($event, 'from')"></app-carousel>
         </div>
         <div class="flight-info-block">
-          <app-select-flight [direction]="'goTo'"></app-select-flight>
+          <app-select-flight [direction]="'goTo'" [flight]="selectedFlight" (selectedFlight)="chooseFlightSelect($event, 'from')"></app-select-flight>
         </div>
       </div>
       <div class="destination-block" *ngIf="returnFlight.length">
         <app-order-title [direction]="'return'"></app-order-title>
-        <div class="carousel-block">
-          <app-carousel [flightList]="returnFlight" [chosenFlightDay]="returnFlight[2]" (selectedFlight)="chooseFlight($event)"></app-carousel>
+        <div class="carousel-block" *ngIf="checkReturnCarousel">
+          <app-carousel [flightList]="returnFlight" [chosenFlightDay]="returnFlight[2]" (selectedFlight)="chooseFlightCarousel($event)"></app-carousel>
         </div>
         <div class="flight-info-block">
-          <app-select-flight [direction]="'return'"></app-select-flight>
+          <app-select-flight [direction]="'return'"  [flight]="selectedReturnFlight" (selectedFlight)="chooseFlightSelect($event)"></app-select-flight>
         </div>
       </div>
     </div>
@@ -24,8 +24,10 @@
       <div class="btn-block">
         <button class="back-btn" mat-button [routerLink]="['/main']">Back</button>
         <button
-          class="next-btn"
-          color="primary"
+        color="primary"
+        class="next-btn"
+          [disabled]="(this.returnFlight.length && this.checkCarousel && this.checkReturnCarousel)"
+
           mat-raised-button
           (click)="nextSection()"
         >
