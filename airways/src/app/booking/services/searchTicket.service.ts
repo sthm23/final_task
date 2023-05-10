@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CarouselData } from "src/app/material/interfaces/interfaces";
 
 
 @Injectable({
@@ -12,6 +13,6 @@ export class SearchTicketService {
   constructor(private http: HttpClient) {}
 
   getTicket(body: any) {
-    return this.http.post(`${this.url}/country`, body);
+    return this.http.post<{start: CarouselData[], end: CarouselData[]}>(`${this.url}/airport`, body);
   }
 }

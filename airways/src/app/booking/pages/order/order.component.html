@@ -1,19 +1,19 @@
 <div class="order-block">
   <div class="container">
-    <div class="order-body">
+    <div class="order-body" *ngIf="flightArr.length">
       <div class="from-county">
         <app-order-title [direction]="'goTo'"></app-order-title>
         <div class="carousel-block">
-          <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[3]"></app-carousel>
+          <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[2]" (selectedFlight)="chooseFlight($event)"></app-carousel>
         </div>
         <div class="flight-info-block">
           <app-select-flight [direction]="'goTo'"></app-select-flight>
         </div>
       </div>
-      <div class="destination-block">
+      <div class="destination-block" *ngIf="returnFlight.length">
         <app-order-title [direction]="'return'"></app-order-title>
         <div class="carousel-block">
-          <app-carousel [flightList]="flightArr" [chosenFlightDay]="flightArr[1]"></app-carousel>
+          <app-carousel [flightList]="returnFlight" [chosenFlightDay]="returnFlight[2]" (selectedFlight)="chooseFlight($event)"></app-carousel>
         </div>
         <div class="flight-info-block">
           <app-select-flight [direction]="'return'"></app-select-flight>

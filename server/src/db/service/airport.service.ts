@@ -57,6 +57,7 @@ export class AirportService {
             const flight = Math.floor(Math.random() * 4) === 1;
             const price = Number(Math.ceil((Math.random() * item)) + Math.random().toFixed(2))
             return {
+                id: ind+1,
                 from: from,
                 fromDate: fromDate,
                 destination: dest,

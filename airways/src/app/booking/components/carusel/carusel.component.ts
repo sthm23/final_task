@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { no_reys } from './icon';
+import { CarouselData } from 'src/app/material/interfaces/interfaces';
 
 @Component({
   selector: 'app-carousel',
@@ -14,55 +15,38 @@ export class CaruselComponent implements OnInit {
 
   widthCounter = 0
 
-  days!: {day:Date, id:number, check: boolean}[];
-  @Input() flightList!: any[];
-  @Input() chosenFlightDay!: any;
+  @Input() flightList: CarouselData[] = [];
+  @Input() chosenFlightDay!: CarouselData;
+  @Output() selectedFlight: EventEmitter<CarouselData> = new EventEmitter();
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('no_reys', sanitizer.bypassSecurityTrustHtml(no_reys));
   }
 
   ngOnInit(): void {
-    this.days = this.createCarouselDates();
-    this.currentIndex = this.chosenFlightDay.id
+    console.log(this.flightList);
+    // this.currentIndex = this.chosenFlightDay.id
   }
 
-  selectCard(e:HTMLButtonElement, day:{day:Date, id:number}){
+  selectCard(e:HTMLButtonElement, day:CarouselData){
     this.currentIndex = day.id
     e.classList.add('active-card');
-  }
-
-  createDay(currentDay: Date, day:number) {
-    const now = new Date(currentDay);
-    const now2 = new Date(currentDay);
-    const yes = now2.setDate(now.getDate()+day);
-    return new Date(yes);
-  }
-
-  createCarouselDates() {
-    const currentDay = new Date(this.chosenFlightDay.from);
-    const yesterday = this.createDay(currentDay, -1);
-    const yesterday1 = this.createDay(currentDay, -2);
-    const tomorrow = this.createDay(currentDay, 1);
-    const tomorrow1 = this.createDay(currentDay, 2);
-    return [
-      {id:1, day: yesterday1, check: false},
-      {id:2, day: yesterday, check: false},
-      {id:3, day: currentDay, check: false},
-      {id:4, day: tomorrow, check: false},
-      {id:5, day: tomorrow1, check: false},
-      {id:6, day: currentDay, check: false},
-      {id:7, day: currentDay, check: false},
-    ]
+    this.selectedFlight.emit(day);
   }
 
   nextBtn(el:HTMLElement) {
-    this.widthCounter += 225
+    if(this.widthCounter === -900) {
+      return
+    }
+    this.widthCounter -= 225;
     el.style.left = this.widthCounter + 'px';
   }
 
   prevBtn(el:any) {
-    this.widthCounter -= 225;
+    if(this.widthCounter === 0) {
+      return
+    }
+    this.widthCounter += 225
     el.style.left = this.widthCounter + 'px';
   }
 }

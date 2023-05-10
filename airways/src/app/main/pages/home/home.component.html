@@ -12,8 +12,8 @@
         <mat-form-field appearance="outline">
           <mat-label>From</mat-label>
           <mat-select formControlName="from">
-            <mat-select-trigger>{{this.form.controls.from.value}}</mat-select-trigger>
-            <mat-option *ngFor="let airport of cities" [value]="airport.city">
+            <mat-select-trigger>{{this.form.controls.from.value?.city}}</mat-select-trigger>
+            <mat-option *ngFor="let airport of cities" [value]="airport">
               {{airport.city}} ({{airport.code}})
               <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
             </mat-option>
@@ -22,8 +22,8 @@
         <mat-form-field appearance="outline">
           <mat-label>Destination</mat-label>
           <mat-select formControlName="destination">
-            <mat-select-trigger>{{this.form.controls.destination.value}}</mat-select-trigger>
-            <mat-option *ngFor="let airport of cities" [value]="airport.city">
+            <mat-select-trigger>{{this.form.controls.destination.value?.city}}</mat-select-trigger>
+            <mat-option *ngFor="let airport of cities" [value]="airport">
               {{airport.city}} ({{airport.code}})
               <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
             </mat-option>

@@ -50,8 +50,8 @@ export enum CountryEnum {
   egypt = 'Egypt',
 }
 export interface SearchResult {
-  destination:string
-  from:string
+  destination:Airport
+  from:Airport
   passengers: {
     adults: number,
     child: number,
@@ -69,8 +69,8 @@ export type DropDownOptions = {
 }
 
 export interface SearchFormGroup {
-  from: FormControl<string | null>
-  destination: FormControl<string | null>
+  from: FormControl<any | null>
+  destination: FormControl<any | null>
   date: FormControl<Date | null>
   passengers: FormGroup<FormPassengers>
   rangeDate: FormGroup<{
@@ -156,4 +156,16 @@ type ModalType = 'login' | 'facebook' | 'google'
 export interface AuthModalResult {
   result: LoginWithSocial | LoginResult
   type: ModalType
+}
+
+export interface CarouselData {
+  id: number
+  destination: Airport
+  destinationDate: string
+  duration: number
+  flight: boolean
+  from: Airport
+  fromDate: string
+  price: number
+  seats: number
 }

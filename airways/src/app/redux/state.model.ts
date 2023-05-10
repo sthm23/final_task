@@ -1,3 +1,4 @@
+import { Airport } from "../material/interfaces/interfaces";
 
 
 export enum AirwaysActionsEnum {
@@ -41,8 +42,8 @@ export type OrderType = {
 
 
 export interface UserOrder2 {
-  from: string
-  destination: string
+  from: Airport
+  destination: Airport
   date?: Date
   rangeDate?: {
     start:Date,
@@ -52,8 +53,8 @@ export interface UserOrder2 {
 }
 
 export type UserOrder = Partial<{
-  from: string | null;
-  destination: string | null;
+  from: Airport | null;
+  destination: Airport | null;
   date: Date | null;
   passengers: Partial<{
       adults: number | null;

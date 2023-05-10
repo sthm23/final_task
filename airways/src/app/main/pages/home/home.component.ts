@@ -120,8 +120,8 @@ export class HomeComponent implements OnInit {
   ]
 
   form:FormGroup<SearchFormGroup> = new FormGroup({
-    from: new FormControl<string | null>(null, Validators.required),
-    destination: new FormControl<string | null>(null, Validators.required),
+    from: new FormControl<any | null>(null, Validators.required),
+    destination: new FormControl<any | null>(null, Validators.required),
     date: new FormControl<Date | null>(null, Validators.required),
     passengers: new FormGroup({
       adults: new FormControl<number>(0, [Validators.required, Validators.pattern(/[1-9]/)]),

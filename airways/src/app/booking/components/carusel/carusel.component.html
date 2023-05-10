@@ -5,19 +5,19 @@
     <div class="carousel-card-block">
       <div class="slider-wrapper" #wrapper>
         <button
-          *ngFor="let day of days; index as ind;"
+          *ngFor="let day of flightList; index as ind;"
           class="card"
           [ngClass]="{'active-card': day.id === currentIndex}"
           #el
           (click)="selectCard(el, day)"
-          [disabled]="day.check"
+          [disabled]="day.flight"
           >
-            <span class="date-month">{{day.day | date:'dd MMM' | uppercase}}</span>
-            <span class="date-week">{{day.day | date:'EEEE' | uppercase}}</span>
-            <span class="price" *ngIf="!day.check">$110</span>
+            <span class="date-month">{{day.fromDate | date:'dd MMM' | uppercase}}</span>
+            <span class="date-week">{{day.fromDate | date:'EEEE' | uppercase}}</span>
+            <span class="price" *ngIf="!day.flight">{{day.price.toString()}}$</span>
             <mat-icon
               class="icon-airplane"
-              *ngIf="day.check"
+              *ngIf="day.flight"
               svgIcon="no_reys"
               aria-hidden="false"
               aria-label="no reys SVG icon">
