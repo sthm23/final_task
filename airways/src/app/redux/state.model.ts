@@ -12,6 +12,7 @@ export enum AirwaysActionsEnum {
   register = '[User register] user',
   loginWithSocial = '[Login with social] user',
   search = '[Search flight] search',
+  ticket = '[Select ticket] ticket',
 }
 
 
@@ -70,6 +71,7 @@ export type UserOrder = Partial<{
 
 export interface AirwaysState {
   user: User | null;
+  ticket: SelectedTickets | null;
   searchOrder: UserOrder | null;
   currency: CurrencyType
   typeOfDate: DateType
@@ -80,4 +82,23 @@ export const initialState: AirwaysState = {
   typeOfDate: 'MM/DD/YYYY',
   user: null,
   searchOrder: null,
+  ticket: null,
 };
+
+export interface SelectedTickets {
+ from: CarouselData
+ return?: CarouselData
+}
+
+export interface CarouselData {
+  id: number
+  destination: Airport
+  destinationDate: string
+  duration: number
+  flight: boolean
+  from: Airport
+  flightNumber: string
+  fromDate: string
+  price: number
+  seats: number
+}

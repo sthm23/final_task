@@ -10,7 +10,7 @@ import { User, UserOrder } from 'src/app/redux/state.model';
 import { SearchTicketService } from '../../services/searchTicket.service';
 import { AuthModalResult, CarouselData, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { enterMain, loginAction } from 'src/app/redux/actions/airways.action';
+import { chooseTicketAction, enterMain, loginAction } from 'src/app/redux/actions/airways.action';
 import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
 
 @Component({
@@ -101,8 +101,20 @@ export class OrderComponent implements OnInit {
 
   nextSection() {
     if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel && this.user !== null) {
+      this.store.dispatch(chooseTicketAction({
+        ticket: {
+          from: this.selectedFlight,
+          return: this.selectedReturnFlight
+        }
+      }))
       this.route.navigate(['/booking/order'])
     } else if(!this.checkCarousel && this.user !== null) {
+      this.store.dispatch(chooseTicketAction({
+        ticket: {
+          from: this.selectedFlight,
+          return: this.selectedReturnFlight
+        }
+      }))
       this.route.navigate(['/booking/order'])
     } else {
       this.openAuthDialog()
@@ -137,6 +149,12 @@ export class OrderComponent implements OnInit {
     localStorage.setItem('user_name', JSON.stringify(data.user));
     localStorage.setItem('ac_token', data.accessToken);
     localStorage.setItem('ref_token', data.refreshToken);
+    this.store.dispatch(chooseTicketAction({
+      ticket: {
+        from: this.selectedFlight,
+        return: this.selectedReturnFlight
+      }
+    }))
     this.route.navigate(['/booking/order'])
   }
 }

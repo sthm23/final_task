@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectTicket } from 'src/app/redux/selectors/airways.selector';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -30,9 +33,17 @@ export class ConfigPassengersComponent implements OnInit {
     { number: '+62' },
   ];
 
-  passengersCard: PassengersCard[] = [{ title: 'adult' }, { title: 'child' }, { title: 'infant' }];
+  passengersCard: PassengersCard[] = [
+    { title: 'adult' },
+    { title: 'child' },
+    { title: 'infant' }
+  ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private route: Router
+    ) { }
 
   ngOnInit() {
     this.createForm = new FormGroup({
@@ -64,9 +75,16 @@ export class ConfigPassengersComponent implements OnInit {
       })
     });
     this.contact = this.createForm.get('contact') as FormGroup;
+
+    this.store.select(selectTicket).subscribe(ticket=>{
+      console.log(ticket);
+    })
   }
 
   onSubmit() {
-    console.log(this.createForm);
+    console.log(this.createForm.value);
+    if(this.createForm.valid) {
+      this.route.navigate(['/booking/summary'])
+    }
   }
 }
