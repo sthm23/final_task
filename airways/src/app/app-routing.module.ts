@@ -14,7 +14,7 @@ const routes: Routes = [
         path: 'main', loadChildren: ()=> import('./main/main.module').then(m=>m.MainModule)
       },
       {
-        path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule), canActivate: [AuthGuard]
+        path: 'booking', loadChildren: () => import('./booking/booking.module').then(m=>m.BookingModule)
       },
       {
         path: 'shop', loadChildren: () => import('./shopping/shopping.module').then(m=>m.ShoppingModule), canActivate: [AuthGuard]

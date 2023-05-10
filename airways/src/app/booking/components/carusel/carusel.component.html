@@ -7,7 +7,11 @@
         <button
           *ngFor="let day of flightList; index as ind;"
           class="card"
-          [ngClass]="{'active-card': day.id === currentIndex}"
+          [ngClass]="{
+            'active-card-green': day.id === currentIndex && day.seats <= 130 && day.seats >= 130/2,
+            'active-card-yellow': day.id === currentIndex && day.seats <= 130/2 && day.seats >= 11,
+            'active-card-red': day.id === currentIndex && day.seats <= 10
+          }"
           #el
           (click)="selectCard(el, day)"
           [disabled]="day.flight"

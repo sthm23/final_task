@@ -52,7 +52,13 @@
 
   <div class="right-side">
     <div class="seats-block">
-      <div class="price-info">
+      <div class="price-info"
+      [ngClass]="{
+        'bg-green': flight.seats <= 130 && flight.seats >= 130/2,
+        'bg-yellow': flight.seats <= 130/2 && flight.seats >= 11,
+        'bg-red': flight.seats <= 10
+      }"
+      >
         <div>{{flight.seats}} seats</div>
         <div>available</div>
       </div>

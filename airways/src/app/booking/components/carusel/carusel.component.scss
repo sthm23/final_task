@@ -135,9 +135,71 @@
       }
     }
   }
-  & .active-card{
+  & .active-card-yellow{
     height: 83px;
     border-bottom: 4px solid #F1C933;
+    transition: all 0.3s;
+    & .date-month{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 20px;
+      color: #11397E;
+    }
+
+    & .date-week{
+      display: block;
+      @include textFont();
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #74767A;
+    }
+
+    & .price{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 36px;
+      color: #11397E;
+    }
+  }
+  & .active-card-green{
+    height: 83px;
+    border-bottom: 4px solid #7F8906;
+    transition: all 0.3s;
+    & .date-month{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 20px;
+      color: #11397E;
+    }
+
+    & .date-week{
+      display: block;
+      @include textFont();
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #74767A;
+    }
+
+    & .price{
+      display: block;
+      @include textFont();
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 36px;
+      color: #11397E;
+    }
+  }
+  & .active-card-red{
+    height: 83px;
+    border-bottom: 4px solid #B3261E;
     transition: all 0.3s;
     & .date-month{
       display: block;

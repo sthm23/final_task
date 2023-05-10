@@ -25,12 +25,24 @@ export class CaruselComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.flightList);
+  }
 
+  checkStyle(day: CarouselData, currentIndex: number) {
+    if(day.id === currentIndex && day.seats <= 130 && day.seats >= 130/2) {
+      return 1
+    }
+    if(day.id === currentIndex && day.seats <= 130/2 && day.seats >= 11) {
+      return 2
+    }
+    if(day.id === currentIndex && day.seats <= 10) {
+      return 3
+    }
+   return false
   }
 
   selectCard(e:HTMLButtonElement, day:CarouselData){
     this.currentIndex = day.id
-    e.classList.add('active-card');
+    // e.classList.add('active-card');
     this.selectedFlight.emit(day);
   }
 
