@@ -1,7 +1,7 @@
 <div class="carousel-block">
   <div class="carousel-wrapper">
-    <button class="btn left-btn" (click)="prevBtn(wrapper)"><mat-icon>arrow_back_ios</mat-icon></button>
-    <button class="btn right-btn" (click)="nextBtn(wrapper)"><mat-icon>arrow_forward_ios</mat-icon></button>
+    <button class="btn left-btn" [ngClass]="{'disable':widthCounter === 0}" (click)="prevBtn(wrapper)"><mat-icon>arrow_back_ios</mat-icon></button>
+    <button class="btn right-btn" [ngClass]="{'disable':widthCounter === -900}" (click)="nextBtn(wrapper)"><mat-icon>arrow_forward_ios</mat-icon></button>
     <div class="carousel-card-block">
       <div class="slider-wrapper" #wrapper>
         <button
