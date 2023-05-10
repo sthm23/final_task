@@ -15,6 +15,7 @@ import { OrderTitleComponent } from './components/order-title/order-title.compon
 import { PassengersCardComponent } from './components/passengers-card/passengers-card.component';
 import { SummaryCardComponent } from './components/summary-card/summary-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from '../core/auth.guard';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             path: '', component: OrderComponent,
           },
           {
-            path: 'order', component: ConfigPassengersComponent,
+            path: 'order', component: ConfigPassengersComponent, canActivate: [AuthGuard]
           },
           {
             path: 'summary', component: OrderSummaryComponent,

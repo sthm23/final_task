@@ -5,10 +5,13 @@ import { airplane_icon, airport_Icon } from './icon';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectSearchOrder } from 'src/app/redux/selectors/airways.selector';
-import { UserOrder } from 'src/app/redux/state.model';
+import { selectSearchOrder, selectUser } from 'src/app/redux/selectors/airways.selector';
+import { User, UserOrder } from 'src/app/redux/state.model';
 import { SearchTicketService } from '../../services/searchTicket.service';
-import { CarouselData } from 'src/app/material/interfaces/interfaces';
+import { AuthModalResult, CarouselData, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { enterMain, loginAction } from 'src/app/redux/actions/airways.action';
+import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-order',
@@ -27,12 +30,15 @@ export class OrderComponent implements OnInit {
   checkCarousel = true
   checkReturnCarousel = true
 
+  user:User | null = null;
+
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private route: Router,
     private store: Store,
     private searchService: SearchTicketService,
+    private dialog: MatDialog,
     ) {
     iconRegistry.addSvgIconLiteral('airplane_icon', sanitizer.bypassSecurityTrustHtml(airplane_icon));
     iconRegistry.addSvgIconLiteral('airport_Icon', sanitizer.bypassSecurityTrustHtml(airport_Icon));
@@ -65,6 +71,16 @@ export class OrderComponent implements OnInit {
       this.selectedReturnFlight = res.end[2]
     })
 
+    const user_json = localStorage.getItem('user_name');
+    let user: User | null = null
+    if(user_json) {
+      user = JSON.parse(user_json) as User;
+    }
+    this.store.dispatch(enterMain({user}));
+    this.store.select(selectUser).subscribe(user=>{
+      this.user = user
+    })
+
   }
 
   chooseFlightCarousel(flight:CarouselData, type?:string) {
@@ -84,10 +100,43 @@ export class OrderComponent implements OnInit {
   }
 
   nextSection() {
-    if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel) {
+    if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel && this.user !== null) {
       this.route.navigate(['/booking/order'])
-    } else if(!this.checkCarousel) {
+    } else if(!this.checkCarousel && this.user !== null) {
       this.route.navigate(['/booking/order'])
+    } else {
+      this.openAuthDialog()
     }
+  }
+
+  openAuthDialog() {
+    const dialogRef = this.dialog.open(AuthModalComponent);
+
+    dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
+      if(answer) {
+        const {type, result} = answer;
+        switch (type) {
+          case 'facebook':
+            this.setUserDataToLocalStorage(result)
+            break;
+          case 'google':
+            this.setUserDataToLocalStorage(result)
+            break;
+          case 'login':
+            this.setUserDataToLocalStorage(result)
+            break;
+          default:
+              break;
+        }
+      }
+    });
+  }
+
+  setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
+    this.store.dispatch(loginAction({user: data.user}))
+    localStorage.setItem('user_name', JSON.stringify(data.user));
+    localStorage.setItem('ac_token', data.accessToken);
+    localStorage.setItem('ref_token', data.refreshToken);
+    this.route.navigate(['/booking/order'])
   }
 }
