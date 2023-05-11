@@ -71,11 +71,11 @@ export type DropDownOptions = {
 export interface SearchFormGroup {
   from: FormControl<any | null>
   destination: FormControl<any | null>
-  date: FormControl<Date | null>
+  date: FormControl<string | null>
   passengers: FormGroup<FormPassengers>
   rangeDate: FormGroup<{
-    start: FormControl<Date | null>;
-    end: FormControl<Date | null>;
+    start: FormControl<string | null>;
+    end: FormControl<string | null>;
   }>
 }
 

@@ -45,10 +45,10 @@ export type OrderType = {
 export interface UserOrder2 {
   from: Airport
   destination: Airport
-  date?: Date
+  date?: string
   rangeDate?: {
-    start:Date,
-    end:Date
+    start:string,
+    end:string
   }
   passengers: OrderType;
 }
@@ -56,15 +56,15 @@ export interface UserOrder2 {
 export type UserOrder = Partial<{
   from: Airport | null;
   destination: Airport | null;
-  date: Date | null;
+  date: string | null;
   passengers: Partial<{
       adults: number | null;
       child: number | null;
       infant: number | null;
   }>;
   rangeDate: Partial<{
-      start: Date | null;
-      end: Date | null;
+      start: string | null;
+      end: string | null;
   }>;
 }>
 

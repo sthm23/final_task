@@ -32,25 +32,20 @@
       </div>
 
       <div class="date-pass">
-        <div class="date-pick-block" *ngIf="flightType === '1'" (click)="openDateBlock(multiPicker)">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" *ngIf="flightType === '1'">
             <mat-label>Dates</mat-label>
-            <mat-date-range-input formGroupName="rangeDate" [rangePicker]="multiPicker" [disabled]="true">
-              <input matStartDate formControlName="start" placeholder="Start date">
-              <input matEndDate formControlName="end" placeholder="End date">
+            <mat-date-range-input formGroupName="rangeDate" [rangePicker]="multiPicker" (click)="openDateBlock(multiPicker)">
+              <input matStartDate formControlName="start" placeholder="Start date" [readOnly]="true">
+              <input matEndDate formControlName="end" placeholder="End date" [readOnly]="true">
             </mat-date-range-input>
 
             <mat-datepicker-toggle matIconSuffix [for]="multiPicker"></mat-datepicker-toggle>
             <mat-date-range-picker #multiPicker disabled="false"></mat-date-range-picker>
-
-            <!-- <mat-error *ngIf="form.controls.rangeDate.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
-            <!-- <mat-error *ngIf="form.controls.get('rangeDate').start.hasError('matStartDateInvalid')">Invalid start date</mat-error> -->
           </mat-form-field>
-        </div>
 
           <mat-form-field appearance="outline" *ngIf="flightType === '2'" >
             <mat-label>Date</mat-label>
-            <input matInput [readonly]="true" [matDatepicker]="picker" formControlName="date" (click)="openDateBlock(picker)">
+            <input matInput [readonly]="false" [matDatepicker]="picker" formControlName="date" (click)="openDateBlock(picker)">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker disabled="false"></mat-datepicker>
           </mat-form-field>

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   form:FormGroup<SearchFormGroup> = new FormGroup({
     from: new FormControl<any | null>(null, Validators.required),
     destination: new FormControl<any | null>(null, Validators.required),
-    date: new FormControl<Date | null>(null, Validators.required),
+    date: new FormControl<string | null>(null, Validators.required),
     passengers: new FormGroup({
       adults: new FormControl<number>(0, [Validators.required, Validators.pattern(/[1-9]/)]),
       child: new FormControl<number>(0, [Validators.required, Validators.pattern(/[0-9]/)]),
@@ -36,8 +36,8 @@ export class HomeComponent implements OnInit {
     }),
 
     rangeDate: new FormGroup({
-      start: new FormControl<Date | null>(null, Validators.required),
-      end: new FormControl<Date | null>(null, Validators.required),
+      start: new FormControl<string | null>(null, Validators.required),
+      end: new FormControl<string | null>(null, Validators.required),
     })
   });
 
