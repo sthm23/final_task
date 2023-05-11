@@ -101,6 +101,7 @@ export class OrderComponent implements OnInit {
 
   nextSection() {
     if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel && this.user !== null) {
+      localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
       this.store.dispatch(chooseTicketAction({
         ticket: {
           from: this.selectedFlight,
@@ -109,6 +110,7 @@ export class OrderComponent implements OnInit {
       }))
       this.route.navigate(['/booking/order'])
     } else if(!this.checkCarousel && this.user !== null) {
+      localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
       this.store.dispatch(chooseTicketAction({
         ticket: {
           from: this.selectedFlight,
@@ -149,6 +151,7 @@ export class OrderComponent implements OnInit {
     localStorage.setItem('user_name', JSON.stringify(data.user));
     localStorage.setItem('ac_token', data.accessToken);
     localStorage.setItem('ref_token', data.refreshToken);
+    localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
     this.store.dispatch(chooseTicketAction({
       ticket: {
         from: this.selectedFlight,

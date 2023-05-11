@@ -54,12 +54,12 @@
       >
     </mat-form-field>
 
-    <mat-button-toggle-group formControlName="gender" name="favoriteColor">
-      <mat-button-toggle value="male" checked>
-        <mat-icon>check</mat-icon> Male
+    <mat-button-toggle-group formControlName="gender" name="gender" aria-label="gender">
+      <mat-button-toggle value="male">
+        <mat-icon style="width: 15px; height: 15px; font-size: 15px;" *ngIf="createForm.get('gender')?.value === 'male'">check</mat-icon> Male
       </mat-button-toggle>
       <mat-button-toggle value="female">
-        <mat-icon>check</mat-icon> Female
+        <mat-icon style="width: 15px; height: 15px; font-size: 15px;" *ngIf="createForm.get('gender')?.value === 'female'">check</mat-icon> Female
       </mat-button-toggle>
     </mat-button-toggle-group>
     <mat-form-field appearance="outline">
