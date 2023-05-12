@@ -159,10 +159,10 @@ export class SearchFlightComponent implements OnInit {
     this.flightDate = this.searchData?.rangeDate?.start! || this.searchData?.date;
     this.flightBackDate = this.searchData?.rangeDate?.end;
     this.dropdownOptions = this.searchData?.passengers!
-    this.cityFrom = this.searchData?.from!
-    this.cityDestination = this.searchData?.destination!
-    this.form.controls.from.setValue(this.searchData?.from);
-    this.form.controls.dest.setValue(this.searchData?.destination);
+    this.cityFrom = this.searchData?.from.city!
+    this.cityDestination = this.searchData?.destination.city!
+    this.form.controls.from.setValue(this.searchData?.from?.city);
+    this.form.controls.dest.setValue(this.searchData?.destination?.city);
     this.form.controls.date.setValue(this.searchData?.date || this.searchData?.rangeDate)
     this.form.controls.rangeDate.controls.start.setValue(this.searchData?.rangeDate?.start)
     this.form.controls.rangeDate.controls.end.setValue(this.searchData?.rangeDate?.end)

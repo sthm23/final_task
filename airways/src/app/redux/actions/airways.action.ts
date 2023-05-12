@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AirwaysActionsEnum, CurrencyType, DateType, User, UserOrder } from '../state.model';
+import { AirwaysActionsEnum, CurrencyType, DateType, SelectedTickets, User, UserOrder } from '../state.model';
 
 
 export const enterBooking = createAction(AirwaysActionsEnum.enterBooking);
@@ -40,3 +40,9 @@ export const searchAction = createAction(
   AirwaysActionsEnum.search,
   props<{ searchResult: UserOrder }>(),
 );
+
+
+export const chooseTicketAction = createAction(
+  AirwaysActionsEnum.ticket,
+  props<{ ticket: SelectedTickets }>(),
+)

@@ -3,15 +3,12 @@ import { MatRadioChange } from '@angular/material/radio';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
-import { Airport, AuthModalResult, DropDownOptions, LoginResult, LoginWithSocial, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
+import { Airport, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
 import { Router } from '@angular/router';
-import { selectSearchOrder, selectUser } from 'src/app/redux/selectors/airways.selector';
+import { selectSearchOrder } from 'src/app/redux/selectors/airways.selector';
 import { Store } from '@ngrx/store';
-import { enterMain, loginAction, searchAction } from 'src/app/redux/actions/airways.action';
-import { TypeOfPassengersName, User } from 'src/app/redux/state.model';
-import { AuthModalComponent } from 'src/app/core/auth-modal/auth-modal.component';
-import { MatDialog } from '@angular/material/dialog';
-
+import { searchAction } from 'src/app/redux/actions/airways.action';
+import { TypeOfPassengersName } from 'src/app/redux/state.model';
 
 @Component({
   selector: 'app-home',
@@ -26,103 +23,12 @@ export class HomeComponent implements OnInit {
     infant: 0,
   }
 
-  user:User | null = null;
-
-  cities: Airport[] = [
-    {
-      "id": 1,
-      "code": "AAA",
-      "name": "Anaa Airport",
-      "city": "Anaa",
-      "state": "Tuamotu-Gambier",
-      "country": "French Polynesia"
-  },
-  {
-      "id": 2,
-      "code": "AAE",
-      "name": "El Mellah Airport",
-      "city": "El Tarf",
-      "state": "Annaba",
-      "country": "Algeria"
-  },
-  {
-      "id": 3,
-      "code": "AAL",
-      "name": "Aalborg Airport",
-      "city": "Norresundby",
-      "state": "Nordjylland",
-      "country": "Denmark"
-  },
-  {
-      "id": 4,
-      "code": "AAM",
-      "name": "Mala Mala",
-      "city": "Mala Mala",
-      "state": "",
-      "country": "South Africa"
-  },
-  {
-      "id": 5,
-      "code": "AAN",
-      "name": "Al Ain Airport",
-      "city": "Ayn al Faydah",
-      "state": "Abu Dhabi",
-      "country": "United Arab Emirates"
-  },
-  {
-      "id": 6,
-      "code": "AAQ",
-      "name": "Olkhovka Airport",
-      "city": "Novorossiysk",
-      "state": "Krasnodarskiy Kray",
-      "country": "Russia"
-  },
-  {
-      "id": 7,
-      "code": "AAR",
-      "name": "Tirstrup Airport",
-      "city": "Kolind",
-      "state": "Midtjylland",
-      "country": "Denmark"
-  },
-  {
-      "id": 8,
-      "code": "AAT",
-      "name": "Altay Airport",
-      "city": "Altay",
-      "state": "Xinjiang",
-      "country": "China"
-  },
-  {
-      "id": 9,
-      "code": "AAX",
-      "name": "Romeu Zuma Airport",
-      "city": "Araxá",
-      "state": "Minas Gerais",
-      "country": "Brazil"
-  },
-  {
-      "id": 10,
-      "code": "AAY",
-      "name": "Al Gaidah Airport",
-      "city": "Al Ghaydah",
-      "state": "Hadramawt",
-      "country": "Yemen"
-  },
-  {
-      "id": 11,
-      "code": "ABA",
-      "name": "Abakan",
-      "city": "Abakan",
-      "state": "Khakasiya",
-      "country": "Russian Federation"
-  },
-  ]
+  cities: Airport[] = []
 
   form:FormGroup<SearchFormGroup> = new FormGroup({
-    from: new FormControl<string | null>(null, Validators.required),
-    destination: new FormControl<string | null>(null, Validators.required),
-    date: new FormControl<Date | null>(null, Validators.required),
+    from: new FormControl<any | null>(null, Validators.required),
+    destination: new FormControl<any | null>(null, Validators.required),
+    date: new FormControl<string | null>(null, Validators.required),
     passengers: new FormGroup({
       adults: new FormControl<number>(0, [Validators.required, Validators.pattern(/[1-9]/)]),
       child: new FormControl<number>(0, [Validators.required, Validators.pattern(/[0-9]/)]),
@@ -130,8 +36,8 @@ export class HomeComponent implements OnInit {
     }),
 
     rangeDate: new FormGroup({
-      start: new FormControl<Date | null>(null, Validators.required),
-      end: new FormControl<Date | null>(null, Validators.required),
+      start: new FormControl<string | null>(null, Validators.required),
+      end: new FormControl<string | null>(null, Validators.required),
     })
   });
 
@@ -141,25 +47,16 @@ export class HomeComponent implements OnInit {
     private route: Router,
     private store: Store,
     private httpService: HttpRequestService,
-    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.httpService.getAllAirport().subscribe(airports=>{
-      // this.cities = airports
+      this.cities = airports
     })
 
     this.form.controls.date.disable();
     this.form.controls.rangeDate.enable();
-    const user_json = localStorage.getItem('user_name');
-    let user: User | null = null
-    if(user_json) {
-      user = JSON.parse(user_json) as User;
-    }
-    this.store.dispatch(enterMain({user}));
-    this.store.select(selectUser).subscribe(user=>{
-      this.user = user
-    })
+
     this.store.select(selectSearchOrder).subscribe(item=>{
       if(item) {
         const {from, date, destination, passengers, rangeDate} = item;
@@ -204,46 +101,11 @@ export class HomeComponent implements OnInit {
   }
 
   submitSearch(){
-    if(this.form.valid && this.user !== null) {
+    if(this.form.valid) {
       localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
       this.route.navigate(['/booking'])
-    } else if(this.form.valid && this.user === null) {
-      localStorage.setItem('search_result', JSON.stringify(this.form.value))
-      this.openAuthDialog()
     }
-
-  }
-
-  openAuthDialog() {
-    const dialogRef = this.dialog.open(AuthModalComponent);
-
-    dialogRef.afterClosed().subscribe((answer: AuthModalResult | undefined) => {
-      if(answer) {
-        const {type, result} = answer;
-        switch (type) {
-          case 'facebook':
-            this.setUserDataToLocalStorage(result)
-            break;
-          case 'google':
-            this.setUserDataToLocalStorage(result)
-            break;
-          case 'login':
-            this.setUserDataToLocalStorage(result)
-            break;
-          default:
-              break;
-        }
-      }
-    });
-  }
-
-  setUserDataToLocalStorage(data:LoginResult | LoginWithSocial) {
-    this.store.dispatch(loginAction({user: data.user}))
-    localStorage.setItem('user_name', JSON.stringify(data.user));
-    localStorage.setItem('ac_token', data.accessToken);
-    localStorage.setItem('ref_token', data.refreshToken);
-    this.route.navigate(['/booking'])
   }
 
   flipFlight() {

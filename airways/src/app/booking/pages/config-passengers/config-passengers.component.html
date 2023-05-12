@@ -20,7 +20,8 @@
         <app-passengers-card
           *ngFor="let passenger of passengersCard"
           [passenger]="passenger.title"
-        ></app-passengers-card>
+          ></app-passengers-card>
+          <!-- [form]="createForm.get(passenger.title)" -->
 
         <h3 class="contact-title">
           <mat-icon fontIcon="contact_page"></mat-icon> Contact details
@@ -34,9 +35,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Country code</mat-label>
               <mat-select formControlName="countryCode" required>
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let phone of numbers" [value]="phone">
-                  {{ phone.number }}
+                <mat-option *ngFor="let phone of numbers$ | async" [value]="phone">
+                  {{ phone.name }} ({{phone.code}})
                 </mat-option>
               </mat-select>
               <mat-error
@@ -80,7 +80,14 @@
       <div class="order-footer">
         <div class="btn-block">
           <button mat-button [routerLink]="['/booking']" class="back-btn" >Back</button>
-          <button type="button" class="next-btn" color="primary" mat-raised-button [routerLink]="['/booking/summary']">
+          <button
+          type="button"
+          class="next-btn"
+          color="primary"
+          [disabled]="createForm.invalid"
+          mat-raised-button
+          (click)="onSubmit()"
+          >
             Continue
           </button>
         </div>

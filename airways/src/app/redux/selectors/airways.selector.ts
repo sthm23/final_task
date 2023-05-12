@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AirwaysState, User } from '../state.model';
+import { AirwaysState, SelectedTickets, User } from '../state.model';
 
 
 export const selectSharedCardsState = createFeatureSelector<AirwaysState>('airwaysState');
@@ -25,7 +25,10 @@ export const selectSearchOrder = createSelector(
   selectSharedCardsState,
   (state: AirwaysState) => state.searchOrder
 )
-
+export const selectTicketState = createSelector(
+  selectSharedCardsState,
+  (state: AirwaysState):SelectedTickets | null => state.ticket
+)
 
 
 /* this is selector to components */
@@ -41,5 +44,9 @@ export const selectCurrency = createSelector(
 
 export const selectUser = createSelector(
   selectUserState,
+  selectDates,
+);
+export const selectTicket = createSelector(
+  selectTicketState,
   selectDates,
 );

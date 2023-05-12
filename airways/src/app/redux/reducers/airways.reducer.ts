@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { enterMain, enterBooking, selectCurrencyAction, selectTypeOfDateAction, searchAction, enterAuth, loginAction, registerAction, loginWithSocialAction } from '../actions/airways.action';
+import { enterMain, enterBooking, selectCurrencyAction, selectTypeOfDateAction, searchAction, enterAuth, loginAction, registerAction, loginWithSocialAction, chooseTicketAction } from '../actions/airways.action';
 import { initialState } from '../state.model';
 
 
@@ -44,4 +44,8 @@ export const airwaysReducer = createReducer(
     ...state,
     user: {...action.user, id: 'loginWithSocial'}
   })),
+  on(chooseTicketAction, (state, action) => ({
+    ...state,
+    ticket: action.ticket
+  }))
 );

@@ -1,23 +1,27 @@
 <div class="carousel-block">
   <div class="carousel-wrapper">
-    <button class="btn left-btn" (click)="prevBtn(wrapper)"><mat-icon>arrow_back_ios</mat-icon></button>
-    <button class="btn right-btn" (click)="nextBtn(wrapper)"><mat-icon>arrow_forward_ios</mat-icon></button>
+    <button class="btn left-btn" [ngClass]="{'disable':widthCounter === 0}" (click)="prevBtn(wrapper)"><mat-icon>arrow_back_ios</mat-icon></button>
+    <button class="btn right-btn" [ngClass]="{'disable':widthCounter === -900}" (click)="nextBtn(wrapper)"><mat-icon>arrow_forward_ios</mat-icon></button>
     <div class="carousel-card-block">
       <div class="slider-wrapper" #wrapper>
         <button
-          *ngFor="let day of days; index as ind;"
+          *ngFor="let day of flightList; index as ind;"
           class="card"
-          [ngClass]="{'active-card': day.id === currentIndex}"
+          [ngClass]="{
+            'active-card-green': day.id === currentIndex && day.seats <= 130 && day.seats >= 130/2,
+            'active-card-yellow': day.id === currentIndex && day.seats <= 130/2 && day.seats >= 11,
+            'active-card-red': day.id === currentIndex && day.seats <= 10
+          }"
           #el
           (click)="selectCard(el, day)"
-          [disabled]="day.check"
+          [disabled]="day.flight"
           >
-            <span class="date-month">{{day.day | date:'dd MMM' | uppercase}}</span>
-            <span class="date-week">{{day.day | date:'EEEE' | uppercase}}</span>
-            <span class="price" *ngIf="!day.check">$110</span>
+            <span class="date-month">{{day.fromDate | date:'dd MMM' | uppercase}}</span>
+            <span class="date-week">{{day.fromDate | date:'EEEE' | uppercase}}</span>
+            <span class="price" *ngIf="!day.flight">{{day.price.toString()}}$</span>
             <mat-icon
               class="icon-airplane"
-              *ngIf="day.check"
+              *ngIf="day.flight"
               svgIcon="no_reys"
               aria-hidden="false"
               aria-label="no reys SVG icon">

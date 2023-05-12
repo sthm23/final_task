@@ -117,6 +117,9 @@
     line-height: 20px;
     letter-spacing: 0.1px;
     color: #ffffff;
+    &:disabled {
+      background-color: #cacaca;
+    }
   }
 
   & .back-btn {

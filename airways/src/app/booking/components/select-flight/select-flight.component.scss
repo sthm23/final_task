@@ -51,6 +51,7 @@ $highlight-gradient: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
   & span {
     @include selectFont();
     letter-spacing: 0.5px;
+    font-size: 15px;
   }
 }
 
@@ -65,7 +66,7 @@ $highlight-gradient: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
   & .main-time{
     @include selectFont();
     font-weight: 700;
-    font-size: 30px;
+    font-size: 28px;
     line-height: 36px;
     color: #000000;
   }
@@ -139,8 +140,8 @@ $highlight-gradient: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
   flex-direction: column;
   align-items: flex-end;
   width: 133px;
-  background: rgba(241, 201, 51, 0.3);
   border-radius: 2px;
+
   & div {
     @include selectFont();
     font-weight: 700;
@@ -149,6 +150,15 @@ $highlight-gradient: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
     color: #454A53;
     padding: 4px 8px;
   }
+}
+.bg-yellow {
+  background: rgba(241, 201, 51, 0.3);
+}
+.bg-green {
+  background-color: #7e890650;
+}
+.bg-red {
+  background: rgba(179, 38, 30, 0.3);
 }
 
 .price-title {
@@ -164,7 +174,7 @@ $highlight-gradient: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
   }
   .price{
     font-weight: 700;
-    font-size: 30px;
+    font-size: 28px;
     line-height: 36px;
     color: #11397E;
   }

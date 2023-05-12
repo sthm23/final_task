@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit {
     // console.log(searchResult);
 
     const ticket = this.searchTicket.getTicket(searchResult);
-
-
   }
 
 }

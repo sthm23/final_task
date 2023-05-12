@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-passengers-card',
@@ -8,7 +8,10 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 })
 export class PassengersCardComponent implements OnInit {
   @Input() passenger!: string;
+  @Input() form!: FormControl;
   createForm!: FormGroup
+
+
 
   constructor(private rootFormGroup: FormGroupDirective) { }
 

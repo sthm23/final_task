@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CarouselData } from 'src/app/material/interfaces/interfaces';
 
 @Component({
   selector: 'app-order-title',
@@ -8,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class OrderTitleComponent {
 
   @Input() direction!: string;
+  @Input() flight!: CarouselData;
 }

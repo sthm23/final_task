@@ -5,6 +5,9 @@
   font-style: normal;
 }
 
+.order-block{
+  min-height: 80vh;
+}
 
 .order-body {
   padding-top: 40px;
@@ -35,6 +38,9 @@
     line-height: 20px;
     letter-spacing: 0.1px;
     color: #FFFFFF;
+    &:disabled {
+      background-color: #cacaca;
+    }
   }
 
   & .back-btn {
