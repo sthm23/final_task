@@ -18,8 +18,10 @@
         </div>
 
         <app-passengers-card
-          *ngFor="let passenger of passengersCard"
-          [passenger]="passenger.title"
+          *ngFor="let passenger of passengersCard; let i=index"
+          [passenger]="passenger"
+          [index]="i"
+          [createForm]="createForm"
           ></app-passengers-card>
           <!-- [form]="createForm.get(passenger.title)" -->
 
