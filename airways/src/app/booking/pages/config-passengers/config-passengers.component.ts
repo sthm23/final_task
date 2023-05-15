@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectSearchOrder, selectTicket } from 'src/app/redux/selectors/airways.selector';
 import { TypeOfPassengersName } from 'src/app/redux/state.model';
 import { SearchTicketService } from '../../services/searchTicket.service';
+import { DropDownOptions, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -16,8 +17,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 interface PhoneNumber {
   number: string;
 }
-interface PassengersCard {
+export interface PassengersCard {
   title: string;
+  id: number
 }
 @Component({
   selector: 'app-config-passengers',
@@ -26,7 +28,7 @@ interface PassengersCard {
   encapsulation: ViewEncapsulation.None
 })
 export class ConfigPassengersComponent implements OnInit {
-  createForm!: FormGroup;
+  @Output() createForm!: FormGroup;
   contact!: FormGroup;
   numberRegex = new RegExp('^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{2}[-\\s\\.]?[0-9]{4,6}$');
   numbers$ = this.search.getPhoneNumbers();
@@ -37,36 +39,21 @@ export class ConfigPassengersComponent implements OnInit {
     // { title: 'infant' }
   ];
 
+  fromLuggage!:number;
+  returnLuggage: number | undefined;
+
   constructor(
     private fb: FormBuilder,
     private store: Store,
     private search: SearchTicketService,
     private route: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.createForm = new FormGroup({
-      'adults': this.fb.group({
-        'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'gender': new FormControl(null),
-        'birth': new FormControl(null, [Validators.required]),
-        'assist': new FormControl(null)
-      }),
-      'child': this.fb.group({
-        'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'gender': new FormControl(null),
-        'birth': new FormControl(null, [Validators.required]),
-        'assist': new FormControl(null)
-      }),
-      'infant': this.fb.group({
-        'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-        'gender': new FormControl(null),
-        'birth': new FormControl(null, [Validators.required]),
-        'assist': new FormControl(null)
-      }),
+      'adults': this.fb.array([]),
+      'child': this.fb.array([]),
+      'infant': this.fb.array([]),
       'contact': this.fb.group({
         'countryCode': new FormControl(null, [Validators.required]),
         'mobile': new FormControl(null, [Validators.required, Validators.pattern(this.numberRegex)]),
@@ -74,36 +61,54 @@ export class ConfigPassengersComponent implements OnInit {
       })
     });
     this.contact = this.createForm.get('contact') as FormGroup;
-    const ticket_result = JSON.parse(localStorage.getItem('ticket')!);
-    const search_result = JSON.parse(localStorage.getItem('search_result')!);
+    const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
+    const search_result = JSON.parse(localStorage.getItem('search_result')!) as SearchResult;
+    this.fromLuggage = ticket_result.from.luggage
+    this.returnLuggage = ticket_result.return?.luggage
+    // console.log(search_result, ticket_result);
 
-    console.log(search_result);
-    for (const key in search_result.passengers) {
-      if (Object.prototype.hasOwnProperty.call(search_result.passengers, key)) {
-        const element = search_result.passengers[key];
-        if(element) {
-          // for (let i = 0; i < element; i++) {
-          //   this.passengersCard.push({ title: key })
-          // }
-          this.passengersCard.push({ title: key })
+    const obj = search_result.passengers as any;
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        const element = obj[key];
+        if (element) {
+
+          for (let i = 0; i < element; i++) {
+            const formObj = new FormGroup({
+              'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
+              'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
+              'gender': new FormControl(null),
+              'birth': new FormControl(null, [Validators.required]),
+              'assist': new FormControl(false),
+            })
+            this.passengersCard.push({ title: key, id: i })
+            const passengerArray = (this.createForm.get(key) as FormArray);
+            passengerArray.push(formObj)
+          }
+
         } else {
           this.createForm.get(key)?.disable()
         }
       }
     }
+    // console.log(this.passengersCard);
+    // console.log(this.createForm);
 
-    this.store.select(selectSearchOrder).subscribe(search=>{
-      console.log(search);
-    })
+
+    // this.store.select(selectSearchOrder).subscribe(search => {
+    //   console.log(search);
+    // })
 
     // this.store.select(selectTicket).subscribe(ticket=>{
     //   console.log(ticket);
     // })
   }
-
+  formGroup(name:string, id:number) {
+    return (this.createForm.get(name) as FormArray).at(id) as FormGroup
+  }
   onSubmit() {
-    console.log(this.createForm.value);
-    if(this.createForm.valid) {
+    // console.log(this.createForm.value);
+    if (this.createForm.valid) {
       localStorage.setItem('passengers_info', JSON.stringify(this.createForm.value))
       this.route.navigate(['/booking/summary'])
     }

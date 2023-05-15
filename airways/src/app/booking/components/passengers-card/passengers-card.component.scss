@@ -90,7 +90,6 @@
     opacity: 1 !important;
     color: #11397e;
   }
-
   // toolTip
   .mdc-tooltip__surface {
     padding: 16px 24px !important;
@@ -101,5 +100,39 @@
     line-height: 16px !important;
     letter-spacing: 0.4px !important;
     color: #1c1b1f !important;
+  }
+}
+.luggage-input{
+  width: 100px;
+  height: 20px;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  border-radius: 4px;
+  margin-left: 15px;
+  padding: 8px;
+}
+.luggage-block{
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.luggage{
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  & div {
+    display: flex;
+    align-items: flex-end;
+
+    & mat-icon, span{
+      display: inline-block;
+      letter-spacing: 0.4px;
+      color: #49454f;
+    }
+    & span {
+      margin-left: 8px;
+      & span {
+        font-weight: bold;
+      }
+    }
   }
 }

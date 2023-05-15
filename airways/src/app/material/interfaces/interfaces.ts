@@ -168,5 +168,28 @@ export interface CarouselData {
   flightNumber: string
   fromDate: string
   price: number
+  luggage: number
   seats: number
+}
+
+interface passenger {
+assist:boolean
+birth: string
+firstName: string
+gender: 'female' | 'male'
+lastName: string
+}
+export interface PassengerInfo {
+  adults: passenger[]
+  child: passenger[]
+  infant: passenger[]
+  contact: {
+    code: string
+    email: string
+    mobile: string
+  }
+}
+export interface TicketResult {
+  from: CarouselData
+  return: CarouselData
 }

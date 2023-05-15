@@ -26,5 +26,6 @@ export interface FlightResult {
     flightNumber: string,
     seats: number,
     price: number,
+    luggage: number,
     flight: boolean
 }
