@@ -178,7 +178,6 @@ birth: string
 firstName: string
 gender: 'female' | 'male'
 lastName: string
-luggage: number
 }
 export interface PassengerInfo {
   adults: passenger[]

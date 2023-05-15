@@ -80,7 +80,6 @@ export class ConfigPassengersComponent implements OnInit {
               'gender': new FormControl(null),
               'birth': new FormControl(null, [Validators.required]),
               'assist': new FormControl(false),
-              'luggage': new FormControl(0),
             })
             this.passengersCard.push({ title: key, id: i })
             const passengerArray = (this.createForm.get(key) as FormArray);

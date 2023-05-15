@@ -106,14 +106,14 @@
         <div class="from-luggage">
           <mat-icon *ngIf="luggage !== 0">work</mat-icon>
           <mat-icon *ngIf="luggage === 0">work_off</mat-icon>
-          <span>From luggage <span>{{luggage}}</span> kg</span>
+          <span>From flight luggage <span>{{luggage}}</span> kg</span>
         </div>
 
         <div class="return-luggage" *ngIf="returnLuggage !== undefined">
           <div>
             <mat-icon *ngIf="returnLuggage !== 0">work</mat-icon>
             <mat-icon *ngIf="returnLuggage === 0">work_off</mat-icon>
-            <span>Return luggage <span>{{returnLuggage}}</span> kg</span>
+            <span>Return flight luggage <span>{{returnLuggage}}</span> kg</span>
           </div>
         </div>
       </div>
