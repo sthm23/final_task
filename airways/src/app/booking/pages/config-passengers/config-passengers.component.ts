@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,6 +18,7 @@ interface PhoneNumber {
 }
 export interface PassengersCard {
   title: string;
+  id: number
 }
 @Component({
   selector: 'app-config-passengers',
@@ -65,7 +66,16 @@ export class ConfigPassengersComponent implements OnInit {
         if (element) {
 
           for (let i = 0; i < element; i++) {
-            this.passengersCard.push({ title: key })
+            const formObj = new FormGroup({
+              'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
+              'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
+              'gender': new FormControl(null),
+              'birth': new FormControl(null, [Validators.required]),
+              'assist': new FormControl(null)
+            })
+            this.passengersCard.push({ title: key, id: i })
+            const passengerArray = (this.createForm.get(key) as FormArray);
+            passengerArray.push(formObj)
           }
 
         } else {
@@ -73,7 +83,8 @@ export class ConfigPassengersComponent implements OnInit {
         }
       }
     }
-    console.log(this.passengersCard);
+    // console.log(this.passengersCard);
+    // console.log(this.createForm);
 
 
     // this.store.select(selectSearchOrder).subscribe(search => {
@@ -84,9 +95,11 @@ export class ConfigPassengersComponent implements OnInit {
     //   console.log(ticket);
     // })
   }
-
+  formGroup(name:string, id:number) {
+    return (this.createForm.get(name) as FormArray).at(id) as FormGroup
+  }
   onSubmit() {
-    console.log(this.createForm.value);
+    // console.log(this.createForm.value);
     if (this.createForm.valid) {
       localStorage.setItem('passengers_info', JSON.stringify(this.createForm.value))
       this.route.navigate(['/booking/summary'])

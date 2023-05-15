@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { PassengersCard } from '../../pages/config-passengers/config-passengers.component';
 
 @Component({
@@ -9,26 +9,10 @@ import { PassengersCard } from '../../pages/config-passengers/config-passengers.
 })
 export class PassengersCardComponent implements OnInit {
   @Input() passenger!: PassengersCard;
-  @Input() index!: number;
   @Input() createForm!: FormGroup;
 
-  constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.getHuman.controls.push(this.newHuman());
-  }
+  ngOnInit(): void {}
 
-  get getHuman() {
-    return this.rootFormGroup.control.get(this.passenger.title) as FormArray;
-  }
-
-  newHuman(): FormGroup {
-    return this.fb.group({
-      'firstName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-      'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
-      'gender': new FormControl(null),
-      'birth': new FormControl(null, [Validators.required]),
-      'assist': new FormControl(null)
-    })
-  }
 }

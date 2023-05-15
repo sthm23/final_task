@@ -18,12 +18,10 @@
         </div>
 
         <app-passengers-card
-          *ngFor="let passenger of passengersCard; let i=index"
-          [passenger]="passenger"
-          [index]="i"
-          [createForm]="createForm"
-          ></app-passengers-card>
-          <!-- [form]="createForm.get(passenger.title)" -->
+        *ngFor="let passenger of passengersCard; let i=index"
+        [passenger]="passenger"
+        [createForm]="formGroup(passenger.title, passenger.id)"
+        ></app-passengers-card>
 
         <h3 class="contact-title">
           <mat-icon fontIcon="contact_page"></mat-icon> Contact details
@@ -86,8 +84,8 @@
           type="button"
           class="next-btn"
           color="primary"
-          [disabled]="createForm.invalid"
           mat-raised-button
+          [disabled]="createForm.invalid"
           (click)="onSubmit()"
           >
             Continue
