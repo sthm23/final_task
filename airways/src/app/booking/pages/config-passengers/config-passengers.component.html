@@ -20,6 +20,8 @@
         <app-passengers-card
         *ngFor="let passenger of passengersCard; let i=index"
         [passenger]="passenger"
+        [luggage]="fromLuggage"
+        [returnLuggage]="returnLuggage"
         [createForm]="formGroup(passenger.title, passenger.id)"
         ></app-passengers-card>
 

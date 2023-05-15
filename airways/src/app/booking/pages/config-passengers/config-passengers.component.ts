@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectSearchOrder, selectTicket } from 'src/app/redux/selectors/airways.selector';
 import { TypeOfPassengersName } from 'src/app/redux/state.model';
 import { SearchTicketService } from '../../services/searchTicket.service';
+import { DropDownOptions, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -38,6 +39,9 @@ export class ConfigPassengersComponent implements OnInit {
     // { title: 'infant' }
   ];
 
+  fromLuggage!:number;
+  returnLuggage: number | undefined;
+
   constructor(
     private fb: FormBuilder,
     private store: Store,
@@ -57,12 +61,16 @@ export class ConfigPassengersComponent implements OnInit {
       })
     });
     this.contact = this.createForm.get('contact') as FormGroup;
-    const ticket_result = JSON.parse(localStorage.getItem('ticket')!);
-    const search_result = JSON.parse(localStorage.getItem('search_result')!);
+    const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
+    const search_result = JSON.parse(localStorage.getItem('search_result')!) as SearchResult;
+    this.fromLuggage = ticket_result.from.luggage
+    this.returnLuggage = ticket_result.return?.luggage
+    // console.log(search_result, ticket_result);
 
-    for (const key in search_result.passengers) {
-      if (Object.prototype.hasOwnProperty.call(search_result.passengers, key)) {
-        const element = search_result.passengers[key];
+    const obj = search_result.passengers as any;
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        const element = obj[key];
         if (element) {
 
           for (let i = 0; i < element; i++) {
@@ -71,7 +79,8 @@ export class ConfigPassengersComponent implements OnInit {
               'lastName': new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]),
               'gender': new FormControl(null),
               'birth': new FormControl(null, [Validators.required]),
-              'assist': new FormControl(null)
+              'assist': new FormControl(false),
+              'luggage': new FormControl(0),
             })
             this.passengersCard.push({ title: key, id: i })
             const passengerArray = (this.createForm.get(key) as FormArray);

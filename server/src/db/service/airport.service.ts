@@ -55,6 +55,7 @@ export class AirportService {
             const flightNumber = this.generateFlightNumber(from);
             const seats = Math.floor(Math.random() * 130);
             const flight = Math.floor(Math.random() * 4) === 1;
+            const luggage = this.generateLuggage();
             const price = Number(Math.ceil((Math.random() * item)) + Math.random().toFixed(2))
             return {
                 id: ind+1,
@@ -66,10 +67,17 @@ export class AirportService {
                 flightNumber: flightNumber,
                 seats: seats,
                 price: price,
+                luggage,
                 flight: ind===2 ? false : flight
             }
         })
 
+    }
+
+    private generateLuggage() {
+        const arr = [20, 25, 30, 35]
+        const random = Math.floor(Math.random() * 4);
+        return  random !== 1 ? arr[random] : 0;
     }
 
     private generateRandomDestinationDate(date: Date, num?:number) {
