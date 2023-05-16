@@ -180,9 +180,9 @@ gender: 'female' | 'male'
 lastName: string
 }
 export interface PassengerInfo {
-  adults: passenger[]
-  child: passenger[]
-  infant: passenger[]
+  'adults': passenger[]
+  'child': passenger[]
+  'infant': passenger[]
   contact: {
     code: string
     email: string
