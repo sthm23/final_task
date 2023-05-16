@@ -6,7 +6,7 @@ import { PassengerInfo } from 'src/app/material/interfaces/interfaces';
 })
 export class ServiceChargePipe implements PipeTransform {
 
-  transform(value: PassengerInfo, type: string): unknown {
+  transform(value: PassengerInfo, type: string): number {
     if (type === 'child') {
       let chargeSum = 0
       value.child?.forEach((item) => {

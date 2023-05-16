@@ -8,6 +8,7 @@
   gap: 8px;
   width: 551px;
   max-height: 574px;
+  overflow: auto;
   background: #fff;
   border-top: 3px solid #11397e;
   border-radius: 8px 8px 0px 0px;
@@ -59,11 +60,6 @@
     color: #000000;
     margin-bottom: 4px;
   }
-}
-
-.summary-bottom {
-  overflow: auto;
-  height: 84%;
 }
 
 @media screen and (max-width: 989px) {

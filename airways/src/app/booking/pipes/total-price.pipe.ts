@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PassengerInfo } from 'src/app/material/interfaces/interfaces';
+import { PassengerInfo, TicketResult } from 'src/app/material/interfaces/interfaces';
 
 
 interface Passengers {
@@ -13,11 +13,14 @@ interface Passengers {
 })
 export class TotalPricePipe implements PipeTransform {
 
-  transform(passengers: Passengers, price: number, passenger_info: PassengerInfo): unknown {
+  transform(passengers: Passengers, ticket_result: TicketResult, passenger_info: PassengerInfo): unknown {
 
     const { adults, child, infant } = passengers;
+    const { from } = ticket_result;
 
-    return Math.round((price * adults) + (price * child) + (infant * price) + this.chargeService(passenger_info));
+    return (from.price * adults) + (from.price * child) + (from.price * infant)
+      + (ticket_result.return?.price * adults) + (ticket_result.return?.price * child) + (ticket_result.return?.price * infant)
+      + (ticket_result.return?.price ? this.chargeService(passenger_info) * 2 : this.chargeService(passenger_info));
   }
 
   chargeService(passenger_info: PassengerInfo) {

@@ -79,7 +79,7 @@
               <th>
                 €{{
                   ticket_result.from.price > 0
-                    ? ticket_result.from.price * search_result.passengers.adults
+                    ? (ticket_result.from.price * search_result.passengers.adults) + (passenger_info | serviceCharge : "adults")
                     : 0
                 }}
               </th>
@@ -103,7 +103,7 @@
               <th>
                 €{{
                   ticket_result.from.price > 0
-                    ? ticket_result.from.price * search_result.passengers.child
+                    ? (ticket_result.from.price * search_result.passengers.child) + (passenger_info | serviceCharge : "child")
                     : 0
                 }}
               </th>
@@ -127,7 +127,7 @@
               <th>
                 €{{
                   search_result.passengers.infant > 0
-                    ? ticket_result.from.price * search_result.passengers.child
+                    ? (ticket_result.from.price * search_result.passengers.infant) + (passenger_info | serviceCharge : "infant")
                     : 0
                 }}
               </th>
@@ -154,7 +154,7 @@
           <p>
             €{{
               search_result.passengers
-                | totalPrice : ticket_result.from.price : passenger_info
+                | totalPrice : ticket_result : passenger_info
             }}
           </p>
         </div>

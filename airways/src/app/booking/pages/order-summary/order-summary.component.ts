@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { concatAll, from, fromEvent, interval, map, merge, of, race, take } from 'rxjs';
 import { CarouselData, PassengerInfo, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
 
 
@@ -21,11 +22,13 @@ export class OrderSummaryComponent implements OnInit {
     const passengerInfo = JSON.parse(localStorage.getItem('passengers_info')!) as PassengerInfo;
 
     this.ticket_result = ticket_result;
-    this.passenger_info = passengerInfo;
     this.search_result = search_result;
+    this.passenger_info = passengerInfo;
     console.log(ticket_result);
     console.log(search_result);
     console.log(passengerInfo);
+
+
 
   }
 
