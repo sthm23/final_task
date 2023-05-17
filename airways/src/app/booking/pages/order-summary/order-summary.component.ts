@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { concatAll, from, fromEvent, interval, map, merge, of, race, take } from 'rxjs';
 import { CarouselData, PassengerInfo, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
+import { TotalPriceService } from '../../services/total-price.service';
 
 
 
@@ -14,7 +15,9 @@ export class OrderSummaryComponent implements OnInit {
   search_result!: SearchResult;
   passenger_info!: PassengerInfo;
 
+  totalPrice!: number;
 
+  constructor(private totalPriceService: TotalPriceService) { }
 
   ngOnInit(): void {
     const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
@@ -28,8 +31,8 @@ export class OrderSummaryComponent implements OnInit {
     console.log(search_result);
     console.log(passengerInfo);
 
-
-
+    this.totalPrice = this.totalPriceService.totalPrice(search_result.passengers, this.ticket_result, this.passenger_info);
   }
+
 
 }
