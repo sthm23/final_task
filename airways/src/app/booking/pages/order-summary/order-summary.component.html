@@ -14,58 +14,6 @@
           *ngIf="ticket_result.return?.destinationDate"
           [ticket_result]="ticket_result.return"
         ></app-summary-card>
-        <!-- <div class="summary-card">
-          <div class="summary-header">
-            <p class="header-way"><span>FR 1925</span>Dublin — Warsaw Modlin</p>
-            <p class="header-date">
-              Wednesday, 1 March, 2023 <span>8:40 — 12:00</span>
-            </p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-header">
-            <p class="header-way"><span>FR 1925</span>Warsaw Modlin — Dublin</p>
-            <p class="header-date">
-              Saturday, 18 March, 2023 <span>7:40 — 11:00</span>
-            </p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-        </div> -->
       </div>
 
       <div class="total">
@@ -153,7 +101,7 @@
           <p>TOTAL:</p>
           <p>
             €{{
-              totalPrice
+              totalPrice.toFixed(2)
             }}
           </p>
         </div>
