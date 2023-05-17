@@ -7,6 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { AuthModalComponent } from './auth-modal/auth-modal.component';
 import { MaterialModule } from '../material/material.module';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MaterialModule } from '../material/material.module';
     FooterComponent,
     ErrorComponent,
     AuthModalComponent,
+    UserComponent,
   ],
   imports: [
     CommonModule,

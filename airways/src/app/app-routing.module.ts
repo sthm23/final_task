@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './core/pages/home/home.component';
 import { ErrorComponent } from './core/pages/error/error.component';
 import { AuthGuard } from './core/auth.guard';
+import { UserComponent } from './core/pages/user/user.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: '', component: HomeComponent, children: [
+      {
+        path: 'user', component: UserComponent
+      },
       {
         path: 'main', loadChildren: ()=> import('./main/main.module').then(m=>m.MainModule)
       },
