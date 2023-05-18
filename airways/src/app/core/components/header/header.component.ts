@@ -58,10 +58,16 @@ export class HeaderComponent implements OnInit {
     })
 
     this.store.select(selectUser).subscribe(user => {
-      if(user) {
-        this.userName = `${user.firstName} ${user.lastName}`
+      const userString = localStorage.getItem('user_name');
+      if(userString) {
+        const user = JSON.parse(userString) as User;
+        this.userName = `${user.firstName} ${user.lastName}`;
       } else {
-        this.userName = user
+        if(user) {
+          this.userName = `${user.firstName} ${user.lastName}`
+        } else {
+          this.userName = user
+        }
       }
     })
   }
@@ -89,8 +95,7 @@ export class HeaderComponent implements OnInit {
         }
       });
     } else {
-      localStorage.removeItem('user_name');
-      this.store.dispatch(loginAction({user: null}))
+      this.route.navigate(['user'])
     }
 
   }

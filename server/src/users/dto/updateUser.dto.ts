@@ -41,4 +41,8 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   region: string;
+
+  @IsOptional()
+  @IsString()
+  citizenship: string;
 }
