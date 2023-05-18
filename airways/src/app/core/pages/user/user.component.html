@@ -54,7 +54,7 @@
             <div class="row btn-block">
               <button
               mat-raised-button
-              [disabled]="!changeValue"
+              [disabled]="!changeValue || form.invalid"
               color="primary"
               (click)="onSubmit()"
               >update</button>

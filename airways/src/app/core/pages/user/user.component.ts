@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { facebook, google, telegram } from '../../auth-modal/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { User } from 'src/app/redux/state.model';
+import { AuthLoginRegisterService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -12,17 +13,18 @@ import { User } from 'src/app/redux/state.model';
 })
 export class UserComponent implements OnInit {
   form = new FormGroup({
-    firstName: new FormControl(),
-    lastName: new FormControl(),
-    gender: new FormControl(),
-    email: new FormControl(),
-    phoneNumber: new FormControl(),
-    country: new FormControl(),
-    birthday: new FormControl(),
-    citizenship: new FormControl(),
+    id: new FormControl(),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    gender: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
+    country: new FormControl('', [Validators.required]),
+    birthday: new FormControl('', [Validators.required]),
+    citizenship: new FormControl('', [Validators.required]),
     loginForm: new FormGroup({
-      login: new FormControl(),
-      password: new FormControl()
+      login: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     })
   })
 
@@ -33,6 +35,7 @@ export class UserComponent implements OnInit {
   constructor(
     iconRegistr: MatIconRegistry,
     sanitaizer: DomSanitizer,
+    private userService: AuthLoginRegisterService
   ) {
     iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
     iconRegistr.addSvgIconLiteral('facebook', sanitaizer.bypassSecurityTrustHtml(facebook));
@@ -59,13 +62,28 @@ export class UserComponent implements OnInit {
     this.form.controls.gender.setValue(user.gender)
     this.form.controls.lastName.setValue(user.lastName)
     this.form.controls.phoneNumber.setValue(user.phoneNumber)
+    this.form.controls.id.setValue(user.id)
 
     this.form.controls.loginForm.controls.login.setValue(user.login)
     this.form.controls.loginForm.controls.password.setValue(user.password)
   }
 
   onSubmit() {
-    console.log(this.form.value);
-
+    const obj = {...this.form.value};
+    this.userService.updateUser(obj.id, {
+      firstName: obj.firstName,
+      lastName: obj.lastName,
+      email: obj.email,
+      phoneNumber: obj.phoneNumber,
+      gender: obj.gender,
+      country: obj.country,
+      citizenship: obj?.citizenship,
+      birthday: obj.birthday,
+      login: obj.loginForm?.login,
+    }, localStorage.getItem('ref_token')!).subscribe(result=>{
+      console.log(result);
+      localStorage.setItem('user_name', JSON.stringify(result));
+      this.changeValue = false
+    })
   }
 }
