@@ -24,7 +24,7 @@
                 <span>{{ search_result.passengers.adults }}</span
                 >x Adult Fare
               </th>
-              <th>€{{ totalFare("adult") + fareAdult }}</th>
+              <th>€{{ (totalFare("adult") + fareAdult).toFixed(2) }}</th>
             </tr>
 
             <tr>
@@ -32,7 +32,7 @@
               <td>
                 €{{
                   search_result.passengers.adults > 0
-                    ? ticket_result.from.price
+                    ? ticket_result.from.price.toFixed(2)
                     : 0
                 }}
               </td>
@@ -48,7 +48,7 @@
                 <span>{{ search_result.passengers.child }}</span
                 >x Child Fare
               </th>
-              <th>€{{ totalFare("child") + fareChild }}</th>
+              <th>€{{ (totalFare("child") + fareChild).toFixed(2) }}</th>
             </tr>
 
             <tr>
@@ -56,7 +56,7 @@
               <td>
                 €{{
                   search_result.passengers.child > 0
-                    ? ticket_result.from.price
+                    ? ticket_result.from.price.toFixed(2)
                     : 0
                 }}
               </td>
@@ -72,7 +72,7 @@
                 <span>{{ search_result.passengers.infant }}</span
                 >x Infant Fare
               </th>
-              <th>€{{ totalFare("infant") + fareInfant }}</th>
+              <th>€{{ (totalFare("infant") + fareInfant).toFixed(2) }}</th>
             </tr>
 
             <tr>
@@ -80,7 +80,7 @@
               <td>
                 €{{
                   search_result.passengers.infant > 0
-                    ? ticket_result.from.price
+                    ? ticket_result.from.price.toFixed(2)
                     : 0
                 }}
               </td>

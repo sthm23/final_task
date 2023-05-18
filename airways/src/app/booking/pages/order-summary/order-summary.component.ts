@@ -40,11 +40,11 @@ export class OrderSummaryComponent implements OnInit {
   totalFare(type: string) {
     const ticketPrice = this.ticket_result.from.price;
     if (type === 'adult') {
-      return ticketPrice * this.search_result.passengers.adults;
+      return +(ticketPrice * this.search_result.passengers.adults).toFixed(2);
     } else if (type === 'child') {
-      return ticketPrice * this.search_result.passengers.child;
+      return +(ticketPrice * this.search_result.passengers.child).toFixed(2);
     } else if (type === 'infant') {
-      return ticketPrice * this.search_result.passengers.infant;
+      return +(ticketPrice * this.search_result.passengers.infant).toFixed(2);
     }
     return 0;
   }
