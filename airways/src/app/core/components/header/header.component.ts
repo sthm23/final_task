@@ -56,14 +56,18 @@ export class HeaderComponent implements OnInit {
         this.headerBgToggler = str === '/main'
       }
     })
-
-    this.store.select(selectUser).subscribe(user => {
-      if(user) {
-        this.userName = `${user.firstName} ${user.lastName}`
-      } else {
-        this.userName = user
-      }
-    })
+    const userString = localStorage.getItem('user_name');
+    if(userString) {
+      const user = JSON.parse(userString) as User;
+      this.userName = `${user.firstName} ${user.lastName}`;
+    }
+    // this.store.select(selectUser).subscribe(user => {
+    //   if(user) {
+    //     this.userName = `${user.firstName} ${user.lastName}`
+    //   } else {
+    //     this.userName = user
+    //   }
+    // })
   }
 
   openAuthDialog() {

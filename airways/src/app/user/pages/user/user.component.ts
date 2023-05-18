@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { facebook, google, telegram } from '../../auth-modal/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { User } from 'src/app/redux/state.model';
-import { AuthLoginRegisterService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { facebook, google, telegram } from 'src/app/core/auth-modal/icon';
 
 @Component({
   selector: 'app-user',
@@ -27,15 +27,12 @@ export class UserComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     })
   })
-
-
-
   userName = ''
   changeValue = false
   constructor(
     iconRegistr: MatIconRegistry,
     sanitaizer: DomSanitizer,
-    private userService: AuthLoginRegisterService
+    private userService: UserService
   ) {
     iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
     iconRegistr.addSvgIconLiteral('facebook', sanitaizer.bypassSecurityTrustHtml(facebook));
@@ -81,7 +78,6 @@ export class UserComponent implements OnInit {
       birthday: obj.birthday,
       login: obj.loginForm?.login,
     }, localStorage.getItem('ref_token')!).subscribe(result=>{
-      console.log(result);
       localStorage.setItem('user_name', JSON.stringify(result));
       this.changeValue = false
     })

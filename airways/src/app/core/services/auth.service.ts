@@ -21,12 +21,6 @@ export class AuthLoginRegisterService {
     return this.http.post<User>(`${this.url}/auth/register`, userObj);
   }
 
-  updateUser(id:string, obj: any, token:string) {
-    return this.http.patch(this.url + '/users/'+id, obj, {headers: {
-      Authorization: `Bearer ${token}`
-    }})
-  }
-
   registerWithGoogle() {
     // let headers = new HttpHeaders();
 
