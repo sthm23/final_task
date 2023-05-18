@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       {
-        path: 'user', component: UserComponent
+        path: 'user', component: UserComponent, canActivate: [AuthGuard]
       },
       {
         path: 'main', loadChildren: ()=> import('./main/main.module').then(m=>m.MainModule)

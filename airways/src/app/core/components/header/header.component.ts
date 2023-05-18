@@ -89,8 +89,7 @@ export class HeaderComponent implements OnInit {
         }
       });
     } else {
-      localStorage.removeItem('user_name');
-      this.store.dispatch(loginAction({user: null}))
+      this.route.navigate(['user'])
     }
 
   }

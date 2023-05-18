@@ -28,7 +28,7 @@
                 <mat-label>Phone number</mat-label>
                 <input matInput formControlName="phoneNumber">
               </mat-form-field>
-              <mat-button-toggle-group formControlName="gender" name="gender" aria-label="gender">
+              <mat-button-toggle-group  formControlName="gender" name="gender" aria-label="gender">
                 <mat-button-toggle value="male">Male</mat-button-toggle>
                 <mat-button-toggle value="female">Female</mat-button-toggle>
               </mat-button-toggle-group>
@@ -45,14 +45,19 @@
 
               <mat-form-field appearance="outline" >
                 <mat-label>Birthday</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="birthday">
+                <input matInput [matDatepicker]="picker" formControlName="birthday" [readonly]="true">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
             </div>
             <div class="row btn-block">
-              <button mat-raised-button color="primary">update</button>
+              <button
+              mat-raised-button
+              [disabled]="!changeValue"
+              color="primary"
+              (click)="onSubmit()"
+              >update</button>
             </div>
 
           </form>
@@ -67,15 +72,15 @@
             <div class="card-image-bg">
               <mat-icon>group</mat-icon>
             </div>
-            <h3 class="title">Sanjar Tukhtamishev</h3>
-            <div class="login-block">
+            <h3 class="title">{{userName}}</h3>
+            <div class="login-block" [formGroup]="form.controls.loginForm">
               <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Login</mat-label>
-                <input matInput formControlName="firstName">
+                <input matInput formControlName="login" [readonly]="true">
               </mat-form-field>
               <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>password</mat-label>
-                <input matInput formControlName="firstName">
+                <input matInput formControlName="password" [readonly]="true">
               </mat-form-field>
             </div>
           </div>
