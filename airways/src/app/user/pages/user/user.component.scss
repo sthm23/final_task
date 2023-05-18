@@ -10,6 +10,7 @@
     align-items: center;
   }
 }
+
 .card{
   display: flex;
   flex-direction: column;
@@ -101,18 +102,21 @@
   align-items: center;
 
 }
+.title-block{
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+}
 .card-image-bg{
   margin-top: -50px;
   border-radius: 100%;
-  width: 110px;
-  height: 110px;
+  width: 85px;
+  height: 83px;
   background:rgb(184, 184, 184);
   & mat-icon{
-    width: 100px;
-    height: 100px;
-    margin-top: 40px;
-    margin-left: 40px;
-    font-size: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 25px;
   }
 }
 .login-block{
@@ -123,4 +127,9 @@
 .title{
   color: #002ca7;
   font-size: 25px;
+}
+.upd-btn{
+  border-radius: 5px !important;
+  width: 150px;
+  font-size: large;
 }

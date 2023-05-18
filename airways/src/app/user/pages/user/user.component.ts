@@ -5,6 +5,9 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { User } from 'src/app/redux/state.model';
 import { UserService } from '../../services/user.service';
 import { facebook, google, telegram } from 'src/app/core/auth-modal/icon';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loginAction } from 'src/app/redux/actions/airways.action';
 
 @Component({
   selector: 'app-user',
@@ -32,6 +35,8 @@ export class UserComponent implements OnInit {
   constructor(
     iconRegistr: MatIconRegistry,
     sanitaizer: DomSanitizer,
+    private route:Router,
+    private store:Store,
     private userService: UserService
   ) {
     iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
@@ -81,5 +86,11 @@ export class UserComponent implements OnInit {
       localStorage.setItem('user_name', JSON.stringify(result));
       this.changeValue = false
     })
+  }
+
+  exitApp() {
+    localStorage.removeItem('user_name');
+    this.route.navigate(['main'])
+    this.store.dispatch(loginAction({user: null}))
   }
 }

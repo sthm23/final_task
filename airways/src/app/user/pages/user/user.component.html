@@ -2,7 +2,7 @@
   <div class="edit-user-block">
     <div class="card">
       <div class="card-header">
-        <h5 class="title">Edit Profile</h5>
+        <h3 class="title">Edit Profile</h3>
       </div>
       <div class="card-body">
         <form [formGroup]="form">
@@ -33,11 +33,11 @@
           </div>
           <div class="row">
             <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>country</mat-label>
+              <mat-label>Country</mat-label>
               <input matInput formControlName="country">
             </mat-form-field>
             <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>citizenship</mat-label>
+              <mat-label>Citizenship</mat-label>
               <input matInput formControlName="citizenship">
             </mat-form-field>
 
@@ -49,16 +49,18 @@
             </mat-form-field>
 
           </div>
-          <div class="row btn-block">
-            <button
-            mat-raised-button
-            [disabled]="!changeValue || form.invalid"
-            color="primary"
-            (click)="onSubmit()"
-            >update</button>
-          </div>
 
         </form>
+      </div>
+      <div class="line"></div>
+      <div class="row btn-block">
+        <button
+        mat-fab
+        [disabled]="!changeValue || form.invalid"
+        color="primary"
+        class="upd-btn"
+        (click)="onSubmit()"
+        >Update</button>
       </div>
     </div>
   </div>
@@ -70,7 +72,10 @@
           <div class="card-image-bg">
             <mat-icon>group</mat-icon>
           </div>
-          <h3 class="title">{{userName}}</h3>
+          <div class="title-block">
+            <h3 class="title">{{userName}}</h3>
+            <button mat-fab color="primary" (click)="exitApp()"><mat-icon>exit_to_app</mat-icon></button>
+          </div>
           <div class="login-block" [formGroup]="form.controls.loginForm">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Login</mat-label>
