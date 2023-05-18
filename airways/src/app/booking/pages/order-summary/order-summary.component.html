@@ -24,22 +24,22 @@
                 <span>{{ search_result.passengers.adults }}</span
                 >x Adult Fare
               </th>
-              <th>
-                €{{
-                  ticket_result.from.price > 0
-                    ? (ticket_result.from.price * search_result.passengers.adults) + (passenger_info | serviceCharge : "adults")
-                    : 0
-                }}
-              </th>
+              <th>€{{ totalFare("adult") + fareAdult }}</th>
             </tr>
 
             <tr>
               <td>Fare</td>
-              <td>€{{ ticket_result.from.price }}</td>
+              <td>
+                €{{
+                  search_result.passengers.adults > 0
+                    ? ticket_result.from.price
+                    : 0
+                }}
+              </td>
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€{{ passenger_info | serviceCharge : "adults" }}</td>
+              <td>€{{ fareAdult }}</td>
             </tr>
           </table>
           <table>
@@ -48,22 +48,22 @@
                 <span>{{ search_result.passengers.child }}</span
                 >x Child Fare
               </th>
-              <th>
-                €{{
-                  ticket_result.from.price > 0
-                    ? (ticket_result.from.price * search_result.passengers.child) + (passenger_info | serviceCharge : "child")
-                    : 0
-                }}
-              </th>
+              <th>€{{ totalFare("child") + fareChild }}</th>
             </tr>
 
             <tr>
               <td>Fare</td>
-              <td>€{{ ticket_result.from.price }}</td>
+              <td>
+                €{{
+                  search_result.passengers.child > 0
+                    ? ticket_result.from.price
+                    : 0
+                }}
+              </td>
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€{{ passenger_info | serviceCharge : "child" }}</td>
+              <td>€{{ fareChild }}</td>
             </tr>
           </table>
           <table>
@@ -72,13 +72,7 @@
                 <span>{{ search_result.passengers.infant }}</span
                 >x Infant Fare
               </th>
-              <th>
-                €{{
-                  search_result.passengers.infant > 0
-                    ? (ticket_result.from.price * search_result.passengers.infant) + (passenger_info | serviceCharge : "infant")
-                    : 0
-                }}
-              </th>
+              <th>€{{ totalFare("infant") + fareInfant }}</th>
             </tr>
 
             <tr>
@@ -93,17 +87,13 @@
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€{{ passenger_info | serviceCharge : "infant" }}</td>
+              <td>€{{ fareInfant }}</td>
             </tr>
           </table>
         </div>
         <div class="total-bottom">
           <p>TOTAL:</p>
-          <p>
-            €{{
-              totalPrice.toFixed(2)
-            }}
-          </p>
+          <p>€{{ totalPrice.toFixed(2) }}</p>
         </div>
       </div>
     </div>

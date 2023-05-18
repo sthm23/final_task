@@ -1,52 +1,51 @@
 import { Injectable } from '@angular/core';
-import { PassengerInfo, TicketResult } from 'src/app/material/interfaces/interfaces';
-
-
-interface Passengers {
-  adults: number,
-  child: number,
-  infant: number
-}
+import { PassengerInfo, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TotalPriceService {
+  fareAdult = 0;
+  fareChild = 0;
+  fareInfant = 0;
 
-  totalPrice(passengers: Passengers, ticket_result: TicketResult, passenger_info: PassengerInfo): number {
-
-    const { adults, child, infant } = passengers;
-    const { from } = ticket_result;
-
-    return (from.price * adults) + (from.price * child) + (from.price * infant)
-      + (ticket_result.return?.price * adults) + (ticket_result.return?.price * child) + (ticket_result.return?.price * infant)
-      + (ticket_result.return?.price ? this.chargeService(passenger_info) * 2 : this.chargeService(passenger_info));
+  get totalFarePrice(): number {
+    return this.fareAdult + this.fareChild + this.fareInfant;
   }
 
-  chargeService(passenger_info: PassengerInfo) {
-    let chargeSum = 0
+  fares(passenger_info: PassengerInfo, search_result: SearchResult, ticket_result: TicketResult): void {
     for (const key in passenger_info) {
-      if (key === 'adults') {
-        passenger_info.adults.forEach((item) => {
-          if (item.assist) {
-            chargeSum += 15
-          }
-        })
-      } else if (key === 'child') {
-        passenger_info.child.forEach((item) => {
-          if (item.assist) {
-            chargeSum += 10
-          }
-        })
-      } else if (key === 'infant') {
-        passenger_info.infant.forEach((item) => {
-          if (item.assist) {
-            chargeSum += 5
-          }
-        })
-      }
+      this.fareCharge(passenger_info, key, ticket_result);
     }
+  }
 
-    return chargeSum;
+  fareCharge(passenger_info: PassengerInfo, type: string, ticket_result: TicketResult) {
+    if (type === 'child') {
+      let chargeSum = 0
+      passenger_info.child?.forEach((item) => {
+        if (item.assist) {
+          chargeSum += 10
+        }
+      })
+      this.fareChild = chargeSum * (ticket_result.return?.destinationDate ? 2 : 1);
+    }
+    else if (type === 'infant') {
+      let chargeSum = 0
+      passenger_info.infant?.forEach((item) => {
+        if (item.assist) {
+          chargeSum += 5
+        }
+      })
+      this.fareInfant = chargeSum * (ticket_result.return?.destinationDate ? 2 : 1);
+    }
+    else if (type === 'adults') {
+      let chargeSum = 0
+      passenger_info.adults?.forEach((item) => {
+        if (item.assist) {
+          chargeSum += 15
+        }
+      })
+      this.fareAdult = chargeSum * (ticket_result.return?.destinationDate ? 2 : 1);
+    }
   }
 }

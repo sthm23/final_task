@@ -20,7 +20,7 @@
         <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
         <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
         <p>1 personal item (max. 8 kg) included</p>
-        <p>Seat {{ ticket_result.seats }}E</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
       </div>
     </div>
     <div class="adults" *ngIf="passengerInfo.child">
@@ -28,7 +28,7 @@
         <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
         <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
         <p>1 personal item (max. 8 kg) included</p>
-        <p>Seat {{ ticket_result.seats }}E</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
       </div>
     </div>
     <div class="adults" *ngIf="passengerInfo.infant">
