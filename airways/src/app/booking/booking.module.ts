@@ -17,6 +17,7 @@ import { SummaryCardComponent } from './components/summary-card/summary-card.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from '../core/auth.guard';
 import { Seats } from './pipes/seats.pipe';
+import { ConvertHourPipe } from './pipes/convert-hour.pipe';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { Seats } from './pipes/seats.pipe';
     PassengersCardComponent,
     SummaryCardComponent,
     Seats,
+    ConvertHourPipe,
   ],
   imports: [
     CommonModule,
