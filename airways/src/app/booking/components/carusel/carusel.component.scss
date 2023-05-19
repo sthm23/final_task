@@ -23,7 +23,9 @@
   box-sizing: border-box;
   position: relative;
 }
-
+button:not(:disabled) {
+  cursor: pointer;
+}
 
 .btn {
   position: absolute;

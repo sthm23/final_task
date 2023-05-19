@@ -31,6 +31,7 @@ export class OrderComponent implements OnInit {
   checkReturnCarousel = true
 
   user:User | null = null;
+  nowDate = Date.now();
 
   constructor(
     iconRegistry: MatIconRegistry,
@@ -46,30 +47,15 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
-    const search = JSON.parse(localStorage.getItem('search_result')!);
-    const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
-    const range = search.rangeDate;
+    // const search = JSON.parse(localStorage.getItem('search_result')!);
+    // const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
+    // const range = search.rangeDate;
+    const ticket_result = JSON.parse(localStorage.getItem('ticket_result')!) as {start: CarouselData[], end: CarouselData[]};
+    this.flightArr = this.correctCarouselDate(ticket_result.start, this.nowDate)
+    this.flightReturnArr = this.correctCarouselDate(ticket_result.end, this.nowDate)
 
-    const obj = {
-      from: search.from.id,
-      destination: search.destination.id,
-      date: undefined,
-      rangeDate: undefined,
-      count
-    }
-    if(range) {
-      obj.rangeDate = range
-    } else {
-      obj.date = search.date
-    }
-
-    this.searchService.getTicket(obj).subscribe((res)=>{
-      this.flightArr = res.start
-      this.flightReturnArr = res.end
-      this.returnFlight = res.end
-      this.selectedFlight = res.start[2]
-      this.selectedReturnFlight = res.end[2]
-    })
+    this.selectedFlight = ticket_result.start[2]
+    this.selectedReturnFlight = ticket_result.end[2]
 
     const user_json = localStorage.getItem('user_name');
     let user: User | null = null
@@ -81,6 +67,18 @@ export class OrderComponent implements OnInit {
       this.user = user
     })
 
+  }
+
+  correctCarouselDate(arr: CarouselData[], date:number) {
+      return arr.map((item, ind)=>{
+        const fd = new Date(item.fromDate).getTime();
+        if(fd <= date) {
+          if(ind == 0 || ind == 1) {
+            return {...item, flight: true}
+          }
+        }
+        return item
+      })
   }
 
   chooseFlightCarousel(flight:CarouselData, type?:string) {

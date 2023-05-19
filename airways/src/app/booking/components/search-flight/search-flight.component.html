@@ -53,9 +53,9 @@
             <div class="date-pick-block" *ngIf="flightBackDate">
               <mat-form-field appearance="outline">
                 <mat-label>Dates</mat-label>
-                <mat-date-range-input formGroupName="rangeDate" [rangePicker]="multiPicker" [disabled]="true">
-                  <input matStartDate formControlName="start" placeholder="Start date">
-                  <input matEndDate formControlName="end" placeholder="End date">
+                <mat-date-range-input formGroupName="rangeDate" [min]="minDate" [rangePicker]="multiPicker" >
+                  <input matStartDate formControlName="start" placeholder="Start date" [readonly]="true">
+                  <input matEndDate formControlName="end" placeholder="End date" [readonly]="true">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="multiPicker"></mat-datepicker-toggle>
                 <mat-date-range-picker #multiPicker disabled="false"></mat-date-range-picker>
@@ -64,7 +64,7 @@
 
               <mat-form-field appearance="outline" *ngIf="!flightBackDate" >
                 <mat-label>Date</mat-label>
-                <input matInput [readonly]="true" [matDatepicker]="picker" formControlName="date">
+                <input matInput [readonly]="true" [min]="minDate" [matDatepicker]="picker" formControlName="date">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker disabled="false"></mat-datepicker>
               </mat-form-field>

@@ -10,7 +10,7 @@
           <app-select-flight [direction]="'goTo'" [flight]="selectedFlight" (selectedFlight)="chooseFlightSelect($event, 'from')"></app-select-flight>
         </div>
       </div>
-      <div class="destination-block" *ngIf="returnFlight.length">
+      <div class="destination-block" *ngIf="flightReturnArr.length">
         <app-order-title [direction]="'return'" [flight]="selectedReturnFlight"></app-order-title>
         <div class="carousel-block" *ngIf="checkReturnCarousel">
           <app-carousel [flightList]="flightReturnArr" [chosenFlightDay]="returnFlight[2]" (selectedFlight)="chooseFlightCarousel($event)"></app-carousel>

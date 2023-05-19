@@ -13,6 +13,7 @@ export class PassengersCardComponent implements OnInit {
   @Input() luggage!: number;
   @Input() returnLuggage: number | undefined;
 
+  maxDate = new Date();
   constructor() { }
 
   ngOnInit(): void {}

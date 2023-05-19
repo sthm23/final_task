@@ -33,11 +33,7 @@ export class ConfigPassengersComponent implements OnInit {
   numberRegex = new RegExp('^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{2}[-\\s\\.]?[0-9]{4,6}$');
   numbers$ = this.search.getPhoneNumbers();
 
-  passengersCard: PassengersCard[] = [
-    // { title: 'adults' },
-    // { title: 'child' },
-    // { title: 'infant' }
-  ];
+  passengersCard: PassengersCard[] = [];
 
   fromLuggage!:number;
   returnLuggage: number | undefined;
