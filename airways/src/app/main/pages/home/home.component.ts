@@ -102,9 +102,28 @@ export class HomeComponent implements OnInit {
 
   submitSearch(){
     if(this.form.valid) {
+      const {from, destination, passengers, date, rangeDate} = this.form.value
+      const count = passengers?.adults! + passengers?.child! + passengers?.infant!;
+      const obj = {
+        from: from.id,
+        destination: destination.id,
+        date: undefined,
+        rangeDate: undefined,
+        count
+      }
+      if(rangeDate) {
+        obj.rangeDate = rangeDate as any
+      } else {
+        obj.date = date as any
+      }
+
       localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
-      this.route.navigate(['/booking'])
+      this.httpService.getTicket(obj).subscribe(res=>{
+        localStorage.setItem('ticket_result', JSON.stringify(res))
+        this.route.navigate(['/booking'])
+      })
+
     }
   }
 

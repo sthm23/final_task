@@ -46,30 +46,15 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
-    const search = JSON.parse(localStorage.getItem('search_result')!);
-    const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
-    const range = search.rangeDate;
-
-    const obj = {
-      from: search.from.id,
-      destination: search.destination.id,
-      date: undefined,
-      rangeDate: undefined,
-      count
-    }
-    if(range) {
-      obj.rangeDate = range
-    } else {
-      obj.date = search.date
-    }
-
-    this.searchService.getTicket(obj).subscribe((res)=>{
-      this.flightArr = res.start
-      this.flightReturnArr = res.end
-      this.returnFlight = res.end
-      this.selectedFlight = res.start[2]
-      this.selectedReturnFlight = res.end[2]
-    })
+    // const search = JSON.parse(localStorage.getItem('search_result')!);
+    // const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
+    // const range = search.rangeDate;
+    const ticket_result = JSON.parse(localStorage.getItem('ticket_result')!) as {start: CarouselData[], end: CarouselData[]};
+    this.flightArr = ticket_result.start
+    this.flightReturnArr = ticket_result.end
+    this.returnFlight = ticket_result.end
+    this.selectedFlight = ticket_result.start[2]
+    this.selectedReturnFlight = ticket_result.end[2]
 
     const user_json = localStorage.getItem('user_name');
     let user: User | null = null
