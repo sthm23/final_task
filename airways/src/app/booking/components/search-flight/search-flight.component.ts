@@ -16,7 +16,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SearchFlightComponent implements OnInit {
   showBtnBlock= true
-
+  minDate = new Date();
   form = new FormGroup({
     from: new FormControl(),
     dest: new FormControl(),

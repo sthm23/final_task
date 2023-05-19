@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
     infant: 0,
   }
 
+  minDate = new Date();
+
   cities: Airport[] = []
 
   form:FormGroup<SearchFormGroup> = new FormGroup({
