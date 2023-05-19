@@ -8,8 +8,8 @@
       {{ ticket_result.destinationDate | date : "fullDate" }}
 
       <span
-        >{{ ticket_result.destinationDate | date : "shortTime" }} —
-        {{ date | date : "shortTime" }}</span
+        >{{ ticket_result.fromDate | date : "shortTime" | convertHour }} —
+        {{ ticket_result.destinationDate | date : "shortTime" | convertHour }}</span
       >
     </p>
   </div>
