@@ -7,113 +7,93 @@
       </h2>
 
       <div class="order-summary">
-        <app-summary-card></app-summary-card>
-        <app-summary-card></app-summary-card>
-        <!-- <div class="summary-card">
-          <div class="summary-header">
-            <p class="header-way"><span>FR 1925</span>Dublin — Warsaw Modlin</p>
-            <p class="header-date">
-              Wednesday, 1 March, 2023 <span>8:40 — 12:00</span>
-            </p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-header">
-            <p class="header-way"><span>FR 1925</span>Warsaw Modlin — Dublin</p>
-            <p class="header-date">
-              Saturday, 18 March, 2023 <span>7:40 — 11:00</span>
-            </p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-          <div class="summary-main">
-            <h4>Harry Potter</h4>
-            <p>1checked bag (total 23 kg) included</p>
-            <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-            <p>Seat 19E</p>
-          </div>
-        </div> -->
+        <app-summary-card
+          [ticket_result]="ticket_result.from"
+        ></app-summary-card>
+        <app-summary-card
+          *ngIf="ticket_result.return?.destinationDate"
+          [ticket_result]="ticket_result.return"
+        ></app-summary-card>
       </div>
 
       <div class="total">
         <div class="total-top">
           <table>
             <tr>
-              <th><span>1</span>x Adult Fare</th>
-              <th>€257.31</th>
+              <th>
+                <span>{{ search_result.passengers.adults }}</span
+                >x Adult Fare
+              </th>
+              <th>€{{ (totalFare("adult") + fareAdult).toFixed(2) }}</th>
             </tr>
 
             <tr>
               <td>Fare</td>
-              <td>€166.00</td>
+              <td>
+                €{{
+                  search_result.passengers.adults > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€90.08</td>
+              <td>€{{ fareAdult }}</td>
             </tr>
           </table>
           <table>
             <tr>
-              <th><span>1</span>x Adult Fare</th>
-              <th>€257.31</th>
+              <th>
+                <span>{{ search_result.passengers.child }}</span
+                >x Child Fare
+              </th>
+              <th>€{{ (totalFare("child") + fareChild).toFixed(2) }}</th>
             </tr>
 
             <tr>
               <td>Fare</td>
-              <td>€166.00</td>
+              <td>
+                €{{
+                  search_result.passengers.child > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€90.08</td>
+              <td>€{{ fareChild }}</td>
             </tr>
           </table>
           <table>
             <tr>
-              <th><span>1</span>x Adult Fare</th>
-              <th>€257.31</th>
+              <th>
+                <span>{{ search_result.passengers.infant }}</span
+                >x Infant Fare
+              </th>
+              <th>€{{ (totalFare("infant") + fareInfant).toFixed(2) }}</th>
             </tr>
 
             <tr>
               <td>Fare</td>
-              <td>€166.00</td>
+              <td>
+                €{{
+                  search_result.passengers.infant > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
             </tr>
             <tr>
               <td>Tax & Service Charge</td>
-              <td>€90.08</td>
+              <td>€{{ fareInfant }}</td>
             </tr>
           </table>
         </div>
         <div class="total-bottom">
           <p>TOTAL:</p>
-          <p>€551.38</p>
+          <p>€{{ totalPrice.toFixed(2) }}</p>
         </div>
       </div>
     </div>
@@ -121,9 +101,18 @@
   <div class="order-footer">
     <div class="container">
       <div class="btn-block">
-        <button mat-button [routerLink]="['/booking/order']" class="back-btn">Back</button>
-        <button mat-stroked-button class="add-order-btn">Add to order card</button>
-        <button color="primary" class="next-btn" mat-raised-button [routerLink]="['/shop']">
+        <button mat-button [routerLink]="['/booking/order']" class="back-btn">
+          Back
+        </button>
+        <button mat-stroked-button class="add-order-btn">
+          Add to order card
+        </button>
+        <button
+          color="primary"
+          class="next-btn"
+          mat-raised-button
+          [routerLink]="['/shop']"
+        >
           Continue
         </button>
       </div>

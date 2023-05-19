@@ -1,26 +1,41 @@
 <div class="summary-card">
   <div class="summary-header">
-    <p class="header-way"><span>FR 1925</span>Dublin — Warsaw Modlin</p>
+    <p class="header-way">
+      <span>{{ ticket_result.flightNumber }}</span>
+      {{ ticket_result.from.state }} — {{ ticket_result.destination.state }}
+    </p>
     <p class="header-date">
-      Wednesday, 1 March, 2023 <span>8:40 — 12:00</span>
+      {{ ticket_result.destinationDate | date : "fullDate" }}
+
+      <span
+        >{{ ticket_result.destinationDate | date : "shortTime" }} —
+        {{ date | date : "shortTime" }}</span
+      >
     </p>
   </div>
-  <div class="summary-main">
-    <h4>Harry Potter</h4>
-    <p>1checked bag (total 23 kg) included</p>
-    <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-    <p>Seat 19E</p>
-  </div>
-  <div class="summary-main">
-    <h4>Harry Potter</h4>
-    <p>1checked bag (total 23 kg) included</p>
-    <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-    <p>Seat 19E</p>
-  </div>
-  <div class="summary-main">
-    <h4>Harry Potter</h4>
-    <p>1checked bag (total 23 kg) included</p>
-    <p>1 cabin bag + 1 personal item (max. 8 kg) included</p>
-    <p>Seat 19E</p>
+  <!-- *ngFor="let passenger in passengerInfo" -->
+  <div class="summary-bottom">
+    <div class="adults" *ngIf="passengerInfo.adults">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.adults">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
+        <p>1 personal item (max. 8 kg) included</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
+      </div>
+    </div>
+    <div class="adults" *ngIf="passengerInfo.child">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.child">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
+        <p>1 personal item (max. 8 kg) included</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
+      </div>
+    </div>
+    <div class="adults" *ngIf="passengerInfo.infant">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.infant">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1 personal item (max. 8 kg) included</p>
+      </div>
+    </div>
   </div>
 </div>

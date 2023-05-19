@@ -16,6 +16,7 @@ import { PassengersCardComponent } from './components/passengers-card/passengers
 import { SummaryCardComponent } from './components/summary-card/summary-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from '../core/auth.guard';
+import { Seats } from './pipes/seats.pipe';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AuthGuard } from '../core/auth.guard';
     OrderTitleComponent,
     PassengersCardComponent,
     SummaryCardComponent,
+    Seats,
   ],
   imports: [
     CommonModule,

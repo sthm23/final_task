@@ -7,6 +7,8 @@
 .summary-card {
   gap: 8px;
   width: 551px;
+  max-height: 574px;
+  overflow: auto;
   background: #fff;
   border-top: 3px solid #11397e;
   border-radius: 8px 8px 0px 0px;
@@ -27,6 +29,11 @@
       color: #11397e;
       margin-right: 20px;
     }
+  }
+
+  .header-date {
+    display: flex;
+    gap: 36px;
   }
 }
 .summary-main {
