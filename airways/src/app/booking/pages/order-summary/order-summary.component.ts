@@ -69,16 +69,16 @@ export class OrderSummaryComponent implements OnInit {
       flightNumber: this.ticket_result.from.flightNumber,
       destination: {
         from: this.ticket_result.from.destination.state,
-        return: this.ticket_result.return.destination.state,
+        return: this.ticket_result.return?.destination.state,
       },
-      flightType: this.ticket_result.return?.destinationDate ? 'Round Trip' : 'One way',
+      flightType: this.ticket_result.return?.price ? 'Round Trip' : 'One way',
       departureDate: {
         from: this.ticket_result.from.destinationDate,
-        return: this.ticket_result.return.destinationDate,
+        return: this.ticket_result.return?.destinationDate,
       },
       arrivalDate: {
         from: this.ticket_result.from.duration,
-        return: this.ticket_result.return.duration,
+        return: this.ticket_result.return?.duration,
       },
       passengerAmount: this.search_result.passengers,
       price: this.totalPrice,
