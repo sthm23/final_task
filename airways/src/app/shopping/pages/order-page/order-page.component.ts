@@ -16,6 +16,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<any>(true, []);
   commonPrice = 0;
+  getData = JSON.parse(localStorage.getItem('cart-items')!);
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -27,19 +28,25 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  changeCheckBox(e: MatCheckboxChange, element: CartInfo) {
+  changeCheckBox(e: any, element: CartInfo) {
     e ? this.selection.toggle(element) : null;
 
     const checkedElem = this.selection.selected.find((item) => item.id === element.id);
 
-    e.checked ? this.commonPrice += checkedElem.price : this.commonPrice -= element.price
+    !checkedElem ?  this.commonPrice -= element.price : this.commonPrice += checkedElem?.price;
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
-  get getData() {
-    return JSON.parse(localStorage.getItem('cart-items')!);
+  deleteItem(element: CartInfo){
+    const found = this.getData.findIndex((item: CartInfo) => item.id === element.id)
+    this.getData.splice(found, 1);
+
+  }
+
+  editItem(element: CartInfo){
+    console.log(element);
   }
 }

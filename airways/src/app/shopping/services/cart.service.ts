@@ -29,7 +29,6 @@ export class CartService {
   }
 
   pushToItems(item: CartInfo[]) {
-    console.log(this.items);
     this.items.push(...item);
     localStorage.setItem('cart-items', JSON.stringify(this.items));
   }
