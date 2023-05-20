@@ -52,7 +52,9 @@
 
         <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
       </div>
-      <button type="button" mat-flat-button class="search-btn primary" color="primary" (click)="submitSearch()">Search</button>
+      <div class="main-btn-block">
+        <button type="button" mat-flat-button class="search-btn primary" color="primary" [disabled]="form.invalid" (click)="submitSearch()">Search</button>
+      </div>
     </form>
   </div>
   <div class="body-bottom"></div>
