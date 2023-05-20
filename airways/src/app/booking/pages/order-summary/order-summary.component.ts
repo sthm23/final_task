@@ -77,8 +77,8 @@ export class OrderSummaryComponent implements OnInit {
         return: this.ticket_result.return?.destinationDate,
       },
       arrivalDate: {
-        from: this.ticket_result.from.duration,
-        return: this.ticket_result.return?.duration,
+        from: new Date(new Date().getTime() - this.ticket_result.from.duration),
+        return: new Date(new Date().getTime() - this.ticket_result.return?.duration),
       },
       passengerAmount: this.search_result.passengers,
       price: this.totalPrice,

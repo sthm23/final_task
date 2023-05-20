@@ -207,8 +207,8 @@ export interface CartInfo {
     return: string,
   },
   arrivalDate: {
-    from: number,
-    return: number,
+    from: Date,
+    return: Date,
   },
   passengerAmount: {
     adults: number,
