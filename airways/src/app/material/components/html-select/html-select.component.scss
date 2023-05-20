@@ -17,12 +17,13 @@ $border-color: #ddd;
   justify-content: space-between;
   width: 201px;
   height: 56px;
-  background: #f4f6f9;
+  background: transparent;
   padding: 6px 16px;
   border-radius: 4px;
-  border: 1px solid #a7a9ad;
+  border: 1px solid #cecece;
   cursor: pointer;
   position: relative;
+  margin-left: 5px;
 
   &:hover {
     outline: 1px solid fade_out($accent-color, 0.5);

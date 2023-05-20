@@ -184,5 +184,19 @@
     border-radius: 4px;
     box-sizing: content-box;
     margin-left: auto;
+
+    &:disabled{
+      background-color: #a7a9ad;
+    }
   }
+}
+.main-btn-block{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

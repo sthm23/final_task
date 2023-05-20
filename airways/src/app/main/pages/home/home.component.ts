@@ -128,6 +128,8 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
       this.httpService.getTicket(obj).subscribe(res=>{
+        localStorage.removeItem('ticket')
+        localStorage.removeItem('passengers_info')
         localStorage.setItem('ticket_result', JSON.stringify(res))
         this.route.navigate(['/booking'])
       })
