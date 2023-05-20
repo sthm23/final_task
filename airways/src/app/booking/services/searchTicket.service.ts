@@ -13,10 +13,6 @@ export class SearchTicketService {
 
   constructor(private http: HttpClient) {}
 
-  getTicket(body: any) {
-    return this.http.post<{start: CarouselData[], end: CarouselData[]}>(`${this.url}/airport`, body);
-  }
-
   getPhoneNumbers() {
     return this.http.get<Country[]>(`${this.url}/country`).pipe(
       map(item=>item.map(el=>({code:el.dialling_code, name: el.name})))

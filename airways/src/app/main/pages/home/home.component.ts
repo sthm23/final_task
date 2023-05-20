@@ -3,7 +3,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
-import { Airport, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
+import { Airport, DropDownOptions, SearchFormGroup, SearchResult } from 'src/app/material/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { selectSearchOrder } from 'src/app/redux/selectors/airways.selector';
 import { Store } from '@ngrx/store';
@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
     child: 0,
     infant: 0,
   }
+
+  minDate = new Date();
 
   cities: Airport[] = []
 
@@ -56,6 +58,12 @@ export class HomeComponent implements OnInit {
 
     this.form.controls.date.disable();
     this.form.controls.rangeDate.enable();
+
+    const sr = localStorage.getItem('search_result');
+    let search_result = null as null | SearchResult
+    if(sr) {
+      search_result = JSON.parse(sr);
+    }
 
     this.store.select(selectSearchOrder).subscribe(item=>{
       if(item) {
@@ -102,9 +110,28 @@ export class HomeComponent implements OnInit {
 
   submitSearch(){
     if(this.form.valid) {
+      const {from, destination, passengers, date, rangeDate} = this.form.value
+      const count = passengers?.adults! + passengers?.child! + passengers?.infant!;
+      const obj = {
+        from: from.id,
+        destination: destination.id,
+        date: undefined,
+        rangeDate: undefined,
+        count
+      }
+      if(rangeDate) {
+        obj.rangeDate = rangeDate as any
+      } else {
+        obj.date = date as any
+      }
+
       localStorage.setItem('search_result', JSON.stringify(this.form.value))
       this.store.dispatch(searchAction({searchResult: this.form.value}));
-      this.route.navigate(['/booking'])
+      this.httpService.getTicket(obj).subscribe(res=>{
+        localStorage.setItem('ticket_result', JSON.stringify(res))
+        this.route.navigate(['/booking'])
+      })
+
     }
   }
 

@@ -14,6 +14,7 @@ import { SearchTicketService } from '../../services/searchTicket.service';
 export class HomeComponent implements OnInit {
 
   searchOrder$!:Observable<SearchResult>;
+  searchResult!:SearchResult;
 
   constructor(
     private store: Store,
@@ -24,10 +25,10 @@ export class HomeComponent implements OnInit {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<SearchResult>;
     const search = localStorage.getItem('search_result')!;
     const searchResult = JSON.parse(search) as SearchResult;
-
+    this.searchResult = searchResult
     // console.log(searchResult);
 
-    const ticket = this.searchTicket.getTicket(searchResult);
+    // const ticket = this.searchTicket.getTicket(searchResult);
   }
 
 }

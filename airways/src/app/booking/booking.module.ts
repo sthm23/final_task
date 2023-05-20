@@ -49,7 +49,7 @@ import { ConvertHourPipe } from './pipes/convert-hour.pipe';
             path: 'order', component: ConfigPassengersComponent, canActivate: [AuthGuard]
           },
           {
-            path: 'summary', component: OrderSummaryComponent,
+            path: 'summary', component: OrderSummaryComponent, canActivate: [AuthGuard]
           },
           {
             path: 'error', component: ErrorComponent

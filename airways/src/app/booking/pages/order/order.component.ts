@@ -31,6 +31,7 @@ export class OrderComponent implements OnInit {
   checkReturnCarousel = true
 
   user:User | null = null;
+  nowDate = Date.now();
 
   constructor(
     iconRegistry: MatIconRegistry,
@@ -46,30 +47,30 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
-    const search = JSON.parse(localStorage.getItem('search_result')!);
-    const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
-    const range = search.rangeDate;
+    // const search = JSON.parse(localStorage.getItem('search_result')!);
+    // const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
+    // const range = search.rangeDate;
+    const ticket_result = JSON.parse(localStorage.getItem('ticket_result')!) as {start: CarouselData[], end: CarouselData[]};
+    this.flightArr = this.correctCarouselDate(ticket_result.start, this.nowDate)
+    this.flightReturnArr = this.correctCarouselDate(ticket_result.end, this.nowDate)
 
-    const obj = {
-      from: search.from.id,
-      destination: search.destination.id,
-      date: undefined,
-      rangeDate: undefined,
-      count
-    }
-    if(range) {
-      obj.rangeDate = range
-    } else {
-      obj.date = search.date
+    const ticket = localStorage.getItem('ticket');
+    let ticket_info = null as {from:CarouselData, return: CarouselData} | null;
+    if(ticket) {
+      ticket_info = JSON.parse(ticket) as {from:CarouselData, return: CarouselData};
+      this.selectedFlight = ticket_info.from
+      this.selectedReturnFlight = ticket_info.return
+      if(!this.selectedReturnFlight?.id) {
+        this.checkReturnCarousel = false
+      }
+    }else {
+      this.selectedFlight = ticket_result.start[2]
+      this.selectedReturnFlight = ticket_result.end[2]
+      if(!this.selectedReturnFlight?.id) {
+        this.checkReturnCarousel = false
+      }
     }
 
-    this.searchService.getTicket(obj).subscribe((res)=>{
-      this.flightArr = res.start
-      this.flightReturnArr = res.end
-      this.returnFlight = res.end
-      this.selectedFlight = res.start[2]
-      this.selectedReturnFlight = res.end[2]
-    })
 
     const user_json = localStorage.getItem('user_name');
     let user: User | null = null
@@ -80,7 +81,21 @@ export class OrderComponent implements OnInit {
     this.store.select(selectUser).subscribe(user=>{
       this.user = user
     })
+  }
 
+  correctCarouselDate(arr: CarouselData[], date:number) {
+      return arr.map((item, ind)=>{
+        const fd = new Date(item.fromDate).getTime();
+        if(fd <= date) {
+          if(ind == 0 || ind == 1) {
+            return {...item, flight: true}
+          }
+        }
+        if(ind === 2 && item.seats === 0) {
+          return {...item, seats: 12}
+        }
+        return item
+      })
   }
 
   chooseFlightCarousel(flight:CarouselData, type?:string) {
@@ -100,7 +115,7 @@ export class OrderComponent implements OnInit {
   }
 
   nextSection() {
-    if(!this.returnFlight.length && !this.checkCarousel && !this.checkReturnCarousel && this.user !== null) {
+    if(!this.checkCarousel && !this.checkReturnCarousel && this.user !== null) {
       localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
       this.store.dispatch(chooseTicketAction({
         ticket: {
@@ -109,15 +124,18 @@ export class OrderComponent implements OnInit {
         }
       }))
       this.route.navigate(['/booking/order'])
-    } else if(!this.checkCarousel && this.user !== null) {
-      localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
-      this.store.dispatch(chooseTicketAction({
-        ticket: {
-          from: this.selectedFlight,
-          return: this.selectedReturnFlight
-        }
-      }))
-      this.route.navigate(['/booking/order'])
+
+    // }
+    // else if(!this.checkCarousel && this.user !== null) {
+    //   localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
+    //   this.store.dispatch(chooseTicketAction({
+    //     ticket: {
+    //       from: this.selectedFlight,
+    //       return: this.selectedReturnFlight
+    //     }
+    //   }))
+    //   this.route.navigate(['/booking/order'])
+
     } else {
       this.openAuthDialog()
     }

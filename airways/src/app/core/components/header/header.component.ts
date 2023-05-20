@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AuthModalComponent } from '../../auth-modal/auth-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -9,7 +9,8 @@ import { selectDate, selectCurrency, selectUser } from 'src/app/redux/selectors/
 import { loginAction, selectCurrencyAction, selectTypeOfDateAction } from 'src/app/redux/actions/airways.action';
 import { Observable } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
-
+import { MatStep, MatStepper } from '@angular/material/stepper';
+import { CdkStep, CdkStepper, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 type RouterUrl = '/main' | '/booking' | '/shop'
 @Component({
@@ -17,6 +18,9 @@ type RouterUrl = '/main' | '/booking' | '/shop'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }]
 })
 export class HeaderComponent implements OnInit {
 
@@ -26,34 +30,44 @@ export class HeaderComponent implements OnInit {
   isActive$ = this.store.select(selectDate)
   currency$:Observable<CurrencyType> = this.store.select(selectCurrency);
 
-
   userName: string | null = null;
-
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
 
   toggleHeader = '/main'
   headerBgToggler = true;
 
+  @ViewChild('stepper') private stepper!: MatStepper;
+
   constructor(
     public dialog: MatDialog,
-    private _formBuilder: FormBuilder,
     private route: Router,
-    private store: Store
+    private store: Store,
     ) {}
 
   ngOnInit(): void {
     this.route.events.subscribe((e:any)=>{
       const urlObj = e?.routerEvent as NavigationEnd | undefined
       if(e?.routerEvent) {
-        const str = urlObj?.url as RouterUrl;
+        const str = urlObj?.url as any;
         this.toggleHeader = str
         this.headerBgToggler = str === '/main'
+
+        if(str==='/booking') {
+          setTimeout(() => {
+            this.stepper.reset()
+          }, 0);
+        }
+        if(str === '/booking/order') {
+          setTimeout(() => {
+            this.stepper.reset();
+            this.stepper.next()
+          }, 0);
+        }
+        if(str==='/booking/summary') {
+          setTimeout(() => {
+            this.stepper.selectedIndex = 2
+          }, 0);
+        }
+
       }
     })
 
@@ -70,6 +84,22 @@ export class HeaderComponent implements OnInit {
         }
       }
     })
+  }
+
+  nextStep(e:MatStepper) {
+    if(e.selectedIndex === 0) {
+      e.reset()
+      this.route.navigate(['booking'])
+    }
+    if(e.selectedIndex === 1) {
+      e.reset()
+      e.next()
+      this.route.navigate(['booking/order'])
+    }
+    if(e.selectedIndex === 2) {
+      e.selectedIndex = 2
+      this.route.navigate(['booking/summary'])
+    }
   }
 
   openAuthDialog() {
