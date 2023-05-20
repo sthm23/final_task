@@ -4,7 +4,7 @@ import { ShopHomeComponent } from './pages/shop-home/shop-home.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { OrderPageComponent } from './pages/order-page/order-page.component';
-import { ConvertHourPipe } from '../booking/pipes/convert-hour.pipe';
+// import { ConvertHourPipe } from '../booking/pipes/convert-hour.pipe';
 
 
 
@@ -12,7 +12,7 @@ import { ConvertHourPipe } from '../booking/pipes/convert-hour.pipe';
   declarations: [
     ShopHomeComponent,
     OrderPageComponent,
-    ConvertHourPipe
+    // ConvertHourPipe
   ],
   imports: [
     CommonModule,
