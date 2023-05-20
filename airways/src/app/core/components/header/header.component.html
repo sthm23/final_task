@@ -4,21 +4,27 @@
       <a [routerLink]="['/main']" class="logo">
         <img src="../../../../assets/img/header-logo.png" alt="png" />
       </a>
-      <mat-stepper #stepper *ngIf="toggleHeader.includes('/booking')">
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Flights</ng-template>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Passengers</ng-template>
-          </form>
+
+      <mat-stepper
+        #stepper [linear]="false"
+        *ngIf="toggleHeader.includes('/booking')"
+        (click)="nextStep(stepper)"
+        >
+        <ng-template matStepperIcon="edit">
+          <mat-icon >edit</mat-icon>
+        </ng-template>
+        <mat-step>
+          <ng-template matStepLabel>Flight Selection</ng-template>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Review & Payment</ng-template>
+          <ng-template matStepLabel>Booking Process</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
         </mat-step>
       </mat-stepper>
+
+
       <div class="menu">
         <button class="btn-text" [routerLink]="['/booking']" *ngIf="toggleHeader === '/main'">Book flights</button>
         <mat-form-field appearance="outline" class="choose-date-select">

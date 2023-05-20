@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CarouselData } from 'src/app/material/interfaces/interfaces';
 
 
@@ -8,13 +8,20 @@ type DirectionType = 'goTo' | 'return'
   templateUrl: './select-flight.component.html',
   styleUrls: ['./select-flight.component.scss']
 })
-export class SelectFlightComponent {
+export class SelectFlightComponent implements OnInit {
 
   @Input() direction: DirectionType = 'goTo'
   @Input() flight!: CarouselData;
   @Output() selectedFlight: EventEmitter<boolean> = new EventEmitter();
 
   checkSelect = true
+
+  ngOnInit(): void {
+    const ticket = localStorage.getItem('ticket');
+    if(ticket) {
+      this.selectFlight()
+    }
+  }
 
   setDuration(time:number) {
     const minute = new Date(time)

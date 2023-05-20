@@ -24,7 +24,7 @@ export class CaruselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.flightList);
+   this.currentIndex = this.flightList.findIndex(el=>this.chosenFlightDay.id === el.id) + 1;
   }
 
   checkStyle(day: CarouselData, currentIndex: number) {
@@ -42,7 +42,6 @@ export class CaruselComponent implements OnInit {
 
   selectCard(e:HTMLButtonElement, day:CarouselData){
     this.currentIndex = day.id
-    // e.classList.add('active-card');
     this.selectedFlight.emit(day);
   }
 

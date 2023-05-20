@@ -3,7 +3,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HttpRequestService } from '../../services/http-request.service';
-import { Airport, DropDownOptions, SearchFormGroup } from 'src/app/material/interfaces/interfaces';
+import { Airport, DropDownOptions, SearchFormGroup, SearchResult } from 'src/app/material/interfaces/interfaces';
 import { Router } from '@angular/router';
 import { selectSearchOrder } from 'src/app/redux/selectors/airways.selector';
 import { Store } from '@ngrx/store';
@@ -58,6 +58,12 @@ export class HomeComponent implements OnInit {
 
     this.form.controls.date.disable();
     this.form.controls.rangeDate.enable();
+
+    const sr = localStorage.getItem('search_result');
+    let search_result = null as null | SearchResult
+    if(sr) {
+      search_result = JSON.parse(sr);
+    }
 
     this.store.select(selectSearchOrder).subscribe(item=>{
       if(item) {
