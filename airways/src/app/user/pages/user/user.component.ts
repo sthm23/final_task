@@ -8,6 +8,7 @@ import { facebook, google, telegram } from 'src/app/core/auth-modal/icon';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loginAction } from 'src/app/redux/actions/airways.action';
+import { CartService } from 'src/app/shopping/services/cart.service';
 
 @Component({
   selector: 'app-user',
@@ -37,7 +38,8 @@ export class UserComponent implements OnInit {
     sanitaizer: DomSanitizer,
     private route:Router,
     private store:Store,
-    private userService: UserService
+    private userService: UserService,
+    private cartServ: CartService
   ) {
     iconRegistr.addSvgIconLiteral('google', sanitaizer.bypassSecurityTrustHtml(google));
     iconRegistr.addSvgIconLiteral('facebook', sanitaizer.bypassSecurityTrustHtml(facebook));
@@ -89,6 +91,7 @@ export class UserComponent implements OnInit {
 
   exitApp() {
     localStorage.removeItem('user_name');
+    this.cartServ.cartNumber.next(0)
     this.route.navigate(['main'])
     this.store.dispatch(loginAction({user: null}))
   }

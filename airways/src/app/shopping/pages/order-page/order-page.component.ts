@@ -32,6 +32,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         return {...el.data, id:el.id}
       });
       this.selectItem(this.getData)
+      this.cartService.cartNumber.next(this.getData.length)
     })
 
   }
@@ -82,12 +83,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         return {...el.data, id:el.id}
       });
         this.selectItem(this.getData)
+        this.cartService.cartNumber.next(this.getData.length)
     })
 
   }
 
   editItem(element: CartInfo){
-    console.log(element);
+    // console.log(element);
 
   }
 

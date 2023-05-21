@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
 import { MatStep, MatStepper } from '@angular/material/stepper';
 import { CdkStep, CdkStepper, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { CartService } from 'src/app/shopping/services/cart.service';
 
 type RouterUrl = '/main' | '/booking' | '/shop'
 @Component({
@@ -35,15 +36,21 @@ export class HeaderComponent implements OnInit {
   toggleHeader = '/main'
   headerBgToggler = true;
 
+  badgeNumber = 0
+
   @ViewChild('stepper') private stepper!: MatStepper;
 
   constructor(
     public dialog: MatDialog,
     private route: Router,
     private store: Store,
+    private cartSer:CartService
     ) {}
 
   ngOnInit(): void {
+    this.cartSer.cartNumber.subscribe(el=>{
+      this.badgeNumber = el
+    })
     this.route.events.subscribe((e:any)=>{
       const urlObj = e?.routerEvent as NavigationEnd | undefined
       if(e?.routerEvent) {

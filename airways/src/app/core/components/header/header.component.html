@@ -45,9 +45,9 @@
          <span *ngIf="!userName; else name">Sign in</span>
          <ng-template #name>{{userName}}</ng-template>
         </button>
-        <span class="shopping-basket" [routerLink]="['/shop']" [ngClass]="{'textColor': !headerBgToggler }">
-          <mat-icon aria-hidden="false" fontIcon="shopping_basket"></mat-icon>
-        </span>
+        <div class="shopping-basket" [routerLink]="['/shop']" [ngClass]="{'textColor': !headerBgToggler }">
+          <mat-icon [matBadge]="badgeNumber" matBadgeColor="warn" [matBadgeHidden]="badgeNumber === 0" matBadgeOverlap="false">shopping_basket</mat-icon>
+        </div>
       </div>
     </nav>
   </div>

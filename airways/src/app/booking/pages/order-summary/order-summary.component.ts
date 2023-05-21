@@ -64,7 +64,7 @@ export class OrderSummaryComponent implements OnInit {
 
   addToCart() {
     this.cartService.addToCart({data: this.newTrip, passengerInfo: this.passenger_info}).subscribe(el=>{
-
+      this.cartService.cartNumber.next(el.length)
     });
   }
 

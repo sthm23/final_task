@@ -22,15 +22,7 @@ export class AuthLoginRegisterService {
   }
 
   registerWithGoogle() {
-    // let headers = new HttpHeaders();
-
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-    // headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-    // headers.append('Access-Control-Allow-Credentials', 'true');
-
-
-    return this.http.get<LoginWithSocial>(`${this.url}/auth/google`) //, {headers})
+    return this.http.get<LoginWithSocial>(`${this.url}/auth/google`)
   }
 
   registerWithFacebook() {

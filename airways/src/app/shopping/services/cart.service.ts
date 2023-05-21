@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartInfo, CartInfoResult } from 'src/app/material/interfaces/interfaces';
 
 @Injectable({
@@ -8,9 +9,9 @@ import { CartInfo, CartInfoResult } from 'src/app/material/interfaces/interfaces
 export class CartService {
   items:CartInfo[] = []
   url = 'http://localhost:3000'
-  constructor(private http:HttpClient) {
 
-  }
+  cartNumber = new BehaviorSubject<number>(0)
+  constructor(private http:HttpClient) {}
 
   addToCart(newTrip: CartInfoResult) {
     return this.http.post<CartInfo[]>(this.url+'/user-info', newTrip)

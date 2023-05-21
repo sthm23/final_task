@@ -25,6 +25,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ConvertHourPipe } from './pipe/convert-hour.pipe';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ConvertHourPipe } from './pipe/convert-hour.pipe';
     MatNativeDateModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatBadgeModule,
     MatProgressSpinnerModule
   ],
   exports: [
@@ -84,6 +87,7 @@ import { ConvertHourPipe } from './pipe/convert-hour.pipe';
     MatTooltipModule,
     MatProgressSpinnerModule,
     ConvertHourPipe,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

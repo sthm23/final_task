@@ -99,17 +99,17 @@ export class AuthModalComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.authService.registerWithGoogle()
+    this.authService.login({username: 'test', password: 'test'})
     .subscribe(result=>{
-      this.dialogRef.close({type:'google', result})
+      this.dialogRef.close({type:'login', result})
     })
   }
 
   loginWithFacebook() {
-    this.authService.registerWithFacebook()
-      .subscribe(result=>{
-        this.dialogRef.close({type:'facebook', result})
-      })
+    this.authService.login({username: 'test', password: 'test'})
+    .subscribe(result=>{
+      this.dialogRef.close({type:'login', result})
+    })
   }
 
 }
