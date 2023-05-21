@@ -1,0 +1,38 @@
+<div class="order-block">
+  <div class="container">
+    <div class="order-body" *ngIf="flightArr.length">
+      <div class="from-county">
+        <app-order-title [direction]="'goTo'" [flight]="selectedFlight"></app-order-title>
+        <div class="carousel-block" *ngIf="checkCarousel">
+          <app-carousel [flightList]="flightArr" [chosenFlightDay]="selectedFlight" (selectedFlight)="chooseFlightCarousel($event, 'from')"></app-carousel>
+        </div>
+        <div class="flight-info-block">
+          <app-select-flight [direction]="'goTo'" [flight]="selectedFlight" [checkSelect]="checkCarousel" (selectedFlight)="chooseFlightSelect($event, 'from')"></app-select-flight>
+        </div>
+      </div>
+      <div class="destination-block" *ngIf="flightReturnArr.length">
+        <app-order-title [direction]="'return'" [flight]="selectedReturnFlight"></app-order-title>
+        <div class="carousel-block" *ngIf="checkReturnCarousel">
+          <app-carousel [flightList]="flightReturnArr" [chosenFlightDay]="selectedReturnFlight" (selectedFlight)="chooseFlightCarousel($event)"></app-carousel>
+        </div>
+        <div class="flight-info-block">
+          <app-select-flight [direction]="'return'"  [flight]="selectedReturnFlight" [checkSelect]="checkReturnCarousel" (selectedFlight)="chooseFlightSelect($event)"></app-select-flight>
+        </div>
+      </div>
+    </div>
+    <div class="order-footer">
+      <div class="btn-block">
+        <button class="back-btn" mat-button [routerLink]="['/main']">Back</button>
+        <button
+          color="primary"
+          class="next-btn"
+          mat-raised-button
+          [disabled]="checkCarousel || checkReturnCarousel"
+          (click)="nextSection()"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

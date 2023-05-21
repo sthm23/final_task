@@ -1,0 +1,11 @@
+<div class="order-top">
+  <h2 class="order-title">
+    <mat-icon
+    [ngClass]="{'airplane-icon': direction === 'return'}"
+    svgIcon="airplane_icon"
+    aria-hidden="false"
+    aria-label="airplane_icon SVG icon"
+    ></mat-icon>
+    {{flight.from.city + ' to ' + flight.destination.city}}
+  </h2>
+</div>

@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-block {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  background: url("../../../../assets/img/bg-airplane.jpg"), rgba(0, 0, 0, 0.25);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.order-block {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 9;
+}
+.body-bottom {
+  grid-column-start: 1;
+  grid-column-end: 8;
+  grid-row-start: 10;
+  grid-row-end: 11;
+  background: #f5f5f5;
+}
+.order-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+
+  .flight-type {
+    margin-bottom: 12px;
+    mat-radio-group {
+      display: flex;
+      gap: 32px;
+    }
+  }
+
+  .choose-line {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    & .swap-btn {
+      position: absolute;
+      z-index: 1;
+      right: 20px;
+      top: 45px;
+      background-color: #fff;
+      color: #74767a;
+    }
+  }
+  .date-pass {
+    display: flex;
+    justify-content: space-between;
+    & .date-pick-block {
+      width: 100%;
+      mat-form-field {
+        width: 98%;
+      }
+    }
+  }
+
+  .passengers {
+    width: 201px;
+    background: #f4f6f9;
+    border-radius: 4px;
+    border: 1px solid #a7a9ad;
+    cursor: pointer;
+    height: 56px;
+    padding: 8px 0 0 16px;
+
+    .passenger-label {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4px;
+      color: #49454f;
+    }
+  }
+  .select {
+    width: 201px;
+    background: #ffffff;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 276px;
+    right: 23px;
+    z-index: 2;
+    padding: 14px 16px;
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .option-info {
+      p {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        color: #11397e;
+      }
+      span {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+        color: #74767a;
+      }
+    }
+  }
+}
+
+.mat-mdc-radio-button.mat-accent {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+::ng-deep {
+  .label-block .dropdown-label {
+    font-size: 12px !important;
+    line-height: 16px !important;
+    letter-spacing: 0.4px !important;
+    color: #49454f !important;
+  }
+  .mat-mdc-text-field-wrapper {
+    border: none;
+  }
+  .mat-mdc-form-field
+    .mat-mdc-text-field-wrapper.mdc-text-field
+    .mdc-notched-outline__notch {
+    padding-top: 20px;
+    padding-right: 0;
+  }
+
+  .mat-mdc-form-field.mat-focused
+    .mat-mdc-text-field-wrapper
+    .mat-mdc-form-field-flex
+    .mat-mdc-floating-label,
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    top: 20px !important;
+  }
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 8px;
+  }
+  .mat-label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #49454f;
+  }
+  .dropdown-value {
+    font-weight: 400 !important;
+    color: #1c1b1f !important;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border: none;
+  }
+
+  .mat-mdc-form-field-infix {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px !important;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #1c1b1f;
+  }
+
+  .search-btn.mdc-button {
+    padding: 12px 24px;
+    background: #11397e;
+    border-radius: 4px;
+    box-sizing: content-box;
+    margin-left: auto;
+
+    &:disabled{
+      background-color: #a7a9ad;
+    }
+  }
+}
+.main-btn-block{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

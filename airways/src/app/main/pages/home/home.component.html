@@ -1,0 +1,66 @@
+<main class="main-block" *ngIf="cities.length;else loading">
+  <div class="order-block">
+    <form class="order-card" [formGroup]="form">
+      <div class="flight-type">
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button color="primary" value="1" checked (change)="selectFlightType($event)">Round Trip</mat-radio-button>
+          <mat-radio-button color="primary" value="2" (change)="selectFlightType($event)">One Way</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="choose-line">
+        <button mat-mini-fab class="swap-btn" (click)="flipFlight()"><mat-icon>swap_horiz</mat-icon></button>
+        <mat-form-field appearance="outline">
+          <mat-label>From</mat-label>
+          <mat-select formControlName="from">
+            <mat-select-trigger>{{this.form.controls.from.value?.city}}</mat-select-trigger>
+            <mat-option *ngFor="let airport of cities" [value]="airport">
+              {{airport.city}} ({{airport.code}})
+              <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Destination</mat-label>
+          <mat-select formControlName="destination">
+            <mat-select-trigger>{{this.form.controls.destination.value?.city}}</mat-select-trigger>
+            <mat-option *ngFor="let airport of cities" [value]="airport">
+              {{airport.city}} ({{airport.code}})
+              <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="date-pass">
+          <mat-form-field appearance="outline" *ngIf="flightType === '1'">
+            <mat-label>Dates</mat-label>
+            <mat-date-range-input formGroupName="rangeDate" [min]="minDate" [rangePicker]="multiPicker" (click)="openDateBlock(multiPicker)">
+              <input matStartDate formControlName="start" placeholder="Start date" [readonly]="true">
+              <input matEndDate formControlName="end" placeholder="End date" [readonly]="true">
+            </mat-date-range-input>
+
+            <mat-datepicker-toggle matIconSuffix [for]="multiPicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #multiPicker disabled="false"></mat-date-range-picker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" *ngIf="flightType === '2'" >
+            <mat-label>Date</mat-label>
+            <input matInput [readonly]="true" [min]="minDate" [matDatepicker]="picker" formControlName="date" (click)="openDateBlock(picker)">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+        <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
+      </div>
+      <div class="main-btn-block">
+        <button type="button" mat-flat-button class="search-btn primary" color="primary" [disabled]="form.invalid" (click)="submitSearch()">Search</button>
+      </div>
+    </form>
+  </div>
+  <div class="body-bottom"></div>
+</main>
+<ng-template #loading>
+  <div class="main-block loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

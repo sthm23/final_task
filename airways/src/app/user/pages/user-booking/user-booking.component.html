@@ -1,0 +1,115 @@
+<div class="order-block">
+  <div class="order-body">
+    <div class="container">
+      <h2 class="summary-title">
+        <mat-icon fontIcon="preview"></mat-icon>
+        Summary
+      </h2>
+
+      <div class="order-summary">
+        <app-summary-card
+          [ticket_result]="ticket_result.from"
+        ></app-summary-card>
+        <app-summary-card
+          *ngIf="ticket_result.return?.destinationDate"
+          [ticket_result]="ticket_result.return"
+        ></app-summary-card>
+      </div>
+
+      <div class="total">
+        <div class="total-top">
+          <table>
+            <tr>
+              <th>
+                <span>{{ search_result.passengers.adults }}</span
+                >x Adult Fare
+              </th>
+              <th>€{{ (totalFare("adult") + fareAdult).toFixed(2) }}</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>
+                €{{
+                  search_result.passengers.adults > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€{{ fareAdult }}</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th>
+                <span>{{ search_result.passengers.child }}</span
+                >x Child Fare
+              </th>
+              <th>€{{ (totalFare("child") + fareChild).toFixed(2) }}</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>
+                €{{
+                  search_result.passengers.child > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€{{ fareChild }}</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th>
+                <span>{{ search_result.passengers.infant }}</span
+                >x Infant Fare
+              </th>
+              <th>€{{ (totalFare("infant") + fareInfant).toFixed(2) }}</th>
+            </tr>
+
+            <tr>
+              <td>Fare</td>
+              <td>
+                €{{
+                  search_result.passengers.infant > 0
+                    ? ticket_result.from.price.toFixed(2)
+                    : 0
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Tax & Service Charge</td>
+              <td>€{{ fareInfant }}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="total-bottom">
+          <p>TOTAL:</p>
+          <p>€{{ totalPrice.toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="order-footer">
+    <div class="container">
+      <div class="btn-block">
+        <button
+          color="primary"
+          class="next-btn"
+          mat-raised-button
+          [routerLink]="['/user']"
+        >
+          Return to Account
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

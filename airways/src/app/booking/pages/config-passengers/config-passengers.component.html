@@ -1,0 +1,99 @@
+<div class="order-block">
+  <div class="container">
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+      <div class="order-body">
+        <div class="order-top">
+          <h2 class="order-title">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="account_circle"
+            ></mat-icon>
+            Passengers
+          </h2>
+          <p class="order-text">
+            Enter the passenger's names as they appear on document (passport or
+            ID).
+          </p>
+        </div>
+
+        <app-passengers-card
+        *ngFor="let passenger of passengersCard; let i=index"
+        [passenger]="passenger"
+        [luggage]="fromLuggage"
+        [returnLuggage]="returnLuggage"
+        [createForm]="formGroup(passenger.title, passenger.id)"
+        ></app-passengers-card>
+
+        <h3 class="contact-title">
+          <mat-icon fontIcon="contact_page"></mat-icon> Contact details
+        </h3>
+        <p class="contact-text">
+          We need contact details to be able to deliver the latest information
+          regarding your flight.
+        </p>
+        <div class="passengers-card contact">
+          <div class="card-inputs" formGroupName="contact">
+            <mat-form-field appearance="outline">
+              <mat-label>Country code</mat-label>
+              <mat-select formControlName="countryCode" required>
+                <mat-option *ngFor="let phone of numbers$ | async" [value]="phone">
+                  {{ phone.name }} ({{phone.code}})
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="contact.controls['countryCode'].hasError('required')"
+                >Please choose a country code</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Mobile phone number</mat-label>
+              <input
+                type="tel"
+                matInput
+                formControlName="mobile"
+                placeholder="555-555-1234"
+              />
+              <mat-error *ngIf="contact.controls['mobile'].hasError('required')">
+                Please enter a mobile number
+              </mat-error>
+              <mat-error *ngIf="contact.controls['mobile'].hasError('pattern')">
+                Please enter a valid number
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="Ex. pat@example.com"
+              />
+              <mat-error *ngIf="contact.controls['email'].hasError('email')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="contact.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="order-footer">
+        <div class="btn-block">
+          <button mat-button [routerLink]="['/booking']" class="back-btn" >Back</button>
+          <button
+          type="button"
+          class="next-btn"
+          color="primary"
+          mat-raised-button
+          [disabled]="createForm.invalid"
+          (click)="onSubmit()"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
