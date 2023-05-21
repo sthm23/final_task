@@ -28,7 +28,7 @@ import { SummaryCardComponent } from './components/summary-card/summary-card.com
         ]
       },
       {
-        path: 'user-booking', component: UserBookingComponent
+        path: 'user-booking/:id', component: UserBookingComponent
       }
 
     ])

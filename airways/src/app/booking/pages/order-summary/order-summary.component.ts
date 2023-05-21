@@ -29,9 +29,15 @@ export class OrderSummaryComponent implements OnInit {
     const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
     const search_result = JSON.parse(localStorage.getItem('search_result')!) as SearchResult;
     const passengerInfo = JSON.parse(localStorage.getItem('passengers_info')!) as PassengerInfo;
+
     this.ticket_result = ticket_result;
     this.search_result = search_result;
     this.passenger_info = passengerInfo;
+
+    this.cartService.getAllTrips().pipe().subscribe(el=>{
+      // console.log(el);
+
+    })
 
     // console.log(ticket_result);
     // console.log(search_result);
@@ -63,12 +69,14 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.newTrip);
+    this.cartService.addToCart({data: this.newTrip, passengerInfo: this.passenger_info}).subscribe(el=>{
+      // console.log(el);
+
+    });
   }
 
   get newTrip(): CartInfo {
     return {
-      id: this.cartService.items.length + 1,
       flightType: this.ticket_result.return?.price ? 'Round Trip' : 'One way',
       passengerAmount: this.search_result.passengers,
       check: false,
@@ -92,7 +100,7 @@ export class OrderSummaryComponent implements OnInit {
           destination: this.ticket_result.return?.destination.state,
         },
         flightDate: {
-          from: this.ticket_result.return.fromDate,
+          from: this.ticket_result.return?.fromDate,
           return: this.ticket_result.return?.destinationDate,
           duration: this.ticket_result.return?.duration,
         },

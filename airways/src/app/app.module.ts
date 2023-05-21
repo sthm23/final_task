@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, Provider, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AirwaysEffects } from './redux/effects/airways.effect';
 import { CoreModule } from './core/core.module';
+import { AuthIntercepted } from './services/http-token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+const INTERCEPTOR_PROVIDER:Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthIntercepted,
+  multi: true
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -26,7 +34,7 @@ import { CoreModule } from './core/core.module';
     EffectsModule.forRoot([AirwaysEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

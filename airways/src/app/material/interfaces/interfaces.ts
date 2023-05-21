@@ -207,7 +207,7 @@ type FlightDetail = {
   },
 }
 export interface CartInfo {
-  id: number
+  id?: string
   flightType: 'Round Trip' | 'One way',
   passengerAmount: {
     adults: number
@@ -218,4 +218,10 @@ export interface CartInfo {
   price: number,
   from:FlightDetail
   return:FlightDetail
+}
+
+export interface CartInfoResult {
+  id?:string
+  data: CartInfo,
+  passengerInfo: PassengerInfo
 }

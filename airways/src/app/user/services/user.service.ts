@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { CartInfo } from '../pages/user-table/user-table.component';
+import { CartInfo } from "src/app/material/interfaces/interfaces";
+// import { CartInfo } from '../pages/user-table/user-table.component';
 
 
 @Injectable({

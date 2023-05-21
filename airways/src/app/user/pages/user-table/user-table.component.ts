@@ -1,33 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-export interface CartInfo {
-  id: number,
-  flightNumber: string,
-  destination: {
-    from: string,
-    return: string,
-  },
-  flightType: string,
-  departureDate: {
-    from: string,
-    return: string,
-  },
-  arrivalDate: {
-    from: Date,
-    return: Date,
-  },
-  passengerAmount: {
-    adults: number,
-    child: number,
-    infant: number
-  },
-  price: number,
-}
+import { CartInfo } from 'src/app/material/interfaces/interfaces';
+import { CartService } from 'src/app/shopping/services/cart.service';
+
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
@@ -41,13 +19,25 @@ export class UserTableComponent implements OnInit {
   commonPrice = 0;
   getData!: CartInfo[];
 
-  constructor(private userService: UserService, private router: Router){}
+  constructor(private cartService: CartService, private router: Router){}
 
   ngOnInit(): void {
-    this.dataSource.data = this.userService.getData;
-    for (let i = 0; i < this.dataSource.data.length; i++) {
-      this.selection.toggle(this.dataSource.data[i]);
-      this.commonPrice += (this.dataSource.data[i] as CartInfo).price;
+    this.cartService.getAllTrips().subscribe(el=>{
+      this.cartService.items = el.map(ell=>{
+        return {...ell.data, id: ell.id}
+      });
+      this.getData = el.map(el=>{
+        return {...el.data, id: el.id}
+      });
+      this.selectItem(this.getData)
+    })
+  }
+
+  selectItem(arr: CartInfo[]) {
+    this.dataSource.data = arr;
+    for (let i = 0; i < arr.length; i++) {
+      this.selection.toggle(arr[i]);
+      this.commonPrice += (arr[i] as CartInfo).price;
     }
   }
 
@@ -60,7 +50,7 @@ export class UserTableComponent implements OnInit {
   }
 
   moreFlight(element: CartInfo) {
-    this.router.navigate(['/user/user-booking']);
+    this.router.navigate(['/user/user-booking', element.id]);
   }
 
 }

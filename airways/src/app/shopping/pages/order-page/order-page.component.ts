@@ -24,9 +24,16 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   constructor(private cartService: CartService){}
 
   ngOnInit(): void {
-    this.getData = this.cartService.items
+    this.cartService.getAllTrips().subscribe(el=>{
+      this.cartService.items = el.map(el=>{
+        return el.data
+      });;
+      this.getData = el.map(el=>{
+        return el.data
+      });
+      this.selectItem(this.getData)
+    })
 
-    this.selectItem(this.getData)
   }
 
   selectItem(arr: CartInfo[]) {
