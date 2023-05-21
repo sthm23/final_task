@@ -7,6 +7,8 @@ import { FlyController } from './controller/fly.controller';
 import { FlyService } from './service/flyService.service';
 import { AirportService } from './service/airport.service';
 import { AirportController } from './controller/airport.controller';
+import { UserInfoController } from './controller/user-info.controller';
+import { UserInfoService } from './service/user-info/user-info.service';
 
 @Module({
   imports: [
@@ -15,8 +17,8 @@ import { AirportController } from './controller/airport.controller';
       maxRedirects: 5
     })
   ],
-  providers: [DBService, CountryService, FlyService, AirportService],
-  controllers: [CountryController, FlyController, AirportController],
-  exports: [DBService, CountryService, FlyService, AirportService]
+  providers: [DBService, CountryService, FlyService, AirportService, UserInfoService],
+  controllers: [CountryController, FlyController, AirportController, UserInfoController],
+  exports: [DBService, CountryService, FlyService, AirportService, UserInfoService]
 })
 export class DbModule {}
