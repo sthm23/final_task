@@ -65,7 +65,7 @@ export class OrderSummaryComponent implements OnInit {
 
   get newTrip(): CartInfo {
     return {
-      id: this.cartService.getCartItems.length + 1,
+      id: this.cartService.items.length + 1,
       flightNumber: this.ticket_result.from.flightNumber,
       destination: {
         from: this.ticket_result.from.destination.state,

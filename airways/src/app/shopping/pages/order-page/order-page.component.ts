@@ -4,6 +4,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CartInfo } from 'src/app/material/interfaces/interfaces';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-order-page',
@@ -16,11 +17,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<any>(true, []);
   commonPrice = 0;
-  getData = JSON.parse(localStorage.getItem('cart-items')!);
+  getData!: CartInfo[];
 
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(private cartService: CartService){}
+
   ngOnInit(): void {
+    this.getData = this.cartService.items
+
     this.dataSource.data = this.getData;
     for (let i = 0; i < this.dataSource.data.length; i++) {
       this.selection.toggle(this.dataSource.data[i]);
@@ -41,9 +46,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   deleteItem(element: CartInfo){
-    const found = this.getData.findIndex((item: CartInfo) => item.id === element.id)
-    this.getData.splice(found, 1);
-
+    console.log(element);
   }
 
   editItem(element: CartInfo){
