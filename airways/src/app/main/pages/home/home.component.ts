@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   cities: Airport[] = []
 
-  form:FormGroup<SearchFormGroup> = new FormGroup({
+  form: FormGroup<SearchFormGroup> = new FormGroup({
     from: new FormControl<any | null>(null, Validators.required),
     destination: new FormControl<any | null>(null, Validators.required),
     date: new FormControl<string | null>(null, Validators.required),
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.httpService.getAllAirport().subscribe(airports=>{
+    this.httpService.getAllAirport().subscribe(airports => {
       this.cities = airports
     })
 
@@ -61,13 +61,13 @@ export class HomeComponent implements OnInit {
 
     const sr = localStorage.getItem('search_result');
     let search_result = null as null | SearchResult
-    if(sr) {
+    if (sr) {
       search_result = JSON.parse(sr);
     }
 
-    this.store.select(selectSearchOrder).subscribe(item=>{
-      if(item) {
-        const {from, date, destination, passengers, rangeDate} = item;
+    this.store.select(selectSearchOrder).subscribe(item => {
+      if (item) {
+        const { from, date, destination, passengers, rangeDate } = item;
         this.form.get('from')?.setValue(from!)
         this.form.get('date')?.setValue(date!)
         this.form.get('destination')?.setValue(destination!)
@@ -84,11 +84,14 @@ export class HomeComponent implements OnInit {
         };
       }
     })
+    !localStorage.getItem('cart-items') ?
+      localStorage.setItem('cart-items', JSON.stringify([])) : null
+
   }
 
   selectFlightType(event: MatRadioChange) {
     this.flightType = event.value;
-    if(event.value === '1') {
+    if (event.value === '1') {
       this.form.controls.date.disable();
       this.form.controls.rangeDate.enable()
     } else {
@@ -97,9 +100,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  dropdownValueChanged(e:DropDownOptions) {
+  dropdownValueChanged(e: DropDownOptions) {
     this.dropdownOptions = e;
-    let key:TypeOfPassengersName = 'adults'
+    let key: TypeOfPassengersName = 'adults'
     for (key in e) {
       if (Object.prototype.hasOwnProperty.call(e, key)) {
         const element = e[key];
@@ -108,9 +111,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  submitSearch(){
-    if(this.form.valid) {
-      const {from, destination, passengers, date, rangeDate} = this.form.value
+  submitSearch() {
+    if (this.form.valid) {
+      const { from, destination, passengers, date, rangeDate } = this.form.value
       const count = passengers?.adults! + passengers?.child! + passengers?.infant!;
       const obj = {
         from: from.id,
@@ -119,15 +122,15 @@ export class HomeComponent implements OnInit {
         rangeDate: undefined,
         count
       }
-      if(rangeDate) {
+      if (rangeDate) {
         obj.rangeDate = rangeDate as any
       } else {
         obj.date = date as any
       }
 
       localStorage.setItem('search_result', JSON.stringify(this.form.value))
-      this.store.dispatch(searchAction({searchResult: this.form.value}));
-      this.httpService.getTicket(obj).subscribe(res=>{
+      this.store.dispatch(searchAction({ searchResult: this.form.value }));
+      this.httpService.getTicket(obj).subscribe(res => {
         localStorage.removeItem('ticket')
         localStorage.removeItem('passengers_info')
         localStorage.setItem('ticket_result', JSON.stringify(res))
@@ -144,7 +147,7 @@ export class HomeComponent implements OnInit {
     this.form.controls.destination.setValue(dest);
   }
 
-  openDateBlock(e:any) {
+  openDateBlock(e: any) {
     e.open()
   }
 }

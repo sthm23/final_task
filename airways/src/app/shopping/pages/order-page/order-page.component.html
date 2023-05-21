@@ -110,10 +110,10 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-              <button mat-menu-item (click)="deleteItem(element)">
+              <button mat-menu-item>
                 <span>Delete</span>
               </button>
-              <button mat-menu-item (click)="editItem(element)">
+              <button mat-menu-item>
                 <span>Edit</span>
               </button>
             </mat-menu>
@@ -124,7 +124,6 @@
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          (click)="changeCheckBox(true, row)"
         ></tr>
       </table>
     </div>
@@ -132,7 +131,7 @@
     <div class="card-footer">
       <div class="footer-top-block">
         <div class="add-trip-block">
-          <button mat-stroked-button [routerLink]="['/main']">+ Add new trip</button>
+          <button mat-stroked-button>+ Add new trip</button>
         </div>
         <div class="total-price-block">
           <h4>Total</h4>

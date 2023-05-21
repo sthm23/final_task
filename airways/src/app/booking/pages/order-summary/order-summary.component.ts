@@ -25,7 +25,6 @@ export class OrderSummaryComponent implements OnInit {
     const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
     const search_result = JSON.parse(localStorage.getItem('search_result')!) as SearchResult;
     const passengerInfo = JSON.parse(localStorage.getItem('passengers_info')!) as PassengerInfo;
-
     this.ticket_result = ticket_result;
     this.search_result = search_result;
     this.passenger_info = passengerInfo;

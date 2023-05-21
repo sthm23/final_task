@@ -13,21 +13,30 @@ export class CartService {
 
   addToCart(newTrip: CartInfo) {
     if (this.items.length > 0) {
-      newTrip.id - 1;
-      const filtered = this.items.findIndex((val: CartInfo) => val.id === newTrip.id - 1);
-
-      //delete from items
-      this.items.splice(filtered, 1);
-
-      // add to items and save to storage
-      this.pushToItems([newTrip]);
-      this.toLocalstorage();
+      for (const key in newTrip) {
+        console.log(key);
+        if (this.items.length > 0) {
+          if (key === 'price') {
+            const filtered = this.items.find((val: CartInfo) => val.price === newTrip.price);
+            this.pushToItems(filtered?.price ? [] : [newTrip]);
+          } else if (key === 'flightType') {
+            const filtered = this.items.find((val: CartInfo) => val.flightType === newTrip.flightType);
+            this.pushToItems(filtered?.price ? [] : [newTrip]);
+          } else if (key === 'flightNumber') {
+            const filtered = this.items.find((val: CartInfo) => val.flightNumber === newTrip.flightNumber);
+            this.pushToItems(filtered?.price ? [] : [newTrip]);
+          }
+        } else {
+          this.pushToItems([newTrip]);
+        }
+      }
     } else {
       this.pushToItems([newTrip]);
     }
   }
 
   pushToItems(item: CartInfo[]) {
+    console.log(this.items);
     this.items.push(...item);
     this.toLocalstorage();
   }

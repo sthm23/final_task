@@ -33,12 +33,12 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  changeCheckBox(e: any, element: CartInfo) {
+  changeCheckBox(e: MatCheckboxChange, element: CartInfo) {
     e ? this.selection.toggle(element) : null;
 
     const checkedElem = this.selection.selected.find((item) => item.id === element.id);
 
-    !checkedElem ?  this.commonPrice -= element.price : this.commonPrice += checkedElem?.price;
+    e.checked ? this.commonPrice += checkedElem.price : this.commonPrice -= element.price
   }
 
   ngAfterViewInit() {
