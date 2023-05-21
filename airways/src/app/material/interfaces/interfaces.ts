@@ -13,7 +13,7 @@ const country_list = [
   'South Korea', 'China', 'Finland', 'Georgia',
   'Germany', 'Italy', 'Kazakhstan', 'Czech Republic',
   'Japan', 'Russia', 'France', 'Spain', 'Maldives',
-  'Uruguay',  'Canada',
+  'Uruguay', 'Canada',
 ]
 
 export enum CountryEnum {
@@ -50,8 +50,8 @@ export enum CountryEnum {
   egypt = 'Egypt',
 }
 export interface SearchResult {
-  destination:Airport
-  from:Airport
+  destination: Airport
+  from: Airport
   passengers: {
     adults: number,
     child: number,
@@ -90,20 +90,20 @@ export interface Country {
   capital: string,
   region: string,
   currency: {
-      code: string,
-      name: string,
-      symbol: string
+    code: string,
+    name: string,
+    symbol: string
   },
   language: {
-      code: string,
-      name: string
+    code: string,
+    name: string
   },
   flag: string
   dialling_code: string,
   isoCode: string
 }
 
-export type RegisterCountryType = Pick<Country, 'name' | 'isoCode'> & {code:string}
+export type RegisterCountryType = Pick<Country, 'name' | 'isoCode'> & { code: string }
 
 export interface Airport {
   id: number
@@ -173,11 +173,11 @@ export interface CarouselData {
 }
 
 interface passenger {
-assist:boolean
-birth: string
-firstName: string
-gender: 'female' | 'male'
-lastName: string
+  assist: boolean
+  birth: string
+  firstName: string
+  gender: 'female' | 'male'
+  lastName: string
 }
 export interface PassengerInfo {
   'adults': passenger[]
@@ -192,4 +192,29 @@ export interface PassengerInfo {
 export interface TicketResult {
   from: CarouselData
   return: CarouselData
+}
+
+export interface CartInfo {
+  id: number,
+  flightNumber: string,
+  destination: {
+    from: string,
+    return: string,
+  },
+  flightType: string,
+  departureDate: {
+    from: string,
+    return: string,
+  },
+  arrivalDate: {
+    from: Date,
+    return: Date,
+  },
+  passengerAmount: {
+    adults: number,
+    child: number,
+    infant: number
+  },
+  price: number,
+  check: boolean
 }

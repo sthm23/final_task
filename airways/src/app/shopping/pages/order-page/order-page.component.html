@@ -1,4 +1,3 @@
-
 <div class="order-block">
   <div class="order-card">
     <div class="order-title">
@@ -6,82 +5,130 @@
     </div>
     <div class="order-body">
       <table mat-table [dataSource]="dataSource" matSort>
-
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? this.toggleAllRows() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              color="primary">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="changeCheckBox($event, row)"
+              [checked]="selection.isSelected(row)"
+              [disabled]="row.check"
+              color="primary">
+            </mat-checkbox>
+          </td>
+        </ng-container>
         <!-- Position Column -->
         <ng-container matColumnDef="No.">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            No.
+            <span>No.</span>
           </th>
           <td mat-cell *matCellDef="let element">
-            <mat-checkbox color="primary"
-              (click)="$event.stopPropagation()"
-              (change)="$event ? selection.toggle(element) : null"
-              [checked]="selection.isSelected(element)">
-            </mat-checkbox>
-            <span class="flight-name" *ngFor="let item of element.number">{{item}}</span>
+            <span class="flight-name">{{ element.flightNumber }}</span>
           </td>
         </ng-container>
 
         <!-- Flight Column -->
         <ng-container matColumnDef="Flight">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Flight
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight</th>
           <td mat-cell *matCellDef="let element">
-            <div *ngFor="let item of element.flight">{{item}}</div>
+            <div>
+              {{
+                element.destination.from + " — " + element.destination.return
+              }}
+            </div>
+            <div>
+              {{
+                element.destination.return + " — " + element.destination.from
+              }}
+            </div>
           </td>
         </ng-container>
 
         <!-- Type trip Column -->
         <ng-container matColumnDef="Type trip">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Type trip
-          </th>
-          <td mat-cell *matCellDef="let element">{{element.flight.length > 1 ? 'Round Trip' : 'One way'}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type trip</th>
+          <td mat-cell *matCellDef="let element">{{ element.flightType }}</td>
         </ng-container>
 
         <!-- Data & Time Column -->
         <ng-container matColumnDef="Data & Time">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Data & Time
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Data & Time</th>
           <td mat-cell *matCellDef="let element">
-            <div *ngFor="let item of element.date">{{item}}</div>
+            <div>
+              {{ element.departureDate.from | date : "longDate" }}
+              {{ element.arrivalDate.from | date : "shortTime"  }}
+              —
+              {{
+                element.departureDate.from | date : "shortTime"
+              }}
+            </div>
+            <div>
+              {{ element.departureDate.return | date : "longDate" }}
+              {{
+                element.arrivalDate.return | date : "shortTime"
+              }}
+              —
+              {{
+                element.departureDate.return | date : "shortTime"
+              }}
+            </div>
           </td>
         </ng-container>
 
         <!-- Passengers Column -->
         <ng-container matColumnDef="Passengers">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Passengers
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Passengers</th>
           <td mat-cell *matCellDef="let element">
-            <div *ngFor="let item of element.passengers">{{item.count ? item.count+' x '+item.person : '' }}</div>
+            <div>
+              <div *ngIf="element.passengerAmount.adults > 0">
+                {{ element.passengerAmount.adults + " x Adults" }}
+              </div>
+              <div *ngIf="element.passengerAmount.child > 0">
+                {{ element.passengerAmount.child + " x Child" }}
+              </div>
+              <div *ngIf="element.passengerAmount.infant > 0">
+                {{ element.passengerAmount.infant + " x Infant" }}
+              </div>
+            </div>
           </td>
         </ng-container>
 
         <!-- Price Column -->
         <ng-container matColumnDef="Price">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Price
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
           <td mat-cell *matCellDef="let element">
-            <div class="price-name">$ {{element.price}}</div>
+            <div class="price-name">$ {{ element.price.toFixed(2) }}</div>
           </td>
         </ng-container>
 
         <!-- Price Column -->
         <ng-container matColumnDef="btn">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-          <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu btn">
+          <td
+            mat-cell
+            *matCellDef="let element"
+            (click)="$event.stopPropagation()"
+          >
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="menu btn"
+            >
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-              <button mat-menu-item>
+              <button mat-menu-item (click)="deleteItem(element)">
                 <span>Delete</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="editItem(element)">
                 <span>Edit</span>
               </button>
             </mat-menu>
@@ -89,29 +136,31 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
       </table>
-
     </div>
 
     <div class="card-footer">
       <div class="footer-top-block">
         <div class="add-trip-block">
-          <button mat-stroked-button>+ Add new trip</button>
+          <button mat-stroked-button [routerLink]="['/main']">+ Add new trip</button>
         </div>
         <div class="total-price-block">
           <h4>Total</h4>
-          <div>$ 572.34</div>
+          <div>$ {{ commonPrice.toFixed(2) }}</div>
         </div>
       </div>
       <div class="footer-bottom-block">
         <div class="promo-code-block">
-          <input type="text" placeholder="Promo code">
-          <button >APPLY</button>
+          <input type="text" placeholder="Promo code" />
+          <button>APPLY</button>
         </div>
         <div class="payment-btn-block">
-          <p>2 selected</p>
-          <button color="primary" mat-raised-button>Payment</button>
+          <p>{{selection.selected.length}} selected</p>
+          <button color="primary" mat-raised-button (click)="payment()">Payment</button>
         </div>
       </div>
     </div>
