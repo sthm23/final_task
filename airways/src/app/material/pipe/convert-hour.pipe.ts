@@ -6,6 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ConvertHourPipe implements PipeTransform {
 
   transform(value: string | null): string {
+    if(!value) {
+      return ''
+    }
     const [time, modifier] = value!.split(' ');
 
     const [_, minutes] = time.split(':');

@@ -24,12 +24,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ConvertHourPipe } from './pipe/convert-hour.pipe';
 
 @NgModule({
   declarations: [
     HtmlSelectComponent,
     ClickOutsideDirective,
-    CounterComponent
+    CounterComponent,
+
+    ConvertHourPipe,
   ],
   imports: [
     CommonModule,
@@ -79,7 +82,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatNativeDateModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ConvertHourPipe,
   ]
 })
 export class MaterialModule { }
