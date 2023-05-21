@@ -28,22 +28,4 @@ export class CartService {
     return this.http.delete<CartInfoResult[]>(this.url+'/user-info/'+id)
   }
 
-  // pushToItems(item: CartInfo[]) {
-  //   // console.log(this.items);
-  //   this.items.push(...item);
-  //   this.toLocalstorage();
-  // }
-
-  // toLocalstorage() {
-  //   localStorage.setItem('cart-items', JSON.stringify(this.items));
-  // }
-
-  // oldItem(): CartInfo[] {
-  //   const arr = localStorage.getItem('cart-items');
-  //   if(arr) {
-  //     return JSON.parse(arr);
-  //   }else {
-  //     return []
-  //   }
-  // }
 }

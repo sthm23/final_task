@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SearchResult } from 'src/app/material/interfaces/interfaces';
 import { selectSearchOrder } from 'src/app/redux/selectors/airways.selector';
-import { UserOrder } from 'src/app/redux/state.model';
 import { SearchTicketService } from '../../services/searchTicket.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private searchTicket: SearchTicketService
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +24,6 @@ export class HomeComponent implements OnInit {
     const search = localStorage.getItem('search_result')!;
     const searchResult = JSON.parse(search) as SearchResult;
     this.searchResult = searchResult
-    // console.log(searchResult);
-
-    // const ticket = this.searchTicket.getTicket(searchResult);
   }
 
 }

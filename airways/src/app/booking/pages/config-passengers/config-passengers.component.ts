@@ -81,7 +81,7 @@ export class ConfigPassengersComponent implements OnInit {
 
     this.fromLuggage = ticket_result.from.luggage
     this.returnLuggage = ticket_result.return?.luggage
-    // console.log(search_result, ticket_result);
+
     const pas_inf = localStorage.getItem('passengers_info');
     let passengers_info = null as Passengers_Info | null;
     if(pas_inf) {
@@ -92,20 +92,6 @@ export class ConfigPassengersComponent implements OnInit {
       const obj = search_result.passengers as any;
       this.createFormArrayElem(obj);
     }
-
-
-
-    // console.log(this.passengersCard);
-    // console.log(this.createForm);
-
-
-    // this.store.select(selectSearchOrder).subscribe(search => {
-    //   console.log(search);
-    // })
-
-    // this.store.select(selectTicket).subscribe(ticket=>{
-    //   console.log(ticket);
-    // })
   }
 
   setValueToForm(object:Passengers_Info) {
@@ -169,7 +155,6 @@ export class ConfigPassengersComponent implements OnInit {
     return (this.createForm.get(name) as FormArray).at(id) as FormGroup
   }
   onSubmit() {
-    // console.log(this.createForm.value);
     if (this.createForm.valid) {
       localStorage.setItem('passengers_info', JSON.stringify(this.createForm.value))
       this.route.navigate(['/booking/summary'])

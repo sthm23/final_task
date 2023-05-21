@@ -26,10 +26,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.cartService.getAllTrips().subscribe(el=>{
       this.cartService.items = el.map(el=>{
-        return el.data
+        return {...el.data, id:el.id}
       });;
       this.getData = el.map(el=>{
-        return el.data
+        return {...el.data, id:el.id}
       });
       this.selectItem(this.getData)
     })
@@ -72,7 +72,18 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   deleteItem(element: CartInfo){
-    console.log(element);
+    this.selection.clear()
+    this.commonPrice = 0
+    this.cartService.removeTrip(element.id!).subscribe(el=>{
+      this.cartService.items = el.map(el=>{
+        return {...el.data, id:el.id}
+      });
+      this.getData = el.map(el=>{
+        return {...el.data, id:el.id}
+      });
+        this.selectItem(this.getData)
+    })
+
   }
 
   editItem(element: CartInfo){
@@ -81,19 +92,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   payment() {
-    // console.log(this.selection.selected);
-
-    // const arr = this.selection.selected.map(item=>{
-    //   return {
-    //     ...item,
-    //     check: true
-    //   }
-    // });
-
-    // this.selectItem(this.getData)
-    // this.dataSource.data = this.dataSource.data;
     alert('mission compleat')
-
   }
 
 }

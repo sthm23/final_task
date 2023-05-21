@@ -13,7 +13,6 @@ export class SummaryCardComponent implements OnInit{
   ngOnInit(): void {
     const passengerInfo = JSON.parse(localStorage.getItem('passengers_info')!) as PassengerInfo;
 
-    // console.log(this.ticket_result.fromDate);
     this.passengerInfo = passengerInfo
   }
 

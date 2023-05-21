@@ -35,14 +35,8 @@ export class OrderSummaryComponent implements OnInit {
     this.passenger_info = passengerInfo;
 
     this.cartService.getAllTrips().pipe().subscribe(el=>{
-      // console.log(el);
 
     })
-
-    // console.log(ticket_result);
-    // console.log(search_result);
-    // console.log(passengerInfo);
-    // console.log(this.ticket_result.from);
 
     this.totalPriceService.fares(this.passenger_info, this.search_result, this.ticket_result);
 
@@ -70,7 +64,6 @@ export class OrderSummaryComponent implements OnInit {
 
   addToCart() {
     this.cartService.addToCart({data: this.newTrip, passengerInfo: this.passenger_info}).subscribe(el=>{
-      // console.log(el);
 
     });
   }

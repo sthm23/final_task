@@ -50,7 +50,6 @@ export class UserComponent implements OnInit {
       this.userName = `${user.firstName} ${user.lastName}`;
 
       this.form.valueChanges.subscribe(el=>{
-        console.log(el);
         this.changeValue = true
       })
   }

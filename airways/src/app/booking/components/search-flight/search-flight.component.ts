@@ -167,9 +167,6 @@ export class SearchFlightComponent implements OnInit {
     this.form.controls.rangeDate.controls.start.setValue(this.searchData?.rangeDate?.start)
     this.form.controls.rangeDate.controls.end.setValue(this.searchData?.rangeDate?.end)
 
-
-    // console.log(this.searchData);
-
   }
 
   showSearchForm() {
