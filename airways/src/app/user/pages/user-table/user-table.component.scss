@@ -164,3 +164,7 @@ td{
     color: #11397E;
   }
 }
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: rgb(99, 99, 99, 0.15);
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CartInfo } from '../pages/user-table/user-table.component';
 
 
 @Injectable({
@@ -15,5 +16,9 @@ export class UserService {
     return this.http.patch(this.url + '/users/'+id, obj, {headers: {
       Authorization: `Bearer ${token}`
     }})
+  }
+
+  get getData(): CartInfo[] {
+    return JSON.parse(localStorage.getItem('cart-items')!);
   }
 }
