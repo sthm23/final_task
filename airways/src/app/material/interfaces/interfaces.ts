@@ -194,27 +194,28 @@ export interface TicketResult {
   return: CarouselData
 }
 
-export interface CartInfo {
-  id: number,
+type FlightDetail = {
   flightNumber: string,
-  destination: {
+  flight: {
     from: string,
-    return: string,
+    destination: string
   },
-  flightType: string,
-  departureDate: {
-    from: string,
-    return: string,
+  flightDate: {
+    from: string
+    return: string
+    duration: number
   },
-  arrivalDate: {
-    from: Date,
-    return: Date,
-  },
+}
+export interface CartInfo {
+  id: number
+  flightType: 'Round Trip' | 'One way',
   passengerAmount: {
-    adults: number,
-    child: number,
+    adults: number
+    child: number
     infant: number
-  },
+  }
+  check: boolean,
   price: number,
-  check: boolean
+  from:FlightDetail
+  return:FlightDetail
 }

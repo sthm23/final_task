@@ -69,23 +69,34 @@ export class OrderSummaryComponent implements OnInit {
   get newTrip(): CartInfo {
     return {
       id: this.cartService.items.length + 1,
-      flightNumber: this.ticket_result.from.flightNumber,
-      destination: {
-        from: this.ticket_result.from.destination.state,
-        return: this.ticket_result.return?.destination.state,
-      },
       flightType: this.ticket_result.return?.price ? 'Round Trip' : 'One way',
-      departureDate: {
-        from: this.ticket_result.from.destinationDate,
-        return: this.ticket_result.return?.destinationDate,
-      },
-      arrivalDate: {
-        from: new Date(new Date().getTime() - this.ticket_result.from.duration),
-        return: new Date(new Date().getTime() - this.ticket_result.return?.duration),
-      },
       passengerAmount: this.search_result.passengers,
+      check: false,
       price: this.totalPrice,
-      check: false
+      from:{
+        flightNumber: this.ticket_result.from.flightNumber,
+        flight: {
+          from: this.ticket_result.from.from.state,
+          destination: this.ticket_result.from.destination.state,
+        },
+        flightDate: {
+          from: this.ticket_result.from.fromDate,
+          return: this.ticket_result.from?.destinationDate,
+          duration: this.ticket_result.from?.duration,
+        },
+      },
+      return:{
+        flightNumber: this.ticket_result.return?.flightNumber,
+        flight: {
+          from: this.ticket_result.return?.from.state,
+          destination: this.ticket_result.return?.destination.state,
+        },
+        flightDate: {
+          from: this.ticket_result.return.fromDate,
+          return: this.ticket_result.return?.destinationDate,
+          duration: this.ticket_result.return?.duration,
+        },
+      },
     };
   }
 
