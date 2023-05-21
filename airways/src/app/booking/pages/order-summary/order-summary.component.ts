@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { concatAll, from, fromEvent, interval, map, merge, of, race, take } from 'rxjs';
-import { CarouselData, CartInfo, PassengerInfo, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
+import { CartInfo, PassengerInfo, SearchResult, TicketResult } from 'src/app/material/interfaces/interfaces';
 import { CartService } from 'src/app/shopping/services/cart.service';
 import { TotalPriceService } from '../../services/total-price.service';
+import { Router } from '@angular/router';
 
 
 
@@ -19,7 +19,11 @@ export class OrderSummaryComponent implements OnInit {
   fareChild = 0;
   fareInfant = 0;
 
-  constructor(private totalPriceService: TotalPriceService, private cartService: CartService) { }
+  constructor(
+    private totalPriceService: TotalPriceService,
+    private cartService: CartService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     const ticket_result = JSON.parse(localStorage.getItem('ticket')!) as TicketResult;
@@ -29,10 +33,10 @@ export class OrderSummaryComponent implements OnInit {
     this.search_result = search_result;
     this.passenger_info = passengerInfo;
 
-    console.log(ticket_result);
-    console.log(search_result);
-    console.log(passengerInfo);
-    console.log(this.ticket_result.from);
+    // console.log(ticket_result);
+    // console.log(search_result);
+    // console.log(passengerInfo);
+    // console.log(this.ticket_result.from);
 
     this.totalPriceService.fares(this.passenger_info, this.search_result, this.ticket_result);
 
@@ -84,6 +88,10 @@ export class OrderSummaryComponent implements OnInit {
     };
   }
 
+  continueBtn() {
+    this.addToCart()
+    this.route.navigate(['/shop'])
+  }
 
 
 }

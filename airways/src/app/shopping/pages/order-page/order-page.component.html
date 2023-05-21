@@ -5,17 +5,31 @@
     </div>
     <div class="order-body">
       <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? this.toggleAllRows() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              color="primary">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="changeCheckBox($event, row)"
+              [checked]="selection.isSelected(row)"
+              color="primary">
+            </mat-checkbox>
+          </td>
+        </ng-container>
         <!-- Position Column -->
         <ng-container matColumnDef="No.">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span>No.</span>
+          </th>
           <td mat-cell *matCellDef="let element">
-            <mat-checkbox
-              color="primary"
-              (click)="$event.stopPropagation()"
-              (change)="changeCheckBox($event, element)"
-              [checked]="selection.isSelected(element)"
-            >
-            </mat-checkbox>
             <span class="flight-name">{{ element.flightNumber }}</span>
           </td>
         </ng-container>
@@ -90,7 +104,7 @@
         <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
           <td mat-cell *matCellDef="let element">
-            <div class="price-name">$ {{ element.price }}</div>
+            <div class="price-name">$ {{ element.price.toFixed(2) }}</div>
           </td>
         </ng-container>
 

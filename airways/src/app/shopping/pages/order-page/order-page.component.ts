@@ -13,7 +13,7 @@ import { CartService } from '../../services/cart.service';
 })
 export class OrderPageComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['No.', 'Flight', 'Type trip', 'Data & Time', 'Passengers', 'Price', 'btn'];
+  displayedColumns: string[] = ['select', 'No.', 'Flight', 'Type trip', 'Data & Time', 'Passengers', 'Price', 'btn'];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<any>(true, []);
   commonPrice = 0;
@@ -39,6 +39,21 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     const checkedElem = this.selection.selected.find((item) => item.id === element.id);
 
     e.checked ? this.commonPrice += checkedElem.price : this.commonPrice -= element.price
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.dataSource.data);
   }
 
   ngAfterViewInit() {

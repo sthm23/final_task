@@ -14,12 +14,14 @@ export class SelectFlightComponent implements OnInit {
   @Input() flight!: CarouselData;
   @Output() selectedFlight: EventEmitter<boolean> = new EventEmitter();
 
-  checkSelect = true
+  @Input() checkSelect:boolean = true;
 
   ngOnInit(): void {
     const ticket = localStorage.getItem('ticket');
     if(ticket) {
-      this.selectFlight()
+      setTimeout(() => {
+        this.selectFlight()
+      }, 0);
     }
   }
 

@@ -14,7 +14,7 @@ export class CartService {
   addToCart(newTrip: CartInfo) {
     if (this.items.length > 0) {
       for (const key in newTrip) {
-        console.log(key);
+        // console.log(key);
         if (this.items.length > 0) {
           if (key === 'price') {
             const filtered = this.items.find((val: CartInfo) => val.price === newTrip.price);
@@ -36,7 +36,7 @@ export class CartService {
   }
 
   pushToItems(item: CartInfo[]) {
-    console.log(this.items);
+    // console.log(this.items);
     this.items.push(...item);
     this.toLocalstorage();
   }

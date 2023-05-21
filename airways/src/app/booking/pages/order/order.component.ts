@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { airplane_icon, airport_Icon } from './icon';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectSearchOrder, selectUser } from 'src/app/redux/selectors/airways.selector';
-import { User, UserOrder } from 'src/app/redux/state.model';
-import { SearchTicketService } from '../../services/searchTicket.service';
+import { selectUser } from 'src/app/redux/selectors/airways.selector';
+import { User } from 'src/app/redux/state.model';
 import { AuthModalResult, CarouselData, LoginResult, LoginWithSocial } from 'src/app/material/interfaces/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { chooseTicketAction, enterMain, loginAction } from 'src/app/redux/actions/airways.action';
@@ -22,11 +20,9 @@ export class OrderComponent implements OnInit {
 
   flightArr:CarouselData[] = []
   flightReturnArr:CarouselData[] = []
-  returnFlight:CarouselData[] = []
   selectedFlight!:CarouselData;
   selectedReturnFlight!:CarouselData;
 
-  searchOrder$!:Observable<UserOrder>;
   checkCarousel = true
   checkReturnCarousel = true
 
@@ -38,7 +34,6 @@ export class OrderComponent implements OnInit {
     sanitizer: DomSanitizer,
     private route: Router,
     private store: Store,
-    private searchService: SearchTicketService,
     private dialog: MatDialog,
     ) {
     iconRegistry.addSvgIconLiteral('airplane_icon', sanitizer.bypassSecurityTrustHtml(airplane_icon));
@@ -46,10 +41,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchOrder$ = this.store.select(selectSearchOrder) as Observable<UserOrder>;
-    // const search = JSON.parse(localStorage.getItem('search_result')!);
-    // const count = search.passengers.adults + search.passengers.child + search.passengers.infant;
-    // const range = search.rangeDate;
+
     const ticket_result = JSON.parse(localStorage.getItem('ticket_result')!) as {start: CarouselData[], end: CarouselData[]};
     this.flightArr = this.correctCarouselDate(ticket_result.start, this.nowDate)
     this.flightReturnArr = this.correctCarouselDate(ticket_result.end, this.nowDate)
@@ -124,17 +116,6 @@ export class OrderComponent implements OnInit {
         }
       }))
       this.route.navigate(['/booking/order'])
-
-    // }
-    // else if(!this.checkCarousel && this.user !== null) {
-    //   localStorage.setItem('ticket', JSON.stringify({from: this.selectedFlight, return: this.selectedReturnFlight}))
-    //   this.store.dispatch(chooseTicketAction({
-    //     ticket: {
-    //       from: this.selectedFlight,
-    //       return: this.selectedReturnFlight
-    //     }
-    //   }))
-    //   this.route.navigate(['/booking/order'])
 
     } else {
       this.openAuthDialog()
