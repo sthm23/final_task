@@ -8,7 +8,8 @@ import { CartInfo } from "src/app/material/interfaces/interfaces";
   providedIn: 'root'
 })
 export class UserService {
-  url = 'http://localhost:3000';
+  // url = 'http://localhost:3000';
+  private readonly url = 'https://angular-final-task-server.onrender.com';
   constructor(private http: HttpClient) {
 
   }

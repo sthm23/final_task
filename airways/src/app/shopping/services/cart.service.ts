@@ -8,7 +8,8 @@ import { CartInfo, CartInfoResult } from 'src/app/material/interfaces/interfaces
 })
 export class CartService {
   items:CartInfo[] = []
-  url = 'http://localhost:3000'
+  // url = 'http://localhost:3000'
+  private readonly url = 'https://angular-final-task-server.onrender.com';
 
   cartNumber = new BehaviorSubject<number>(0)
   constructor(private http:HttpClient) {}
