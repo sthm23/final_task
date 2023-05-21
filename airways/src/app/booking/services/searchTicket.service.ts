@@ -8,7 +8,8 @@ import { CarouselData, Country } from "src/app/material/interfaces/interfaces";
   providedIn: 'root'
 })
 export class SearchTicketService {
-  private readonly url = 'http://localhost:3000';
+  // private readonly url = 'http://localhost:3000';
+  private readonly url = 'https://angular-final-task-server.onrender.com';
 
 
   constructor(private http: HttpClient) {}
