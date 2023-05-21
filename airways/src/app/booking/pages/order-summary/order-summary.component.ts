@@ -85,6 +85,7 @@ export class OrderSummaryComponent implements OnInit {
       },
       passengerAmount: this.search_result.passengers,
       price: this.totalPrice,
+      check: false
     };
   }
 

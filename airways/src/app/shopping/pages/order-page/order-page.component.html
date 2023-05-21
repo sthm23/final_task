@@ -20,6 +20,7 @@
               (click)="$event.stopPropagation()"
               (change)="changeCheckBox($event, row)"
               [checked]="selection.isSelected(row)"
+              [disabled]="row.check"
               color="primary">
             </mat-checkbox>
           </td>
@@ -124,10 +125,10 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-              <button mat-menu-item>
+              <button mat-menu-item (click)="deleteItem(element)">
                 <span>Delete</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="editItem(element)">
                 <span>Edit</span>
               </button>
             </mat-menu>
@@ -145,7 +146,7 @@
     <div class="card-footer">
       <div class="footer-top-block">
         <div class="add-trip-block">
-          <button mat-stroked-button>+ Add new trip</button>
+          <button mat-stroked-button [routerLink]="['/main']">+ Add new trip</button>
         </div>
         <div class="total-price-block">
           <h4>Total</h4>
@@ -158,8 +159,8 @@
           <button>APPLY</button>
         </div>
         <div class="payment-btn-block">
-          <p>2 selected</p>
-          <button color="primary" mat-raised-button>Payment</button>
+          <p>{{selection.selected.length}} selected</p>
+          <button color="primary" mat-raised-button (click)="payment()">Payment</button>
         </div>
       </div>
     </div>

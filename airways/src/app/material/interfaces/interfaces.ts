@@ -216,4 +216,5 @@ export interface CartInfo {
     infant: number
   },
   price: number,
+  check: boolean
 }

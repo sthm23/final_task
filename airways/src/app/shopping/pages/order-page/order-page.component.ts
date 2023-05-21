@@ -26,10 +26,14 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getData = this.cartService.items
 
-    this.dataSource.data = this.getData;
-    for (let i = 0; i < this.dataSource.data.length; i++) {
-      this.selection.toggle(this.dataSource.data[i]);
-      this.commonPrice += (this.dataSource.data[i] as CartInfo).price;
+    this.selectItem(this.getData)
+  }
+
+  selectItem(arr: CartInfo[]) {
+    this.dataSource.data = arr;
+    for (let i = 0; i < arr.length; i++) {
+      this.selection.toggle(arr[i]);
+      this.commonPrice += (arr[i] as CartInfo).price;
     }
   }
 
@@ -66,5 +70,23 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   editItem(element: CartInfo){
     console.log(element);
+
   }
+
+  payment() {
+    // console.log(this.selection.selected);
+
+    // const arr = this.selection.selected.map(item=>{
+    //   return {
+    //     ...item,
+    //     check: true
+    //   }
+    // });
+
+    // this.selectItem(this.getData)
+    // this.dataSource.data = this.dataSource.data;
+    alert('mission compleat')
+
+  }
+
 }
