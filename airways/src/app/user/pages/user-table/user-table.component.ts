@@ -33,15 +33,13 @@ export interface CartInfo {
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
-export class UserTableComponent implements OnInit, AfterViewInit {
+export class UserTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['No.', 'Flight', 'Type trip', 'Data & Time', 'Passengers', 'Price', 'btn'];
+  displayedColumns: string[] = ['No.', 'Flight', 'Type trip', 'Data & Time', 'Passengers', 'Price'];
   dataSource = new MatTableDataSource();
   selection = new SelectionModel<any>(true, []);
   commonPrice = 0;
   getData!: CartInfo[];
-
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private userService: UserService, private router: Router){}
 
@@ -61,20 +59,8 @@ export class UserTableComponent implements OnInit, AfterViewInit {
     e.checked ? this.commonPrice += checkedElem.price : this.commonPrice -= element.price
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
   moreFlight(element: CartInfo) {
-    console.log(element);
     this.router.navigate(['/user/user-booking']);
   }
 
-  deleteItem(element: CartInfo){
-    console.log(element);
-  }
-
-  editItem(element: CartInfo){
-    console.log(element);
-  }
 }

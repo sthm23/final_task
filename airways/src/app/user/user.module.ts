@@ -25,11 +25,15 @@ import { SummaryCardComponent } from './components/summary-card/summary-card.com
     MaterialModule,
     RouterModule.forChild([
       {
-        path: '', component: UserHomeComponent
+        path: '', component: UserHomeComponent, children: [
+
+        ]
       },
       {
         path: 'user-booking', component: UserBookingComponent
-      }])
+      }
+
+    ])
   ]
 })
 export class UserModule { }
