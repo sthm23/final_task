@@ -1,0 +1,122 @@
+<div [formGroup]="createForm" class="passengers-card">
+  <h3 class="card-title">{{ passenger.title.toUpperCase() }}</h3>
+  <div class="card-inputs">
+    <mat-form-field appearance="outline">
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" required />
+      <mat-icon
+        mat-raised-button
+        matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+        matSuffix
+        >info</mat-icon
+      >
+      <mat-error
+          *ngIf="
+            createForm.controls['firstName'].touched &&
+            this.createForm.get('firstName')?.hasError('pattern')
+          "
+          >Invalid character</mat-error
+        >
+        <mat-error
+          *ngIf="
+            createForm.controls['firstName'].touched &&
+            this.createForm.get('firstName')?.hasError('required')
+          "
+          >Please enter a your first name</mat-error
+        >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" required />
+      <mat-icon
+        mat-raised-button
+        matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+        matSuffix
+        >info</mat-icon
+      >
+      <mat-error
+          *ngIf="
+            createForm.controls['lastName'].touched &&
+            this.createForm.get('lastName')?.hasError('pattern')
+          "
+          >Invalid character</mat-error
+        >
+        <mat-error
+          *ngIf="
+            createForm.controls['lastName'].touched &&
+            this.createForm.get('lastName')?.hasError('required')
+          "
+          >Please enter a your last name</mat-error
+        >
+    </mat-form-field>
+
+    <mat-button-toggle-group
+      formControlName="gender"
+      name="gender"
+      aria-label="gender"
+    >
+      <mat-button-toggle value="male">
+        <mat-icon
+          style="width: 15px; height: 15px; font-size: 15px"
+          *ngIf="createForm.get('gender')?.value === 'male'"
+          >check</mat-icon
+        >
+        Male
+      </mat-button-toggle>
+      <mat-button-toggle value="female">
+        <mat-icon
+          style="width: 15px; height: 15px; font-size: 15px"
+          *ngIf="createForm.get('gender')?.value === 'female'"
+          >check</mat-icon
+        >
+        Female
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field appearance="outline">
+      <mat-label>Date of birth</mat-label>
+      <input
+        [max]="maxDate"
+        matInput
+        [matDatepicker]="picker"
+        placeholder="MM/DD/YYYY"
+        formControlName="birth"
+        required
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error
+          *ngIf="
+            createForm.controls['birth'].touched &&
+            this.createForm.get('birth')?.hasError('required')
+          "
+          >Please enter a your birthday</mat-error
+        >
+    </mat-form-field>
+  </div>
+  <div style="display: flex; align-items: center; margin-top: 15px;">
+    <mat-slide-toggle formControlName="assist" style="margin-top: 0;" color="primary">
+      <mat-icon fontIcon="wheelchair_pickup"></mat-icon>
+      Need special assistance?
+    </mat-slide-toggle>
+
+    <div class="luggage-block" *ngIf="passenger.title !== 'infant'">
+      <div class="luggage">
+        <div class="from-luggage">
+          <mat-icon *ngIf="luggage !== 0">work</mat-icon>
+          <mat-icon *ngIf="luggage === 0">work_off</mat-icon>
+          <span>From flight luggage <span>{{luggage}}</span> kg</span>
+        </div>
+
+        <div class="return-luggage" *ngIf="returnLuggage !== undefined">
+          <div>
+            <mat-icon *ngIf="returnLuggage !== 0">work</mat-icon>
+            <mat-icon *ngIf="returnLuggage === 0">work_off</mat-icon>
+            <span>Return flight luggage <span>{{returnLuggage}}</span> kg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

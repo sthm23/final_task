@@ -1,0 +1,54 @@
+<header [ngClass]="{'bgChange': !headerBgToggler}">
+  <div class="container">
+    <nav class="navbar">
+      <a [routerLink]="['/main']" class="logo">
+        <img src="../../../../assets/img/header-logo.png" alt="png" />
+      </a>
+
+      <mat-stepper
+        #stepper [linear]="false"
+        *ngIf="toggleHeader.includes('/booking')"
+        (click)="nextStep(stepper)"
+        >
+        <ng-template matStepperIcon="edit">
+          <mat-icon >edit</mat-icon>
+        </ng-template>
+        <mat-step>
+          <ng-template matStepLabel>Flight Selection</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Booking Process</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+        </mat-step>
+      </mat-stepper>
+
+
+      <div class="menu">
+        <button class="btn-text" [routerLink]="['/booking']" *ngIf="toggleHeader === '/main'">Book flights</button>
+        <mat-form-field appearance="outline" class="choose-date-select">
+          <mat-select [value]="isActive$ | async" (selectionChange)="selectDate($event)" name="date"  [panelClass]="{'textColor': !headerBgToggler }">
+            <mat-option *ngFor="let date of dateFormatList" [value]="date">
+              <span [ngClass]="{'textColor': !headerBgToggler }">{{date}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button class="btn-language" [matMenuTriggerFor]="currencyMenu">
+          <span [ngClass]="{'textColor': !headerBgToggler }">{{ currency$ | async }}</span>
+        </button>
+        <mat-menu #currencyMenu="matMenu">
+          <button *ngFor="let currencyName of currencyList" (click)="chooseCurrency(currencyName)" mat-menu-item>{{currencyName}}</button>
+        </mat-menu>
+        <button class="btn-sign" (click)="openAuthDialog()" [ngClass]="{'textColor': !headerBgToggler }">
+          <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
+         <span *ngIf="!userName; else name">Sign in</span>
+         <ng-template #name>{{userName}}</ng-template>
+        </button>
+        <div class="shopping-basket" [routerLink]="['/shop']" [ngClass]="{'textColor': !headerBgToggler }">
+          <mat-icon [matBadge]="badgeNumber" matBadgeColor="warn" [matBadgeHidden]="badgeNumber === 0" matBadgeOverlap="false">shopping_basket</mat-icon>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

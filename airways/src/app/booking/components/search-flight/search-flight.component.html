@@ -1,0 +1,79 @@
+<div class="search-container">
+  <div class="search-row">
+    <div class="search-left">
+      <div class="search-subtitle">{{searchData?.from?.city}}</div>
+      <mat-icon svgIcon="fromToReturnIcon"></mat-icon>
+      <div class="search-subtitle">{{searchData?.destination?.city}}</div>
+    </div>
+    <div class="search-right">
+      <span class="right-text">Return</span>
+      <span class="circle"></span>
+      <span class="right-text">
+        <span *ngIf="!flightBackDate">{{flightDate | date: 'd MMM'}}</span>
+        <span *ngIf="flightBackDate">{{flightDate | date: 'd MMM'}} - {{flightBackDate | date: 'd MMM'}}</span>
+      </span>
+      <span class="circle"></span>
+      <span class="right-text"
+        > {{dropdownOptions.adults+dropdownOptions.child+dropdownOptions.infant}}
+        <mat-icon aria-hidden="false" fontIcon="account_circle"></mat-icon>
+      </span>
+    </div>
+    <div class="search-btn-block" *ngIf="showBtnBlock">
+      <button mat-stroked-button class="button-flat" [ngClass]="{'active-btn': searchFormBlockToggler}" (click)="showSearchForm()">Edit</button>
+    </div>
+  </div>
+</div>
+<div class="search-block-parent">
+  <div class="search-form-block" *ngIf="searchFormBlockToggler">
+    <div class="search-container">
+      <form class="order-card" [formGroup]="form">
+
+        <div class="choose-line">
+          <mat-form-field appearance="outline">
+            <mat-label>From</mat-label>
+            <mat-select formControlName="from" (selectionChange)="selectCountry($event, 'from')">
+              <mat-select-trigger>{{cityFrom}}</mat-select-trigger>
+              <mat-option *ngFor="let airport of cities" [value]="airport">
+                {{airport.city}} ({{airport.code}})
+                <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Destination</mat-label>
+            <mat-select formControlName="dest" (selectionChange)="selectCountry($event)">
+              <mat-select-trigger>{{cityDestination}}</mat-select-trigger>
+              <mat-option *ngFor="let airport of cities" [value]="airport">
+                {{airport.city}} ({{airport.code}})
+                <h5 class="subtitle">{{airport.name}}, {{airport.country}}</h5>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="date-pass">
+            <div class="date-pick-block" *ngIf="flightBackDate">
+              <mat-form-field appearance="outline">
+                <mat-label>Dates</mat-label>
+                <mat-date-range-input formGroupName="rangeDate" [min]="minDate" [rangePicker]="multiPicker" >
+                  <input matStartDate formControlName="start" placeholder="Start date" [readonly]="true">
+                  <input matEndDate formControlName="end" placeholder="End date" [readonly]="true">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="multiPicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #multiPicker disabled="false"></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+
+              <mat-form-field appearance="outline" *ngIf="!flightBackDate" >
+                <mat-label>Date</mat-label>
+                <input matInput [readonly]="true" [min]="minDate" [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+              </mat-form-field>
+          </div>
+
+          <app-html-select [title]="'Passengers'" [options]="dropdownOptions" (currentValueChange)="dropdownValueChanged($event)"></app-html-select>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

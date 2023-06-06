@@ -1,0 +1,75 @@
+<div class="select-flight-block">
+
+  <div class="left-side">
+    <div class="start-time-block">
+      <div class="date-block">
+        <span>{{flight.fromDate | date:'EEE, d MMMM y'}}</span>
+      </div>
+      <div class="time-block">
+        <span class="main-time">{{flight.fromDate | date:'h:mm'}}</span>
+        <span>{{flight.fromDate | date:'zzz'}}</span>
+      </div>
+      <div class="country-name-block">
+        {{flight.from.city}}
+      </div>
+    </div>
+
+    <div class="flight-info-icon-block">
+      <div class="icon-time-block">{{setDuration(flight.duration).hour}}h {{setDuration(flight.duration).minute | date:'mm'}}m</div>
+      <div class="icon-block">
+        <span class="line"></span>
+        <mat-icon
+          [ngClass]="{'airplane-icon': direction === 'return'}"
+          svgIcon="airport_Icon"
+          aria-hidden="false"
+          aria-label="airplane_icon SVG icon"
+        ></mat-icon>
+        <span class="line"></span>
+      </div>
+      <div class="icon-subtitle-block">Direct</div>
+    </div>
+
+    <div class="destination-time-block">
+      <div class="date-block">
+        <span>{{flight.destinationDate | date:'EEE, d MMMM y'}}</span>
+      </div>
+      <div class="time-block">
+        <span>{{flight.destinationDate | date:'zzz'}}</span>
+        <span class="main-time">{{flight.destinationDate | date:'h:mm'}}</span>
+      </div>
+      <div class="coutry-name-block">
+        {{flight.destination.city}}
+      </div>
+    </div>
+
+    <div class="flight-number-block">
+      <div class="flight-number-title">Flight no.</div>
+      <div class="flight-number">{{flight.flightNumber}}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="right-side">
+    <div class="seats-block">
+      <div class="price-info"
+      [ngClass]="{
+        'bg-green': flight.seats <= 130 && flight.seats >= 130/2,
+        'bg-yellow': flight.seats <= 130/2 && flight.seats >= 11,
+        'bg-red': flight.seats <= 10
+      }"
+      >
+        <div>{{flight.seats}} seats</div>
+        <div>available</div>
+      </div>
+      <div class="price-title">
+        <p>Price</p>
+        <div class="price">$ {{flight.price}}</div>
+      </div>
+    </div>
+    <div class="select-btn-block">
+      <button mat-raised-button class="select-btn" *ngIf="checkSelect" (click)="selectFlight()">Select</button>
+      <button mat-stroked-button class="edit-btn" *ngIf="!checkSelect" (click)="selectFlight()">Edit</button>
+    </div>
+  </div>
+</div>

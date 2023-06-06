@@ -1,0 +1,41 @@
+<div class="summary-card">
+  <div class="summary-header">
+    <p class="header-way">
+      <span>{{ ticket_result.flightNumber }}</span>
+      {{ ticket_result.from.state }} — {{ ticket_result.destination.state }}
+    </p>
+    <p class="header-date">
+      {{ ticket_result.destinationDate | date : "fullDate" }}
+
+      <span
+        >{{ ticket_result.fromDate | date : "shortTime" | convertHour }} —
+        {{ ticket_result.destinationDate | date : "shortTime" | convertHour }}</span
+      >
+    </p>
+  </div>
+  <!-- *ngFor="let passenger in passengerInfo" -->
+  <div class="summary-bottom">
+    <div class="adults" *ngIf="passengerInfo.adults">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.adults">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
+        <p>1 personal item (max. 8 kg) included</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
+      </div>
+    </div>
+    <div class="adults" *ngIf="passengerInfo.child">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.child">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1checked bag (total {{ ticket_result.luggage }} kg) included</p>
+        <p>1 personal item (max. 8 kg) included</p>
+        <p>Seat {{ ticket_result.seats | seats }}</p>
+      </div>
+    </div>
+    <div class="adults" *ngIf="passengerInfo.infant">
+      <div class="summary-main" *ngFor="let passenger of passengerInfo.infant">
+        <h4>{{ passenger.firstName + " " + passenger.lastName }}</h4>
+        <p>1 personal item (max. 8 kg) included</p>
+      </div>
+    </div>
+  </div>
+</div>
